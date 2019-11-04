@@ -19,6 +19,9 @@ public class Case {
 	private LocalDateTime dateResolved;
 	private LocalDateTime dateRemoved;
 
+	public Case(int id, String title, String status, String dateAdded, String dateResolved, String dateRemoved) {}
+	public Case() {}
+
 	public ObservableList<Appointment> getAppointments() {
 		return appointments;
 	}

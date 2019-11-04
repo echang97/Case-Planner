@@ -63,6 +63,34 @@ public class CaseListController implements Initializable{
 	private ObservableList<Case> archivedCases = FXCollections.observableArrayList();
 	private ObservableList<Case> deletedCases = FXCollections.observableArrayList();
 
+	private ObservableList<Case> getDataFromACaseAndAddToObservableList(String query){
+		ObservableList<Case> personData = FXCollections.observableArrayList();
+		try {
+			connection = database.getConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(query);//"SELECT * FROM aCase WHERE Status = ...;"
+			System.out.println(resultSet);
+			while(resultSet.next()){
+
+				personData.add(new Case(
+						resultSet.getInt("Case_ID"),
+						resultSet.getString("Title"),
+						resultSet.getString("Status"),
+						resultSet.getString("DateAdded"),
+						resultSet.getString("DateResolved"),
+						resultSet.getString("DateRemoved")
+				));
+			}
+			connection.close();
+			statement.close();
+			resultSet.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
+		return personData;
+	}
+
 	// Event Listener on Button.onAction
 	@FXML
 	public void addCase(ActionEvent event) {
@@ -147,9 +175,10 @@ public class CaseListController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Implement w Database
-		ongoingCaseTable.setItems(ongoingCases);
 		ongoingCaseColumn.setCellValueFactory(new PropertyValueFactory<Case,String>("title"));
 		dateAddedColumn.setCellValueFactory(new PropertyValueFactory<Case,LocalDateTime>("dateAdded"));
+		ongoingCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE Status = 'ongoing'");
+		ongoingCaseTable.getItems().addAll(ongoingCases);
 
 		archivedCaseTable.setItems(archivedCases);
 		archivedCaseColumn.setCellValueFactory(new PropertyValueFactory<Case,String>("title"));
