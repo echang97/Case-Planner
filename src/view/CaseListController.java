@@ -111,6 +111,7 @@ public class CaseListController implements Initializable{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+  }
 
 	// Event Listener on Button.onAction
 	@FXML
