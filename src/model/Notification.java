@@ -3,7 +3,7 @@ package model;
 import java.time.LocalDateTime;
 
 public class Notification {
-	private int id;
+	private int notification_id;
 	private Deadline deadline;
 	private Appointment appointment;
 	private String message;
@@ -11,8 +11,8 @@ public class Notification {
 	private LocalDateTime sendDate;
 	private boolean sent;
 
-	public int getId() { return id; }
-	public void setId(int id) { this.id = id;}
+	public int getNotification_id() { return notification_id; }
+	public void setNotification_id(int notification_id) { this.notification_id = notification_id;}
 	public Deadline getDeadline() { return deadline; }
 	public void setDeadline(Deadline deadline) { this.deadline = deadline; }
 	public Appointment getAppointment() { return appointment; }

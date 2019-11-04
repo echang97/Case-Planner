@@ -3,18 +3,18 @@ package model;
 import java.time.LocalDateTime;
 
 public class Appointment {
-	private int id;
+	private int appointment_id;
 	private Case aCase;
 	private String title;
 	private String room;
 	private String address;
 	private String city;
 	private String state;
-	private int zip;
+	private String zip;
 	private LocalDateTime date;
 
-	public int getId() { return id; }
-	public void setId(int id) { this.id = id;}
+	public int getAppointment_id() { return appointment_id; }
+	public void setAppointment_id(int appointment_id) { this.appointment_id = appointment_id;}
 	public Case getCase() { return aCase; }
 	public void setCase(Case aCase) { this.aCase = aCase; }
 	public String getTitle() {
@@ -47,10 +47,10 @@ public class Appointment {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public int getZip() {
+	public String getZip() {
 		return zip;
 	}
-	public void setZip(int zip) {
+	public void setZip(String zip) {
 		this.zip = zip;
 	}
 	public LocalDateTime getDate() {
