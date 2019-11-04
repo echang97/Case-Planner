@@ -2,6 +2,7 @@ package controller;
 
 import java.sql.*;
 
+
 public class DatabaseConnection {
 	public static Connection getConnection() {
 		try {
