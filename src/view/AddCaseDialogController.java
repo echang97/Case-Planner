@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 import controller.DatabaseController;
 import javafx.event.ActionEvent;
 
-public class AddCaseDialogController implements Initializable{
+public class AddCaseDialogController{
 	private DatabaseConnection database = new DatabaseConnection();
 	private Connection connection;
 	private Statement statement;
@@ -136,14 +136,4 @@ public class AddCaseDialogController implements Initializable{
 		return c;
 	}
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		deadlineTable.setItems(c.getDeadlines());
-		deadlineTitleColumn.setCellValueFactory(new PropertyValueFactory<Deadline,String>("title"));
-		deadlineDateColumn.setCellValueFactory(new PropertyValueFactory<Deadline,LocalDateTime>("date"));
-//		appointmentTable.setItems(c.getAppointments());
-//		appointmentTitleColumn.setCellValueFactory(new PropertyValueFactory<Appointment,String>("title"));
-//		appointmentLocColumn.setCellValueFactory(new PropertyValueFactory<Appointment,String>("location"));
-//		appointmentDateColumn.setCellValueFactory(new PropertyValueFactory<Appointment,LocalDateTime>("date"));
-	}
 }
