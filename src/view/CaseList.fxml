@@ -87,5 +87,6 @@
       <Button layoutX="14.0" layoutY="388.0" mnemonicParsing="false" onAction="#viewCaseDetails" text="View Case Details" />
       <Button layoutX="14.0" layoutY="418.0" mnemonicParsing="false" onAction="#archiveCase" prefHeight="25.0" prefWidth="110.0" text="Archive Case" />
       <Button layoutX="14.0" layoutY="448.0" mnemonicParsing="false" onAction="#removeCase" prefHeight="25.0" prefWidth="109.0" text="Remove Case" />
+      <Button layoutX="187.0" layoutY="418.0" mnemonicParsing="false" onAction="#addClient" text="Add Client" />
    </children>
 </AnchorPane>
