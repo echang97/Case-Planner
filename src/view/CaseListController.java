@@ -68,17 +68,17 @@ public class CaseListController implements Initializable{
 		try {
 			connection = database.getConnection();
 			statement = connection.createStatement();
-			resultSet = statement.executeQuery(query);//"SELECT * FROM aCase WHERE Status = ...;"
+			resultSet = statement.executeQuery(query);//"SELECT * FROM aCase WHERE status = ...;"
 			System.out.println(resultSet);
 			while(resultSet.next()){
 
 				personData.add(new Case(
-						resultSet.getInt("Case_ID"),
-						resultSet.getString("Title"),
-						resultSet.getString("Status"),
-						resultSet.getString("DateAdded"),
-						resultSet.getString("DateResolved"),
-						resultSet.getString("DateRemoved")
+						resultSet.getInt("case_id"),
+						resultSet.getString("title"),
+						resultSet.getString("status"),
+						resultSet.getString("dateAdded"),
+						resultSet.getString("dateResolved"),
+						resultSet.getString("dateRemoved")
 				));
 			}
 			connection.close();
@@ -177,7 +177,7 @@ public class CaseListController implements Initializable{
 		// TODO Implement w Database
 		ongoingCaseColumn.setCellValueFactory(new PropertyValueFactory<Case,String>("title"));
 		dateAddedColumn.setCellValueFactory(new PropertyValueFactory<Case,LocalDateTime>("dateAdded"));
-		ongoingCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE Status = 'ongoing'");
+		ongoingCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'ongoing'");
 		ongoingCaseTable.getItems().addAll(ongoingCases);
 
 		archivedCaseTable.setItems(archivedCases);

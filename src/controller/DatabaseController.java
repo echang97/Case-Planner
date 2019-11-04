@@ -9,7 +9,7 @@ public class DatabaseController {
 	public static Statement addCaseToDB(DatabaseConnection database, Case c) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
-		String addition = "INSERT INTO aCase(Client_ID, Title, Status, DateAdded) VALUES (" + c.getClient().getClient_id() + ", '" +
+		String addition = "INSERT INTO aCase(client_id, title, status, dateAdded) VALUES (" + c.getClient().getClient_id() + ", '" +
 				c.getTitle() + "', '" + c.getStatus() + "', '" + c.getDateAdded() + "')";
 		System.out.println(addition);
 		statement.executeUpdate(addition);
@@ -19,7 +19,7 @@ public class DatabaseController {
 	public static Statement addClientInfoToDB(DatabaseConnection database, Client c) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
-		String addition = "INSERT INTO Client(Name, Phone, Email) VALUES ('" + c.getName() + "', ";
+		String addition = "INSERT INTO client(name, phone, email) VALUES ('" + c.getName() + "', ";
 		if (c.getPhone() != null) {
 			addition = addition + "'" + c.getPhone() + "', ";
 		}
@@ -40,7 +40,7 @@ public class DatabaseController {
 	public static Statement addAppointmentToDB(DatabaseConnection database, Appointment a) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
-		String addition = "INSERT INTO Appointment(Case_ID, Title, Room, Address, City, State, ZIP, Date) VALUES (" +
+		String addition = "INSERT INTO appointment(case_id, title, room, address, city, state, zip, date) VALUES (" +
 				a.getCase().getCase_id() + ", '" + a.getTitle() + "', '";
 		if (a.getRoom() != null) {
 			addition = addition + "'" + a.getRoom() + "', ";
@@ -66,8 +66,8 @@ public class DatabaseController {
 		else {
 			addition = addition + "NULL, ";
 		}
-		if (a.getZip() != -1) {
-			addition = addition + "" + a.getZip() + ", ";
+		if (a.getZip() != null) {
+			addition = addition + "'" + a.getZip() + ", ";
 		}
 		else {
 			addition = addition + "NULL, ";
@@ -81,7 +81,7 @@ public class DatabaseController {
 	public static Statement addDeadlineToDB(DatabaseConnection database, Deadline d) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
-		String addition = "INSERT INTO Deadline(Case_ID, Title, Date) VALUES (" + d.getCase().getCase_id() + ", '" +
+		String addition = "INSERT INTO deadline(case_id, title, date) VALUES (" + d.getCase().getCase_id() + ", '" +
 				d.getTitle() + "', '" + d.getDate() + "')";
 		System.out.println(addition);
 		statement.executeUpdate(addition);
@@ -91,7 +91,7 @@ public class DatabaseController {
 	public static Statement delAppointmentInDB(DatabaseConnection database, Appointment a) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
-		String deletion = "DELETE FROM Appointment WHERE Appointment_ID = " + a.getAppointment_id();
+		String deletion = "DELETE FROM appointment WHERE appointment_id = " + a.getAppointment_id();
 		System.out.println(deletion);
 		statement.executeUpdate(deletion);
 		return statement;
@@ -100,7 +100,7 @@ public class DatabaseController {
 	public static Statement delDeadlineInDB(DatabaseConnection database, Deadline d) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
-		String deletion = "DELETE FROM Deadline WHERE Appointment_ID = " + d.getDeadline_id();
+		String deletion = "DELETE FROM deadline WHERE deadline_id = " + d.getDeadline_id();
 		System.out.println(deletion);
 		statement.executeUpdate(deletion);
 		return statement;
@@ -109,8 +109,8 @@ public class DatabaseController {
 	public static Statement editCaseInDB(DatabaseConnection database, Case c) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
-		String edit = "UPDATE aCase SET Title = '" + c.getTitle() + "' Client_ID = " + c.getClient().getClient_id() +
-				" WHERE Case_ID = " + c.getCase_id();
+		String edit = "UPDATE aCase SET title = '" + c.getTitle() + "' client_id = " + c.getClient().getClient_id() +
+				" WHERE case_id = " + c.getCase_id();
 		System.out.println(edit);
 		statement.executeUpdate(edit);
 		return statement;
@@ -119,8 +119,8 @@ public class DatabaseController {
 	public static Statement archiveCaseInDB(DatabaseConnection database, Case c) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
-		String archival = "UPDATE aCase SET Status = 'archived', DateResolved = '" + c.getDateResolved() +
-				"' WHERE Case_ID = " + c.getCase_id();
+		String archival = "UPDATE aCase SET status = 'resolved', dateResolved = '" + c.getDateResolved() +
+				"' WHERE case_id = " + c.getCase_id();
 		System.out.println(archival);
 		statement.executeUpdate(archival);
 		return statement;
@@ -129,8 +129,8 @@ public class DatabaseController {
 	public static Statement removeCaseInDB(DatabaseConnection database, Case c) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
-		String removal = "UPDATE aCase SET Status = 'removed', DateResolved = '" + c.getDateRemoved() +
-				"' WHERE Case_ID = " + c.getCase_id();
+		String removal = "UPDATE aCase SET status = 'removed', dateResolved = '" + c.getDateRemoved() +
+				"' WHERE case_ID = " + c.getCase_id();
 		System.out.println(removal);
 		statement.executeUpdate(removal);
 		return statement;
