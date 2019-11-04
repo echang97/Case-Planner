@@ -90,6 +90,28 @@ public class CaseListController implements Initializable{
 		}
 		return personData;
 	}
+  
+  // Event Listener on Button.onAction
+  @FXML
+	public void addClient(ActionEvent event){
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("AddClientInfoDialog.fxml"));
+		try {
+			Parent root = (Parent) loader.load();
+			Stage dialogStage = new Stage();
+			Scene scene = new Scene(root);
+			dialogStage.setScene(scene);
+			dialogStage.setTitle("Add Client Info");
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+
+			AddClientInfoDialogController controller = loader.getController();
+			controller.setDialogStage(dialogStage);
+
+			dialogStage.showAndWait();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+  }
 
 	// Event Listener on Button.onAction
 	@FXML
