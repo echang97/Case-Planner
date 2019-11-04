@@ -9,7 +9,7 @@ public class DatabaseController {
 	public static Statement addCaseToDB(DatabaseConnection database, Case c) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
-		String addition = "INSERT INTO aCase(Client_ID, Title, Status, DateAdded) VALUES (" + c.getClient().getId() + ", '" +
+		String addition = "INSERT INTO aCase(Client_ID, Title, Status, DateAdded) VALUES (" + c.getClient().getClient_id() + ", '" +
 				c.getTitle() + "', '" + c.getStatus() + "', '" + c.getDateAdded() + "')";
 		System.out.println(addition);
 		statement.executeUpdate(addition);
@@ -41,7 +41,7 @@ public class DatabaseController {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
 		String addition = "INSERT INTO Appointment(Case_ID, Title, Room, Address, City, State, ZIP, Date) VALUES (" +
-				a.getCase().getId() + ", '" + a.getTitle() + "', '";
+				a.getCase().getCase_id() + ", '" + a.getTitle() + "', '";
 		if (a.getRoom() != null) {
 			addition = addition + "'" + a.getRoom() + "', ";
 		}
@@ -81,7 +81,7 @@ public class DatabaseController {
 	public static Statement addDeadlineToDB(DatabaseConnection database, Deadline d) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
-		String addition = "INSERT INTO Deadline(Case_ID, Title, Date) VALUES (" + d.getCase().getId() + ", '" +
+		String addition = "INSERT INTO Deadline(Case_ID, Title, Date) VALUES (" + d.getCase().getCase_id() + ", '" +
 				d.getTitle() + "', '" + d.getDate() + "')";
 		System.out.println(addition);
 		statement.executeUpdate(addition);
@@ -91,7 +91,7 @@ public class DatabaseController {
 	public static Statement delAppointmentInDB(DatabaseConnection database, Appointment a) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
-		String deletion = "DELETE FROM Appointment WHERE Appointment_ID = " + a.getId();
+		String deletion = "DELETE FROM Appointment WHERE Appointment_ID = " + a.getAppointment_id();
 		System.out.println(deletion);
 		statement.executeUpdate(deletion);
 		return statement;
@@ -100,7 +100,7 @@ public class DatabaseController {
 	public static Statement delDeadlineInDB(DatabaseConnection database, Deadline d) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
-		String deletion = "DELETE FROM Deadline WHERE Appointment_ID = " + d.getId();
+		String deletion = "DELETE FROM Deadline WHERE Appointment_ID = " + d.getDeadline_id();
 		System.out.println(deletion);
 		statement.executeUpdate(deletion);
 		return statement;
@@ -109,8 +109,8 @@ public class DatabaseController {
 	public static Statement editCaseInDB(DatabaseConnection database, Case c) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
-		String edit = "UPDATE aCase SET Title = '" + c.getTitle() + "' Client_ID = " + c.getClient().getId() +
-				" WHERE Case_ID = " + c.getId();
+		String edit = "UPDATE aCase SET Title = '" + c.getTitle() + "' Client_ID = " + c.getClient().getClient_id() +
+				" WHERE Case_ID = " + c.getCase_id();
 		System.out.println(edit);
 		statement.executeUpdate(edit);
 		return statement;
@@ -120,7 +120,7 @@ public class DatabaseController {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
 		String archival = "UPDATE aCase SET Status = 'archived', DateResolved = '" + c.getDateResolved() +
-				"' WHERE Case_ID = " + c.getId();
+				"' WHERE Case_ID = " + c.getCase_id();
 		System.out.println(archival);
 		statement.executeUpdate(archival);
 		return statement;
@@ -130,7 +130,7 @@ public class DatabaseController {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
 		String removal = "UPDATE aCase SET Status = 'removed', DateResolved = '" + c.getDateRemoved() +
-				"' WHERE Case_ID = " + c.getId();
+				"' WHERE Case_ID = " + c.getCase_id();
 		System.out.println(removal);
 		statement.executeUpdate(removal);
 		return statement;

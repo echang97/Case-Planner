@@ -2,13 +2,13 @@ package model;
 
 public class Client {
 
-	private int id;
+	private int client_id;
 	private String name;
 	private String email;
 	private String phone;
 
-	public int getId() { return id; }
-	public void setId(int id) { this.id = id;}
+	public int getClient_id() { return client_id; }
+	public void setClient_id(int client_id) { this.client_id = client_id;}
 	public String getName() {
 		return name;
 	}

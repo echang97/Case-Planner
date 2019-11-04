@@ -3,7 +3,7 @@ package model;
 import java.time.LocalDateTime;
 
 public class Appointment {
-	private int id;
+	private int appointment_id;
 	private Case aCase;
 	private String title;
 	private String room;
@@ -13,8 +13,8 @@ public class Appointment {
 	private int zip;
 	private LocalDateTime date;
 
-	public int getId() { return id; }
-	public void setId(int id) { this.id = id;}
+	public int getAppointment_id() { return appointment_id; }
+	public void setAppointment_id(int appointment_id) { this.appointment_id = appointment_id;}
 	public Case getCase() { return aCase; }
 	public void setCase(Case aCase) { this.aCase = aCase; }
 	public String getTitle() {

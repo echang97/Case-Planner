@@ -11,7 +11,7 @@ public class Case {
 	private ObservableList<Deadline> deadlines = FXCollections.observableArrayList();
 	private Client client;
 
-	private int id;
+	private int case_id;
 	private String title;
 	private String status;
 
@@ -19,7 +19,7 @@ public class Case {
 	private LocalDateTime dateResolved;
 	private LocalDateTime dateRemoved;
 
-	public Case(int id, String title, String status, String dateAdded, String dateResolved, String dateRemoved) {}
+	public Case(int case_id, String title, String status, String dateAdded, String dateResolved, String dateRemoved) {}
 	public Case() {}
 
 	public ObservableList<Appointment> getAppointments() {
@@ -52,11 +52,11 @@ public class Case {
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	public int getId() {
-		return id;
+	public int getCase_id() {
+		return case_id;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setCase_id(int case_id) {
+		this.case_id = case_id;
 	}
 	public String getTitle() {
 		return title;
