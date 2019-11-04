@@ -22,7 +22,7 @@ public class AddClientInfoDialogController {
 	@FXML
 	private TextField emailField;
 	@FXML
-	private ComboBox<String> nameField;
+	private TextField nameField;
 
 	private Stage dialogStage;
 	private Client client = new Client();
@@ -34,7 +34,7 @@ public class AddClientInfoDialogController {
 	// Event Listener on Button.onAction
 	@FXML
 	public void handleSubmit(ActionEvent event) throws SQLException {
-		client.setName(nameField.getEditor().getText());
+		client.setName(nameField.getText());
 		client.setPhone(phoneField.getText());
 		client.setEmail(emailField.getText());
 		DatabaseController.addClientInfoToDB(database, client);
