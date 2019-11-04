@@ -10,7 +10,7 @@ public class Appointment {
 	private String address;
 	private String city;
 	private String state;
-	private int zip;
+	private String zip;
 	private LocalDateTime date;
 
 	public int getAppointment_id() { return appointment_id; }
@@ -47,10 +47,10 @@ public class Appointment {
 	public void setState(String state) {
 		this.state = state;
 	}
-	public int getZip() {
+	public String getZip() {
 		return zip;
 	}
-	public void setZip(int zip) {
+	public void setZip(String zip) {
 		this.zip = zip;
 	}
 	public LocalDateTime getDate() {
