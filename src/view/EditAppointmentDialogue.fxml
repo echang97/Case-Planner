@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="511.0" prefWidth="336.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="55.0" layoutY="87.0" text="Title:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <DatePicker fx:id="dateField" layoutX="93.0" layoutY="331.0" prefHeight="25.0" prefWidth="175.0" />
+      <Label layoutX="54.0" layoutY="335.0" text="Date:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <TextField fx:id="titleField" layoutX="90.0" layoutY="83.0" prefHeight="25.0" prefWidth="175.0" />
+      <Button layoutX="106.0" layoutY="464.0" mnemonicParsing="false" onAction="#handleSubmit" text="Submit" />
+      <Button layoutX="178.0" layoutY="464.0" mnemonicParsing="false" onAction="#handleClose" text="Close" />
+      <Label layoutX="78.0" layoutY="14.0" text="Edit Appointment">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="18.0" layoutY="386.0" text="Notifications: ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="101.0" layoutY="380.0" prefHeight="30.0" prefWidth="88.0" text="Appear every" />
+      <TextField fx:id="notificationFrequency" layoutX="178.0" layoutY="383.0" prefHeight="25.0" prefWidth="28.0" text="5" />
+      <Label layoutX="213.0" layoutY="388.0" text="days," />
+      <Label layoutX="104.0" layoutY="418.0" text="starting" />
+      <TextField fx:id="notificationStart" layoutX="154.0" layoutY="414.0" prefHeight="25.0" prefWidth="28.0" text="20" />
+      <Label layoutX="191.0" layoutY="418.0" text="days before the date." />
+      <Label layoutX="50.0" layoutY="127.0" text="Room: " />
+      <TextField fx:id="roomField" layoutX="97.0" layoutY="123.0" prefHeight="25.0" prefWidth="162.0" />
+      <TextField fx:id="addressField" layoutX="97.0" layoutY="163.0" prefHeight="25.0" prefWidth="162.0" />
+      <Label layoutX="38.0" layoutY="167.0" text="Address:" />
+      <TextField fx:id="cityField" layoutX="97.0" layoutY="204.0" prefHeight="25.0" prefWidth="162.0" />
+      <Label layoutX="58.0" layoutY="208.0" text="City:" />
+      <TextField fx:id="stateField" layoutX="97.0" layoutY="243.0" prefHeight="25.0" prefWidth="162.0" />
+      <Label layoutX="54.0" layoutY="247.0" text="State:" />
+      <Label layoutX="33.0" layoutY="283.0" text="ZIP Code:" />
+      <TextField fx:id="zipField" layoutX="97.0" layoutY="279.0" prefHeight="25.0" prefWidth="162.0" />
+   </children>
+</AnchorPane>
