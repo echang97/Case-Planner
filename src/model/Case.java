@@ -19,7 +19,18 @@ public class Case {
 	private LocalDateTime dateResolved;
 	private LocalDateTime dateRemoved;
 
-	public Case(int case_id, String title, String status, String dateAdded, String dateResolved, String dateRemoved) {}
+	public Case(int case_id, String title, String status, String dateAdded, String dateResolved, String dateRemoved) {
+		this.case_id = case_id;
+		this.status = status;
+		this.title = title;
+		this.dateAdded = LocalDateTime.parse(dateAdded);
+		if (dateResolved != null) {
+			this.dateResolved = LocalDateTime.parse(dateResolved);
+		}
+		if (dateRemoved != null) {
+			this.dateRemoved = LocalDateTime.parse(dateRemoved);
+		}
+	}
 	public Case() {}
 
 	public ObservableList<Appointment> getAppointments() {
