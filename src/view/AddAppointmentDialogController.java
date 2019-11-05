@@ -23,7 +23,7 @@ import controller.DatabaseController;
 
 public class AddAppointmentDialogController implements Initializable{
 	@FXML
-	private TextField titleField;
+	private TextField appointmentTitleField;
 	@FXML
 	private TextField hourField;
 	@FXML
@@ -57,7 +57,7 @@ public class AddAppointmentDialogController implements Initializable{
 	public void handleSubmit(ActionEvent event) throws SQLException{
 		DatabaseConnection database = new DatabaseConnection();
 		appointment = new Appointment();
-		appointment.setTitle(titleField.getText());
+		appointment.setTitle(appointmentTitleField.getText());
 		appointment.setDate(makeLocalDateTime());
 		appointment.setRoom(roomField.getText());
 		appointment.setAddress(addressField.getText());
