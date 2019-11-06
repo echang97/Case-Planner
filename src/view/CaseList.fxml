@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.shape.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
@@ -12,9 +7,10 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CaseListController">
+<AnchorPane prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CaseListController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d6f9ff" height="61.0" stroke="#00000046" strokeType="INSIDE" width="500.0" />
       <Label layoutX="198.0" layoutY="16.0" text="Case Planner">
@@ -37,14 +33,19 @@
         <tabs>
           <Tab id="ongoingTab" fx:id="ongoingTab" text="Ongoing">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="190.0" prefWidth="200.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="320.0" prefWidth="240.0">
                      <children>
-                        <TableView fx:id="ongoingCaseTable" prefHeight="330.0" prefWidth="240.0">
+                        <TableView fx:id="ongoingCaseTable" prefHeight="287.0" prefWidth="240.0">
                            <columns>
                               <TableColumn fx:id="ongoingCaseColumn" prefWidth="150.0" text="Case" />
                               <TableColumn fx:id="dateAddedColumn" prefWidth="96.0" text="Date Added" />
                            </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
                         </TableView>
+                        <Button layoutY="293.0" mnemonicParsing="false" onAction="#archiveCaseFromOngoing" prefHeight="25.0" prefWidth="110.0" text="Archive Case" />
+                        <Button layoutX="131.0" layoutY="293.0" mnemonicParsing="false" onAction="#removeCaseFromOngoing" prefHeight="25.0" prefWidth="109.0" text="Remove Case" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -52,12 +53,17 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="188.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="archivedCaseTable" prefHeight="256.0" prefWidth="200.0">
+                        <TableView fx:id="archivedCaseTable" prefHeight="287.0" prefWidth="240.0">
                            <columns>
                               <TableColumn fx:id="archivedCaseColumn" prefWidth="96.0" text="Case" />
                               <TableColumn fx:id="dateArchivedColumn" prefWidth="103.0" text="Date Archived" />
                            </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
                         </TableView>
+                        <Button layoutX="131.0" layoutY="293.0" mnemonicParsing="false" onAction="#removeCaseFromArchived" prefHeight="25.0" prefWidth="109.0" text="Remove Case" />
+                        <Button layoutY="293.0" mnemonicParsing="false" onAction="#resumeCaseFromArchived" prefHeight="25.0" prefWidth="110.0" text="Resume Case" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -65,12 +71,17 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="deletedCaseTable" prefHeight="256.0" prefWidth="200.0">
+                        <TableView fx:id="deletedCaseTable" prefHeight="287.0" prefWidth="240.0">
                           <columns>
                             <TableColumn fx:id="deletedCaseColumn" prefWidth="96.0" text="Case" />
                             <TableColumn fx:id="dateRemovedColumn" prefWidth="103.0" text="Date Removed" />
                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
                         </TableView>
+                        <Button layoutY="293.0" mnemonicParsing="false" onAction="#archiveCaseFromDeleted" prefHeight="25.0" prefWidth="110.0" text="Archive Case" />
+                        <Button layoutX="130.0" layoutY="293.0" mnemonicParsing="false" onAction="#resumeCaseFromDeleted" prefHeight="25.0" prefWidth="110.0" text="Resume Case" />
                      </children>
                   </AnchorPane>
               </content>
@@ -90,9 +101,7 @@
             <TableColumn prefWidth="100.0" text="Case" />
          </columns>
       </TableView>
-      <Button layoutX="80.0" layoutY="492.0" mnemonicParsing="false" onAction="#viewCaseDetails" text="View Case Details" />
-      <Button layoutX="15.0" layoutY="456.0" mnemonicParsing="false" onAction="#archiveCaseFromOngoing" prefHeight="25.0" prefWidth="110.0" text="Archive Case" />
-      <Button layoutX="145.0" layoutY="456.0" mnemonicParsing="false" onAction="#removeCaseFromOngoing" prefHeight="25.0" prefWidth="109.0" text="Remove Case" />
+      <Button layoutX="80.0" layoutY="458.0" mnemonicParsing="false" onAction="#viewCaseDetails" text="View Case Details" />
       <Button layoutX="177.0" layoutY="561.0" mnemonicParsing="false" onAction="#addClient" text="Add Client" />
       <Button layoutX="286.0" layoutY="275.0" mnemonicParsing="false" onAction="#viewAllDeadlines" text="View All Deadlines" />
       <Button layoutX="286.0" layoutY="517.0" mnemonicParsing="false" onAction="#viewAllAppointments" text="View All Appointments" />
