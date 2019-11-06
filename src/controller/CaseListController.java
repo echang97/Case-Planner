@@ -61,6 +61,7 @@ public class CaseListController implements Initializable{
 	private ObservableList<Case> ongoingCases = FXCollections.observableArrayList();
 	private ObservableList<Case> archivedCases = FXCollections.observableArrayList();
 	private ObservableList<Case> deletedCases = FXCollections.observableArrayList();
+	private ObservableList<Deadline> deadlines = FXCollections.observableArrayList();
 
 	private ObservableList<Case> getDataFromACaseAndAddToObservableList(String query){
 		ObservableList<Case> personData = FXCollections.observableArrayList();
@@ -89,6 +90,41 @@ public class CaseListController implements Initializable{
 		}
 		return personData;
 	}
+
+	private ObservableList<Deadline> getDataFromADeadlineAndAddToObservableList(String query){
+		ObservableList<Deadline> deadlineData = FXCollections.observableArrayList();
+		try {
+			connection = database.getConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(query);//"SELECT * FROM aCase WHERE status = ...;"
+			System.out.println(resultSet);
+			while(resultSet.next()){
+				ResultSet aCase = statement.executeQuery("SELECT * FROM aCase WHERE case_id = " + resultSet.getInt("case_id"));
+				Case c = new Case(
+						aCase.getInt("case_id"),
+						aCase.getString("title"),
+						aCase.getString("status"),
+						aCase.getString("dateAdded"),
+						aCase.getString("dateResolved"),
+						aCase.getString("dateRemoved")
+				);
+
+				deadlineData.add(new Deadline(
+						resultSet.getInt("deadline_id"),
+						c,
+						resultSet.getString("title"),
+						resultSet.getString("date")
+				));
+			}
+			connection.close();
+			statement.close();
+			resultSet.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
+		return deadlineData;
+	}
   
   // Event Listener on Button.onAction
   @FXML
@@ -106,6 +142,7 @@ public class CaseListController implements Initializable{
 			controller.setDialogStage(dialogStage);
 
 			dialogStage.showAndWait();
+			refreshLists();
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -128,7 +165,8 @@ public class CaseListController implements Initializable{
 			controller.setDialogStage(dialogStage);
 
 			dialogStage.showAndWait();
-			ongoingCases.add(controller.getCase());
+			//ongoingCases.add(controller.getCase());
+			refreshLists();
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -155,7 +193,7 @@ public class CaseListController implements Initializable{
 			controller.setDetails();
 
 			dialogStage.showAndWait();
-
+			refreshLists();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -163,14 +201,15 @@ public class CaseListController implements Initializable{
 
 	// Event Listener on Button.onAction
 	@FXML
-	public void archiveCase(ActionEvent event) throws SQLException {
+	public void archiveCaseFromOngoing(ActionEvent event) throws SQLException {
 		// TODO implement w Database
 		Case selectedCase = ongoingCaseTable.getSelectionModel().getSelectedItem();
 		if (selectedCase != null){
 			selectedCase.setDateResolved(LocalDateTime.now());
 			DatabaseController.archiveCaseInDB(database, selectedCase);
-			archivedCases.add(selectedCase);
-			ongoingCases.remove(selectedCase);
+			//archivedCases.add(selectedCase);
+			//ongoingCases.remove(selectedCase);
+			refreshLists();
 		}else{
 			// TODO Make this a pop-up message
 			System.out.println("Must select a case from Ongoing");
@@ -179,20 +218,85 @@ public class CaseListController implements Initializable{
 
 	// Event Listener on Button.onAction
 	@FXML
-	public void removeCase(ActionEvent event) throws SQLException {
+	public void removeCaseFromOngoing(ActionEvent event) throws SQLException {
 		// TODO implement w Database
 		Case selectedCase = ongoingCaseTable.getSelectionModel().getSelectedItem();
 		if (selectedCase != null){
 			selectedCase.setDateRemoved(LocalDateTime.now());
 			DatabaseController.removeCaseInDB(database, selectedCase);
-			deletedCases.add(selectedCase);
-			ongoingCases.remove(selectedCase);
+			//deletedCases.add(selectedCase);
+			//ongoingCases.remove(selectedCase);
+			refreshLists();
 		}else{
 			// TODO Make this a pop-up message
 			System.out.println("Must select a case from Ongoing");
 		}
 	}
 
+	// Event Listener on Button.onAction
+	@FXML
+	public void removeCaseFromArchived(ActionEvent event) throws SQLException {
+		// TODO implement w Database
+		Case selectedCase = archivedCaseTable.getSelectionModel().getSelectedItem();
+		if (selectedCase != null){
+			selectedCase.setDateRemoved(LocalDateTime.now());
+			DatabaseController.archiveCaseInDB(database, selectedCase);
+			deletedCases.add(selectedCase);
+			archivedCases.remove(selectedCase);
+		}else{
+			// TODO Make this a pop-up message
+			System.out.println("Must select a case from Archived");
+		}
+	}
+
+	// Event Listener on Button.onAction
+	@FXML
+	public void resumeCaseFromArchived(ActionEvent event) throws SQLException {
+		// TODO implement w Database
+		Case selectedCase = archivedCaseTable.getSelectionModel().getSelectedItem();
+		if (selectedCase != null){
+		//	selectedCase.setDateArchived(LocalDateTime.now());
+		//	DatabaseController.resumeCaseInDB(database, selectedCase);    //no resumeCaseInDB method implemented in DatabaseController
+			ongoingCases.add(selectedCase);
+			archivedCases.remove(selectedCase);
+		}else{
+			// TODO Make this a pop-up message
+			System.out.println("Must select a case from Archived");
+		}
+	}	
+	
+	// Event Listener on Button.onAction
+	@FXML
+	public void archiveCaseFromDeleted(ActionEvent event) throws SQLException {
+		// TODO implement w Database
+		Case selectedCase = deletedCaseTable.getSelectionModel().getSelectedItem();
+		if (selectedCase != null){
+			selectedCase.setDateResolved(LocalDateTime.now());
+			DatabaseController.archiveCaseInDB(database, selectedCase);
+			archivedCases.add(selectedCase);
+			deletedCases.remove(selectedCase);
+		}else{
+			// TODO Make this a pop-up message
+			System.out.println("Must select a case from Deleted");
+		}
+	}
+
+	// Event Listener on Button.onAction
+	@FXML
+	public void resumeCaseFromDeleted(ActionEvent event) throws SQLException {
+		// TODO implement w Database
+		Case selectedCase = deletedCaseTable.getSelectionModel().getSelectedItem();
+		if (selectedCase != null){
+			selectedCase.setDateResolved(LocalDateTime.now());
+			DatabaseController.archiveCaseInDB(database, selectedCase);
+			ongoingCases.add(selectedCase);
+			deletedCases.remove(selectedCase);
+		}else{
+			// TODO Make this a pop-up message
+			System.out.println("Must select a case from Deleted");
+		}
+	}
+	
 	// Event Listener on Button.onAction
 	@FXML
 	public void viewAllDeadlines(ActionEvent event) { //////////////////////////
@@ -206,7 +310,7 @@ public class CaseListController implements Initializable{
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 
 			dialogStage.showAndWait();
-
+			refreshLists();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -225,10 +329,31 @@ public class CaseListController implements Initializable{
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 
 			dialogStage.showAndWait();
+			refreshLists();
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void refreshLists(){
+		ongoingCaseTable.getItems().clear();
+		ongoingCaseColumn.setCellValueFactory(new PropertyValueFactory<Case,String>("title"));
+		dateAddedColumn.setCellValueFactory(new PropertyValueFactory<Case,LocalDateTime>("dateAdded"));
+		ongoingCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'ongoing'");
+		ongoingCaseTable.getItems().addAll(ongoingCases);
+
+		archivedCaseTable.getItems().clear();
+		archivedCaseColumn.setCellValueFactory(new PropertyValueFactory<Case,String>("title"));
+		dateArchivedColumn.setCellValueFactory(new PropertyValueFactory<Case,LocalDateTime>("dateResolved"));
+		archivedCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'resolved'");
+		archivedCaseTable.getItems().addAll(archivedCases);
+
+		deletedCaseTable.getItems().clear();
+		deletedCaseColumn.setCellValueFactory(new PropertyValueFactory<Case,String>("title"));
+		dateRemovedColumn.setCellValueFactory(new PropertyValueFactory<Case,LocalDateTime>("dateRemoved"));
+		deletedCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'removed'");
+		deletedCaseTable.getItems().addAll(deletedCases);
 	}
 
 	@Override
@@ -239,13 +364,16 @@ public class CaseListController implements Initializable{
 		ongoingCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'ongoing'");
 		ongoingCaseTable.getItems().addAll(ongoingCases);
 
-		archivedCaseTable.setItems(archivedCases);
 		archivedCaseColumn.setCellValueFactory(new PropertyValueFactory<Case,String>("title"));
 		dateArchivedColumn.setCellValueFactory(new PropertyValueFactory<Case,LocalDateTime>("dateResolved"));
+		archivedCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'resolved'");
+		archivedCaseTable.getItems().addAll(archivedCases);
 
-		archivedCaseTable.setItems(archivedCases);
-		archivedCaseColumn.setCellValueFactory(new PropertyValueFactory<Case,String>("title"));
-		dateArchivedColumn.setCellValueFactory(new PropertyValueFactory<Case,LocalDateTime>("dateAdded"));
+		deletedCaseColumn.setCellValueFactory(new PropertyValueFactory<Case,String>("title"));
+		dateRemovedColumn.setCellValueFactory(new PropertyValueFactory<Case,LocalDateTime>("dateRemoved"));
+		deletedCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'removed'");
+		deletedCaseTable.getItems().addAll(deletedCases);
+
+
 	}
-
 }

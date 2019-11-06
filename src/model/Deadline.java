@@ -8,7 +8,13 @@ public class Deadline {
 	private String title;
 	private LocalDateTime date;
 
-	public Deadline(String title, LocalDateTime date){
+	public Deadline(int deadline_id, Case aCase, String title, String date){
+		this.deadline_id = deadline_id;
+		this.title = title;
+		this.date = LocalDateTime.parse(date);
+	}
+
+	public Deadline(String title, LocalDateTime date) {
 		this.title = title;
 		this.date = date;
 	}
