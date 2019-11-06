@@ -13,6 +13,18 @@ public class Appointment {
 	private String zip;
 	private LocalDateTime date;
 
+	public Appointment(int appointment_id, Case aCase, String title, String room, String address, String city, String state, String zip, LocalDateTime date) {
+		this.appointment_id = appointment_id;
+		this.aCase = aCase;
+		this.title = title;
+		this.room = room;
+		this.address = address;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
+		this.date = date;
+	}
+
 	public int getAppointment_id() { return appointment_id; }
 	public void setAppointment_id(int appointment_id) { this.appointment_id = appointment_id;}
 	public Case getCase() { return aCase; }
