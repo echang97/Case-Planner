@@ -61,6 +61,7 @@ public class CaseListController implements Initializable{
 	private ObservableList<Case> ongoingCases = FXCollections.observableArrayList();
 	private ObservableList<Case> archivedCases = FXCollections.observableArrayList();
 	private ObservableList<Case> deletedCases = FXCollections.observableArrayList();
+	private ObservableList<Deadline> deadlines = FXCollections.observableArrayList();
 
 	private ObservableList<Case> getDataFromACaseAndAddToObservableList(String query){
 		ObservableList<Case> personData = FXCollections.observableArrayList();
@@ -88,6 +89,41 @@ public class CaseListController implements Initializable{
 
 		}
 		return personData;
+	}
+
+	private ObservableList<Deadline> getDataFromADeadlineAndAddToObservableList(String query){
+		ObservableList<Deadline> deadlineData = FXCollections.observableArrayList();
+		try {
+			connection = database.getConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(query);//"SELECT * FROM aCase WHERE status = ...;"
+			System.out.println(resultSet);
+			while(resultSet.next()){
+				ResultSet aCase = statement.executeQuery("SELECT * FROM aCase WHERE case_id = " + resultSet.getInt("case_id"));
+				Case c = new Case(
+						aCase.getInt("case_id"),
+						aCase.getString("title"),
+						aCase.getString("status"),
+						aCase.getString("dateAdded"),
+						aCase.getString("dateResolved"),
+						aCase.getString("dateRemoved")
+				);
+
+				deadlineData.add(new Deadline(
+						resultSet.getInt("deadline_id"),
+						c,
+						resultSet.getString("title"),
+						resultSet.getString("date")
+				));
+			}
+			connection.close();
+			statement.close();
+			resultSet.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
+		return deadlineData;
 	}
   
   // Event Listener on Button.onAction
@@ -273,6 +309,8 @@ public class CaseListController implements Initializable{
 		dateRemovedColumn.setCellValueFactory(new PropertyValueFactory<Case,LocalDateTime>("dateRemoved"));
 		deletedCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'removed'");
 		deletedCaseTable.getItems().addAll(deletedCases);
+
+
 	}
 
 }
