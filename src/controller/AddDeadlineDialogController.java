@@ -1,4 +1,4 @@
-package view;
+package controller;
 
 import controller.*;
 import model.Deadline;
@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDateTime;
 
-import controller.DeadlineCalculatorController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -56,7 +55,7 @@ public class AddDeadlineDialogController{
 	// Event Listener on Button.onAction
 	@FXML
 	public void handleCalcDeadline(ActionEvent event) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/controller/DeadlineCalculator.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DeadlineCalculator.fxml"));
 		try {
 			Parent root = (Parent) loader.load();
 			Stage dialogStage = new Stage();

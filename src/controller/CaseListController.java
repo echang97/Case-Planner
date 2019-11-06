@@ -1,4 +1,4 @@
-package view;
+package controller;
 
 import controller.*;
 import model.*;
@@ -12,7 +12,6 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
-import controller.DatabaseController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -94,7 +93,7 @@ public class CaseListController implements Initializable{
   // Event Listener on Button.onAction
   @FXML
 	public void addClient(ActionEvent event){
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("AddClientInfoDialog.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AddClientInfoDialog.fxml"));
 		try {
 			Parent root = (Parent) loader.load();
 			Stage dialogStage = new Stage();
@@ -116,7 +115,7 @@ public class CaseListController implements Initializable{
 	// Event Listener on Button.onAction
 	@FXML
 	public void addCase(ActionEvent event) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("AddCaseDialog.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AddCaseDialog.fxml"));
 		try {
 			Parent root = (Parent) loader.load();
 			Stage dialogStage = new Stage();
@@ -140,7 +139,7 @@ public class CaseListController implements Initializable{
 	@FXML
 	public void viewCaseDetails(ActionEvent event) {
 		// TODO Implement with Database
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewCaseDetails.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ViewCaseDetails.fxml"));
 		Case selectedCase = ongoingCaseTable.getSelectionModel().getSelectedItem();
 
 		try {

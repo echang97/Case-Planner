@@ -1,4 +1,4 @@
-package view;
+package controller;
 
 import controller.*;
 import model.*;
@@ -21,7 +21,6 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
-import controller.DatabaseController;
 import javafx.event.ActionEvent;
 
 public class AddCaseDialogController{
@@ -69,7 +68,7 @@ public class AddCaseDialogController{
 	// Event Listener on Button.onAction
 	@FXML
 	public void addDeadline(ActionEvent event) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("AddDeadlineDialog.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AddDeadlineDialog.fxml"));
 		try {
 			Parent root = (Parent) loader.load();
 			Stage dialogStage = new Stage();
@@ -92,7 +91,7 @@ public class AddCaseDialogController{
 	// Event Listener on Button.onAction
 	@FXML
 	public void addClientInfo(ActionEvent event) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("AddClientInfoDialog.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AddClientInfoDialog.fxml"));
 		try {
 			Parent root = (Parent) loader.load();
 			Stage dialogStage = new Stage();
