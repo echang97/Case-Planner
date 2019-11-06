@@ -1,5 +1,7 @@
 /bin/
 
+*.classpath
+
 # Database #
 ######################
 *.sqlite
