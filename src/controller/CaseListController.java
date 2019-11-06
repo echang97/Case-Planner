@@ -201,14 +201,11 @@ public class CaseListController implements Initializable{
 
 	// Event Listener on Button.onAction
 	@FXML
-	public void archiveCase(ActionEvent event) throws SQLException {
-		// TODO implement w Database
+	public void archiveCaseFromOngoing(ActionEvent event) throws SQLException {
 		Case selectedCase = ongoingCaseTable.getSelectionModel().getSelectedItem();
 		if (selectedCase != null){
 			selectedCase.setDateResolved(LocalDateTime.now());
 			DatabaseController.archiveCaseInDB(database, selectedCase);
-			//archivedCases.add(selectedCase);
-			//ongoingCases.remove(selectedCase);
 			refreshLists();
 		}else{
 			// TODO Make this a pop-up message
@@ -218,18 +215,75 @@ public class CaseListController implements Initializable{
 
 	// Event Listener on Button.onAction
 	@FXML
-	public void removeCase(ActionEvent event) throws SQLException {
-		// TODO implement w Database
+	public void removeCaseFromOngoing(ActionEvent event) throws SQLException {
 		Case selectedCase = ongoingCaseTable.getSelectionModel().getSelectedItem();
 		if (selectedCase != null){
 			selectedCase.setDateRemoved(LocalDateTime.now());
 			DatabaseController.removeCaseInDB(database, selectedCase);
-			//deletedCases.add(selectedCase);
-			//ongoingCases.remove(selectedCase);
 			refreshLists();
 		}else{
 			// TODO Make this a pop-up message
 			System.out.println("Must select a case from Ongoing");
+		}
+	}
+
+	// Event Listener on Button.onAction
+	@FXML
+	public void removeCaseFromArchived(ActionEvent event) throws SQLException {
+		// TODO implement w Database
+		Case selectedCase = archivedCaseTable.getSelectionModel().getSelectedItem();
+		if (selectedCase != null){
+			selectedCase.setDateRemoved(LocalDateTime.now());
+			DatabaseController.archiveCaseInDB(database, selectedCase);
+			refreshLists();
+		}else{
+			// TODO Make this a pop-up message
+			System.out.println("Must select a case from Archived");
+		}
+	}
+
+	// Event Listener on Button.onAction
+	@FXML
+	public void resumeCaseFromArchived(ActionEvent event) throws SQLException {
+		// TODO implement w Database
+		Case selectedCase = archivedCaseTable.getSelectionModel().getSelectedItem();
+		if (selectedCase != null){
+			//	selectedCase.setDateArchived(LocalDateTime.now());
+			//	DatabaseController.resumeCaseInDB(database, selectedCase);    //no resumeCaseInDB method implemented in DatabaseController
+			refreshLists();
+		}else{
+			// TODO Make this a pop-up message
+			System.out.println("Must select a case from Archived");
+		}
+	}
+
+	// Event Listener on Button.onAction
+	@FXML
+	public void archiveCaseFromDeleted(ActionEvent event) throws SQLException {
+		// TODO implement w Database
+		Case selectedCase = deletedCaseTable.getSelectionModel().getSelectedItem();
+		if (selectedCase != null){
+			selectedCase.setDateResolved(LocalDateTime.now());
+			DatabaseController.archiveCaseInDB(database, selectedCase);
+			refreshLists();
+		}else{
+			// TODO Make this a pop-up message
+			System.out.println("Must select a case from Deleted");
+		}
+	}
+
+	// Event Listener on Button.onAction
+	@FXML
+	public void resumeCaseFromDeleted(ActionEvent event) throws SQLException {
+		// TODO implement w Database
+		Case selectedCase = deletedCaseTable.getSelectionModel().getSelectedItem();
+		if (selectedCase != null){
+			selectedCase.setDateResolved(LocalDateTime.now());
+			//	DatabaseController.resumeCaseInDB(database, selectedCase); //no resumeCaseInDB method implemented in DatabaseController
+			refreshLists();
+		}else{
+			// TODO Make this a pop-up message
+			System.out.println("Must select a case from Deleted");
 		}
 	}
 

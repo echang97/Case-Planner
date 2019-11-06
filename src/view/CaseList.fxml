@@ -91,8 +91,8 @@
          </columns>
       </TableView>
       <Button layoutX="80.0" layoutY="492.0" mnemonicParsing="false" onAction="#viewCaseDetails" text="View Case Details" />
-      <Button layoutX="15.0" layoutY="456.0" mnemonicParsing="false" onAction="#archiveCase" prefHeight="25.0" prefWidth="110.0" text="Archive Case" />
-      <Button layoutX="145.0" layoutY="456.0" mnemonicParsing="false" onAction="#removeCase" prefHeight="25.0" prefWidth="109.0" text="Remove Case" />
+      <Button layoutX="15.0" layoutY="456.0" mnemonicParsing="false" onAction="#archiveCaseFromOngoing" prefHeight="25.0" prefWidth="110.0" text="Archive Case" />
+      <Button layoutX="145.0" layoutY="456.0" mnemonicParsing="false" onAction="#removeCaseFromOngoing" prefHeight="25.0" prefWidth="109.0" text="Remove Case" />
       <Button layoutX="177.0" layoutY="561.0" mnemonicParsing="false" onAction="#addClient" text="Add Client" />
       <Button layoutX="286.0" layoutY="275.0" mnemonicParsing="false" onAction="#viewAllDeadlines" text="View All Deadlines" />
       <Button layoutX="286.0" layoutY="517.0" mnemonicParsing="false" onAction="#viewAllAppointments" text="View All Appointments" />
