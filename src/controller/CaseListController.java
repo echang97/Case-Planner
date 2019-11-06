@@ -311,5 +311,4 @@ public class CaseListController implements Initializable{
 		archivedCaseColumn.setCellValueFactory(new PropertyValueFactory<Case,String>("title"));
 		dateArchivedColumn.setCellValueFactory(new PropertyValueFactory<Case,LocalDateTime>("dateAdded"));
 	}
-
 }

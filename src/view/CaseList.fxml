@@ -111,3 +111,4 @@
       <Button layoutX="286.0" layoutY="517.0" mnemonicParsing="false" onAction="#viewAllAppointments" text="View All Appointments" />
    </children>
 </AnchorPane>
+
