@@ -1,6 +1,7 @@
 package controller;
 
 import controller.*;
+import javafx.beans.property.Property;
 import model.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -56,12 +57,21 @@ public class CaseListController implements Initializable{
 	@FXML
 	private TableView<Deadline> deadlinesTable;
 	@FXML
+	private TableColumn<Deadline, String> deadlineTitleColumn;
+	@FXML
+	private TableColumn<Case, String> deadlineCaseColumn;
+	@FXML
 	private TableView<Appointment> appointmentsTable;
+	@FXML
+	private TableColumn<Appointment, String> appointmentTitleColumn;
+	@FXML
+	private TableColumn<Appointment, String> appointmentCaseColumn;
 
 	private ObservableList<Case> ongoingCases = FXCollections.observableArrayList();
 	private ObservableList<Case> archivedCases = FXCollections.observableArrayList();
 	private ObservableList<Case> deletedCases = FXCollections.observableArrayList();
 	private ObservableList<Deadline> deadlines = FXCollections.observableArrayList();
+	private ObservableList<Appointment> appointments = FXCollections.observableArrayList();
 
 	private ObservableList<Case> getDataFromACaseAndAddToObservableList(String query){
 		ObservableList<Case> personData = FXCollections.observableArrayList();
@@ -364,7 +374,10 @@ public class CaseListController implements Initializable{
 		deletedCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'removed'");
 		deletedCaseTable.getItems().addAll(deletedCases);
 
-
+		deadlineTitleColumn.setCellValueFactory(new PropertyValueFactory<Deadline, String>("title"));
+		deadlineCaseColumn.setCellValueFactory(new PropertyValueFactory<Case, String>("title"));
+		deadlines = getDataFromADeadlineAndAddToObservableList("SELECT * FROM deadline");
+		deadlinesTable.getItems().addAll(deadlines);
 	}
 
 }

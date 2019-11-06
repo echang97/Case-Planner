@@ -91,14 +91,14 @@
       <Button layoutX="264.0" layoutY="561.0" mnemonicParsing="false" onAction="#addCase" text="Add Case" />
       <TableView fx:id="deadlinesTable" layoutX="286.0" layoutY="90.0" prefHeight="180.0" prefWidth="200.0">
          <columns>
-            <TableColumn prefWidth="100.0" text="Deadline" />
-            <TableColumn prefWidth="100.0" text="Case" />
+            <TableColumn fx:id="deadlineTitleColumn" prefWidth="100.0" text="Deadline" />
+            <TableColumn fx:id="deadlineCaseColumn" prefWidth="100.0" text="Case" />
          </columns>
       </TableView>
       <TableView fx:id="appointmentsTable" layoutX="286.0" layoutY="331.0" prefHeight="180.0" prefWidth="200.0">
          <columns>
-            <TableColumn prefWidth="100.0" text="Appointment" />
-            <TableColumn prefWidth="100.0" text="Case" />
+            <TableColumn fx:id="appointmentTitleColumn" prefWidth="100.0" text="Appointment" />
+            <TableColumn fx:id="appointmentCaseColumn" prefWidth="100.0" text="Case" />
          </columns>
       </TableView>
       <Button layoutX="80.0" layoutY="458.0" mnemonicParsing="false" onAction="#viewCaseDetails" text="View Case Details" />
