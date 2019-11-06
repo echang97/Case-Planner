@@ -24,6 +24,9 @@ public class Appointment {
 		this.zip = zip;
 		this.date = date;
 	}
+	public Appointment(){
+
+	}
 
 	public int getAppointment_id() { return appointment_id; }
 	public void setAppointment_id(int appointment_id) { this.appointment_id = appointment_id;}
