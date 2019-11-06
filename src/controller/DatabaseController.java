@@ -129,7 +129,7 @@ public class DatabaseController {
 	public static Statement removeCaseInDB(DatabaseConnection database, Case c) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
-		String removal = "UPDATE aCase SET status = 'removed', dateResolved = '" + c.getDateRemoved() +
+		String removal = "UPDATE aCase SET status = 'removed', dateRemoved = '" + c.getDateRemoved() +
 				"' WHERE case_ID = " + c.getCase_id();
 		System.out.println(removal);
 		statement.executeUpdate(removal);

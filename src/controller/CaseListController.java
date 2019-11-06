@@ -106,6 +106,7 @@ public class CaseListController implements Initializable{
 			controller.setDialogStage(dialogStage);
 
 			dialogStage.showAndWait();
+			refreshLists();
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -128,7 +129,8 @@ public class CaseListController implements Initializable{
 			controller.setDialogStage(dialogStage);
 
 			dialogStage.showAndWait();
-			ongoingCases.add(controller.getCase());
+			//ongoingCases.add(controller.getCase());
+			refreshLists();
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -155,7 +157,7 @@ public class CaseListController implements Initializable{
 			controller.setDetails();
 
 			dialogStage.showAndWait();
-
+			refreshLists();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -169,8 +171,9 @@ public class CaseListController implements Initializable{
 		if (selectedCase != null){
 			selectedCase.setDateResolved(LocalDateTime.now());
 			DatabaseController.archiveCaseInDB(database, selectedCase);
-			archivedCases.add(selectedCase);
-			ongoingCases.remove(selectedCase);
+			//archivedCases.add(selectedCase);
+			//ongoingCases.remove(selectedCase);
+			refreshLists();
 		}else{
 			// TODO Make this a pop-up message
 			System.out.println("Must select a case from Ongoing");
@@ -185,8 +188,9 @@ public class CaseListController implements Initializable{
 		if (selectedCase != null){
 			selectedCase.setDateRemoved(LocalDateTime.now());
 			DatabaseController.removeCaseInDB(database, selectedCase);
-			deletedCases.add(selectedCase);
-			ongoingCases.remove(selectedCase);
+			//deletedCases.add(selectedCase);
+			//ongoingCases.remove(selectedCase);
+			refreshLists();
 		}else{
 			// TODO Make this a pop-up message
 			System.out.println("Must select a case from Ongoing");
@@ -270,7 +274,7 @@ public class CaseListController implements Initializable{
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 
 			dialogStage.showAndWait();
-
+			refreshLists();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -289,10 +293,31 @@ public class CaseListController implements Initializable{
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 
 			dialogStage.showAndWait();
+			refreshLists();
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void refreshLists(){
+		ongoingCaseTable.getItems().clear();
+		ongoingCaseColumn.setCellValueFactory(new PropertyValueFactory<Case,String>("title"));
+		dateAddedColumn.setCellValueFactory(new PropertyValueFactory<Case,LocalDateTime>("dateAdded"));
+		ongoingCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'ongoing'");
+		ongoingCaseTable.getItems().addAll(ongoingCases);
+
+		archivedCaseTable.getItems().clear();
+		archivedCaseColumn.setCellValueFactory(new PropertyValueFactory<Case,String>("title"));
+		dateArchivedColumn.setCellValueFactory(new PropertyValueFactory<Case,LocalDateTime>("dateResolved"));
+		archivedCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'resolved'");
+		archivedCaseTable.getItems().addAll(archivedCases);
+
+		deletedCaseTable.getItems().clear();
+		deletedCaseColumn.setCellValueFactory(new PropertyValueFactory<Case,String>("title"));
+		dateRemovedColumn.setCellValueFactory(new PropertyValueFactory<Case,LocalDateTime>("dateRemoved"));
+		deletedCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'removed'");
+		deletedCaseTable.getItems().addAll(deletedCases);
 	}
 
 	@Override
@@ -303,12 +328,14 @@ public class CaseListController implements Initializable{
 		ongoingCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'ongoing'");
 		ongoingCaseTable.getItems().addAll(ongoingCases);
 
-		archivedCaseTable.setItems(archivedCases);
 		archivedCaseColumn.setCellValueFactory(new PropertyValueFactory<Case,String>("title"));
 		dateArchivedColumn.setCellValueFactory(new PropertyValueFactory<Case,LocalDateTime>("dateResolved"));
+		archivedCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'resolved'");
+		archivedCaseTable.getItems().addAll(archivedCases);
 
-		archivedCaseTable.setItems(archivedCases);
-		archivedCaseColumn.setCellValueFactory(new PropertyValueFactory<Case,String>("title"));
-		dateArchivedColumn.setCellValueFactory(new PropertyValueFactory<Case,LocalDateTime>("dateAdded"));
+		deletedCaseColumn.setCellValueFactory(new PropertyValueFactory<Case,String>("title"));
+		dateRemovedColumn.setCellValueFactory(new PropertyValueFactory<Case,LocalDateTime>("dateRemoved"));
+		deletedCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'removed'");
+		deletedCaseTable.getItems().addAll(deletedCases);
 	}
 }
