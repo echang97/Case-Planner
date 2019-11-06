@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="435.0" prefWidth="438.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane layoutX="-98.0" layoutY="-136.0" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="upcomingAppointmentsLabel" layoutX="121.0" layoutY="204.0" text="Upcoming Appointments">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <TableView fx:id="appointmentTable" layoutX="19.0" layoutY="89.0" prefHeight="309.0" prefWidth="400.0">
+        <columns>
+          <TableColumn fx:id="caseColumn" prefWidth="100.0" text="Case" />
+          <TableColumn fx:id="appointmentColumn" prefWidth="100.0" text="Appointment" />
+            <TableColumn fx:id="locationColumn" prefWidth="100.0" text="Location" />
+            <TableColumn fx:id="dateColumn" prefWidth="100.0" text="Date" />
+        </columns>
+      </TableView>
+      <Label fx:id="ViewAppointmentsLabel" layoutX="126.0" layoutY="14.0" text="View Appointments" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
