@@ -239,13 +239,15 @@ public class CaseListController implements Initializable{
 		ongoingCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'ongoing'");
 		ongoingCaseTable.getItems().addAll(ongoingCases);
 
-		archivedCaseTable.setItems(archivedCases);
 		archivedCaseColumn.setCellValueFactory(new PropertyValueFactory<Case,String>("title"));
 		dateArchivedColumn.setCellValueFactory(new PropertyValueFactory<Case,LocalDateTime>("dateResolved"));
+		archivedCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'resolved'");
+		archivedCaseTable.getItems().addAll(archivedCases);
 
-		archivedCaseTable.setItems(archivedCases);
-		archivedCaseColumn.setCellValueFactory(new PropertyValueFactory<Case,String>("title"));
-		dateArchivedColumn.setCellValueFactory(new PropertyValueFactory<Case,LocalDateTime>("dateAdded"));
+		deletedCaseColumn.setCellValueFactory(new PropertyValueFactory<Case,String>("title"));
+		dateRemovedColumn.setCellValueFactory(new PropertyValueFactory<Case,LocalDateTime>("dateRemoved"));
+		deletedCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'removed'");
+		deletedCaseTable.getItems().addAll(deletedCases);
 	}
 
 }
