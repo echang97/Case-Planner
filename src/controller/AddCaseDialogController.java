@@ -61,35 +61,6 @@ public class AddCaseDialogController{
 
 	// Event Listener on Button.onAction
 	@FXML
-	public void addAppointment(ActionEvent event) {
-		c.addAppointment(null);
-		System.out.println("add appointment");
-	}
-	// Event Listener on Button.onAction
-	@FXML
-	public void addDeadline(ActionEvent event) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AddDeadlineDialog.fxml"));
-		try {
-			Parent root = (Parent) loader.load();
-			Stage dialogStage = new Stage();
-			Scene scene = new Scene(root);
-			dialogStage.setScene(scene);
-			dialogStage.setTitle("Add Deadline");
-			dialogStage.initModality(Modality.WINDOW_MODAL);
-
-			AddDeadlineDialogController controller = loader.getController();
-			controller.setDialogStage(dialogStage);
-
-			dialogStage.showAndWait();
-
-			c.addDeadline(controller.getDeadline());
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	// Event Listener on Button.onAction
-	@FXML
 	public void addClientInfo(ActionEvent event) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AddClientInfoDialog.fxml"));
 		try {
