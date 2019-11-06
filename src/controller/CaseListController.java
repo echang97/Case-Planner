@@ -193,6 +193,44 @@ public class CaseListController implements Initializable{
 		}
 	}
 
+	// Event Listener on Button.onAction
+	@FXML
+	public void viewAllDeadlines(ActionEvent event) { //////////////////////////
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ViewAllDeadlines.fxml"));
+		try {
+			Parent root = (Parent) loader.load();
+			Stage dialogStage = new Stage();
+			Scene scene = new Scene(root);
+			dialogStage.setScene(scene);
+			dialogStage.setTitle("View Deadlines");
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+
+			dialogStage.showAndWait();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// Event Listener on Button.onAction
+	@FXML
+	public void viewAllAppointments(ActionEvent event) throws SQLException { /////////////////////
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ViewAllAppointments.fxml"));
+		try {
+			Parent root = (Parent) loader.load();
+			Stage dialogStage = new Stage();
+			Scene scene = new Scene(root);
+			dialogStage.setScene(scene);
+			dialogStage.setTitle("View Appointments");
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+
+			dialogStage.showAndWait();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Implement w Database
