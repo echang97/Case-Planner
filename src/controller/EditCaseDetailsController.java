@@ -62,6 +62,7 @@ public class EditCaseDetailsController {
 
 			AddDeadlineDialogController controller = loader.getController();
 			controller.setDialogStage(dialogStage);
+			controller.setCase(c);
 
 			dialogStage.showAndWait();
 
