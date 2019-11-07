@@ -3,7 +3,7 @@ package controller;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import model.Appointment;
-
+import model.Case;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -43,6 +43,7 @@ public class AddAppointmentDialogController implements Initializable{
 	private TextField notificationFrequencyField;
 	@FXML
 	private TextField notifcationStartField;
+	private Case c;
 	private Stage dialogStage;
 	private Appointment appointment;
 
@@ -61,7 +62,7 @@ public class AddAppointmentDialogController implements Initializable{
 		appointment.setCity(cityField.getText());
 		appointment.setState(stateField.getText());
 		appointment.setZip(zipField.getText());
-
+		appointment.setCase(c);
 		DatabaseController.addAppointmentToDB(database, appointment);
 
 		dialogStage.close();
@@ -96,5 +97,9 @@ public class AddAppointmentDialogController implements Initializable{
 			time = LocalTime.parse(Integer.toString(hour) + ":" + minuteField.getText());
 		}
 		return LocalDateTime.of(dateField.getValue(), time);
+	}
+	
+	public void setCase(Case c){
+		this.c = c;
 	}
 }

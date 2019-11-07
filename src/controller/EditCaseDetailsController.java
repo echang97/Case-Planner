@@ -62,7 +62,6 @@ public class EditCaseDetailsController {
 
 			AddDeadlineDialogController controller = loader.getController();
 			controller.setDialogStage(dialogStage);
-			controller.setCase(c);
 
 			dialogStage.showAndWait();
 
@@ -131,6 +130,7 @@ public class EditCaseDetailsController {
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 
 			AddAppointmentDialogController controller = loader.getController();
+			controller.setCase(c);
 			controller.setDialogStage(dialogStage);
 
 			dialogStage.showAndWait();

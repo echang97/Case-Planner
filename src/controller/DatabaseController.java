@@ -41,7 +41,7 @@ public class DatabaseController {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
 		String addition = "INSERT INTO appointment(case_id, title, room, address, city, state, zip, date) VALUES (" +
-				a.getCase().getCase_id() + ", '" + a.getTitle() + "', '";
+				a.getCase().getCase_id() + ", '" + a.getTitle() + "', ";
 		if (a.getRoom() != null) {
 			addition = addition + "'" + a.getRoom() + "', ";
 		}
@@ -67,12 +67,12 @@ public class DatabaseController {
 			addition = addition + "NULL, ";
 		}
 		if (a.getZip() != null) {
-			addition = addition + "'" + a.getZip() + ", ";
+			addition = addition + "'" + a.getZip() + "', ";
 		}
 		else {
 			addition = addition + "NULL, ";
 		}
-		addition = addition + "'" + a.getDate() + "')";
+		addition = addition + "'" + a.getDate().toString() + "')";
 		System.out.println(addition);
 		statement.executeUpdate(addition);
 		return statement;
