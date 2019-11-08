@@ -10,6 +10,7 @@ public class Deadline {
 
 	public Deadline(int deadline_id, Case aCase, String title, String date){
 		this.deadline_id = deadline_id;
+		this.aCase = aCase;
 		this.title = title;
 		this.date = LocalDateTime.parse(date);
 	}
