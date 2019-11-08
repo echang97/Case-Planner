@@ -80,6 +80,7 @@ public class ViewCaseDetailsController{
 
 			EditCaseDetailsController controller = loader.getController();
 			controller.setDialogStage(dialogStage);
+			controller.setCase(c);
 
 			dialogStage.showAndWait();
 

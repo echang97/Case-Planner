@@ -1,6 +1,6 @@
 package controller;
 
-import controller.*;
+import model.Case;
 import model.Deadline;
 
 import java.io.IOException;
@@ -34,6 +34,7 @@ public class AddDeadlineDialogController{
 
 	private Stage dialogStage;
 	private Deadline deadline;
+	private Case c;
 
 	public void setDialogStage(Stage dialogStage){
 		this.dialogStage = dialogStage;
@@ -41,10 +42,12 @@ public class AddDeadlineDialogController{
 
 	// Event Listener on Button.onAction
 	@FXML
-	public void handleSubmit(ActionEvent event) {
+	public void handleSubmit(ActionEvent event) throws SQLException{
 		String title = titleField.getText();
 		LocalDateTime date = dateField.getValue().atStartOfDay();
 		deadline = new Deadline(title, date);
+		deadline.setCase(c);
+		DatabaseController.addDeadlineToDB(database, deadline);
 		dialogStage.close();
 	}
 	// Event Listener on Button.onAction
@@ -80,6 +83,10 @@ public class AddDeadlineDialogController{
 
 	public Deadline getDeadline(){
 		return deadline;
+	}
+
+	public void setCase(Case c){
+		this.c = c;
 	}
 
 }
