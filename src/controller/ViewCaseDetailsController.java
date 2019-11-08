@@ -89,6 +89,8 @@ public class ViewCaseDetailsController{
 
 			dialogStage.showAndWait();
 
+			refreshLists();
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -203,11 +205,13 @@ public class ViewCaseDetailsController{
 	}
 
 	public void refreshLists(){
+		deadlineTable.getItems().clear();
 		deadlineTitleColumn.setCellValueFactory(new PropertyValueFactory<Deadline,String>("title"));
 		deadlineDateColumn.setCellValueFactory(new PropertyValueFactory<Deadline,LocalDateTime>("date"));
 		deadlines = getDataFromADeadlineAndAddToObservableList("SELECT * FROM deadline WHERE case_id = " + c.getCase_id());
 		deadlineTable.getItems().addAll(deadlines);
 
+		appointmentTable.getItems().clear();
 		appointmentTitleColumn.setCellValueFactory(new PropertyValueFactory<Appointment,String>("title"));
 		appointmentLocColumn.setCellValueFactory(new PropertyValueFactory<Appointment,String>("room"));
 		appointmentDateColumn.setCellValueFactory(new PropertyValueFactory<Appointment,LocalDateTime>("date"));
