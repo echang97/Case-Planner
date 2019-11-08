@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="350.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManageClientsController">
+   <children>
+      <TableView fx:id="clientTable" layoutX="25.0" layoutY="79.0" prefHeight="150.0" prefWidth="300.0">
+        <columns>
+          <TableColumn fx:id="clientNameColumn" prefWidth="75.0" text="Name" />
+          <TableColumn fx:id="clientPhoneColumn" prefWidth="75.0" text="Phone" />
+            <TableColumn fx:id="clientEmailColumn" prefWidth="75.0" text="Email" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Label layoutX="103.0" layoutY="21.0" text="Manage Clients">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Button layoutX="25.0" layoutY="238.0" mnemonicParsing="false" onAction="#handleEditClient" prefHeight="25.0" prefWidth="84.0" text="Edit Client" />
+      <Button layoutX="25.0" layoutY="270.0" mnemonicParsing="false" onAction="#handleDeleteClient" text="Delete Client" />
+      <Button layoutX="110.0" layoutY="311.0" mnemonicParsing="false" onAction="#handleSubmit" text="Confirm" />
+      <Button layoutX="182.0" layoutY="311.0" mnemonicParsing="false" onAction="#handleClose" prefHeight="25.0" prefWidth="59.0" text="Close" />
+   </children>
+</AnchorPane>
