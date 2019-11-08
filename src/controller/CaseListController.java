@@ -157,8 +157,32 @@ public class CaseListController implements Initializable{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-  }
+  	}
+  
 
+	// Event Listener on Button.onAction
+	@FXML
+	public void manageClients(ActionEvent event) {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ManageClients.fxml"));
+		try {
+			Parent root = (Parent) loader.load();
+			Stage dialogStage = new Stage();
+			Scene scene = new Scene(root);
+			dialogStage.setScene(scene);
+			dialogStage.setTitle("Manage Clients");
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+
+			ManageClientsController controller = loader.getController();
+			controller.setDialogStage(dialogStage);
+
+			dialogStage.showAndWait();
+			refreshLists();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+  
 	// Event Listener on Button.onAction
 	@FXML
 	public void addCase(ActionEvent event) {

@@ -7,8 +7,22 @@ public class Client {
 	private String email;
 	private String phone;
 
-	public int getClient_id() { return client_id; }
-	public void setClient_id(int client_id) { this.client_id = client_id;}
+	public Client(int client_id, String name, String phone, String email){
+		this.client_id = client_id;
+		this.name = name;
+		this.phone = phone;
+		this.email = email;
+	}
+
+	public Client(){
+	}
+	
+	public int getClient_id() {
+		return client_id;
+	}
+	public void setClient_id(int client_id){
+		this.client_id = client_id;
+	}
 	public String getName() {
 		return name;
 	}
