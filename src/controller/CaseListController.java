@@ -1,7 +1,5 @@
 package controller;
 
-import controller.*;
-import javafx.beans.property.Property;
 import model.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -59,7 +57,7 @@ public class CaseListController implements Initializable{
 	@FXML
 	private TableColumn<Deadline, String> deadlineTitleColumn;
 	@FXML
-	private TableColumn<Case, String> deadlineCaseColumn;
+	private TableColumn<Deadline, Case> deadlineCaseColumn;
 	@FXML
 	private TableView<Appointment> appointmentsTable;
 	@FXML
@@ -101,29 +99,48 @@ public class CaseListController implements Initializable{
 		return personData;
 	}
 
+	private Case getDataFromCaseToReturn(int case_id) throws SQLException {
+		connection = database.getConnection();
+		statement = connection.createStatement();
+		ResultSet aCase = statement.executeQuery("SELECT * FROM aCase WHERE case_id = " + case_id);
+		Case c = new Case(
+				aCase.getInt("case_id"),
+				aCase.getString("title"),
+				aCase.getString("status"),
+				aCase.getString("dateAdded"),
+				aCase.getString("dateResolved"),
+				aCase.getString("dateRemoved")
+		);
+		return c;
+	}
+
 	private ObservableList<Deadline> getDataFromADeadlineAndAddToObservableList(String query){
 		ObservableList<Deadline> deadlineData = FXCollections.observableArrayList();
 		try {
 			connection = database.getConnection();
 			statement = connection.createStatement();
-			resultSet = statement.executeQuery(query);//"SELECT * FROM aCase WHERE status = ...;"
+			resultSet = statement.executeQuery(query);//"SELECT * FROM deadline;"
+			System.out.println(query);
+			ResultSetMetaData rsmd = resultSet.getMetaData();
 			System.out.println(resultSet);
+			int columnsNumber = rsmd.getColumnCount();
 			while(resultSet.next()){
-				ResultSet aCase = statement.executeQuery("SELECT * FROM aCase WHERE case_id = " + resultSet.getInt("case_id"));
-				Case c = new Case(
-						aCase.getInt("case_id"),
-						aCase.getString("title"),
-						aCase.getString("status"),
-						aCase.getString("dateAdded"),
-						aCase.getString("dateResolved"),
-						aCase.getString("dateRemoved")
-				);
-
+				for (int i = 1; i <= columnsNumber; i++) {
+					if (i > 1) System.out.print(",  ");
+					String columnValue = resultSet.getString(i);
+					System.out.print(columnValue + " " + rsmd.getColumnName(i));
+				}
+				System.out.println();
+				int deadline_id = resultSet.getInt(1);
+				String deadline_title = resultSet.getString("title");
+				String deadline_date = resultSet.getString(4);
+				System.out.println(deadline_id + " " + deadline_title + " " + deadline_date);
+				Case c = getDataFromCaseToReturn(resultSet.getInt("case_id"));
 				deadlineData.add(new Deadline(
-						resultSet.getInt("deadline_id"),
+						deadline_id,
 						c,
-						resultSet.getString("title"),
-						resultSet.getString("date")
+						deadline_title,
+						deadline_date
 				));
 			}
 			connection.close();
@@ -406,7 +423,7 @@ public class CaseListController implements Initializable{
 		deletedCaseTable.getItems().addAll(deletedCases);
 
 		deadlineTitleColumn.setCellValueFactory(new PropertyValueFactory<Deadline, String>("title"));
-		deadlineCaseColumn.setCellValueFactory(new PropertyValueFactory<Case, String>("title"));
+		deadlineCaseColumn.setCellValueFactory(new PropertyValueFactory<Deadline, Case>("case"));
 		deadlines = getDataFromADeadlineAndAddToObservableList("SELECT * FROM deadline");
 		deadlinesTable.getItems().addAll(deadlines);
 	}
