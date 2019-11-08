@@ -212,8 +212,15 @@ public class CaseListController implements Initializable{
 	public void viewCaseDetails(ActionEvent event) {
 		// TODO Implement with Database
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ViewCaseDetails.fxml"));
-		Case selectedCase = ongoingCaseTable.getSelectionModel().getSelectedItem();
-
+		Case selectedCase = null;
+		if(archivedTab.isSelected()){
+			selectedCase = archivedCaseTable.getSelectionModel().getSelectedItem();
+		}else if(deletedTab.isSelected()){
+			selectedCase = deletedCaseTable.getSelectionModel().getSelectedItem();
+		}else{
+			selectedCase = ongoingCaseTable.getSelectionModel().getSelectedItem();
+		}
+		
 		try {
 			Parent root = (Parent) loader.load();
 			Stage dialogStage = new Stage();
