@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Case;
 
 import java.io.IOException;
 
@@ -40,6 +41,7 @@ public class EditCaseDetailsController {
 	private TableColumn appointmentLocationColumn;
 	@FXML
 	private TableColumn appointmentDateColumn;
+	private Case c;
 	private Stage dialogStage;
 
 	public void setDialogStage(Stage dialogStage){
@@ -128,6 +130,7 @@ public class EditCaseDetailsController {
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 
 			AddAppointmentDialogController controller = loader.getController();
+			controller.setCase(c);
 			controller.setDialogStage(dialogStage);
 
 			dialogStage.showAndWait();
@@ -152,6 +155,10 @@ public class EditCaseDetailsController {
 	@FXML
 	public void handleClose(ActionEvent event) {
 		dialogStage.close();
+	}
+
+	public void setCase(Case c){
+		this.c = c;
 	}
 
 }
