@@ -31,6 +31,12 @@ public class Case {
 			this.dateRemoved = LocalDateTime.parse(dateRemoved);
 		}
 	}
+
+	@Override
+	public String toString() {
+		return title;
+	}
+
 	public Case() {}
 
 	public ObservableList<Appointment> getAppointments() {

@@ -63,7 +63,7 @@ public class CaseListController implements Initializable{
 	@FXML
 	private TableColumn<Appointment, String> appointmentTitleColumn;
 	@FXML
-	private TableColumn<Appointment, String> appointmentCaseColumn;
+	private TableColumn<Appointment, Case> appointmentCaseColumn;
 
 	private ObservableList<Case> ongoingCases = FXCollections.observableArrayList();
 	private ObservableList<Case> archivedCases = FXCollections.observableArrayList();
@@ -151,6 +151,56 @@ public class CaseListController implements Initializable{
 
 		}
 		return deadlineData;
+	}
+
+	private ObservableList<Appointment> getDataFromAnAppointmentAndAddToObservableList(String query){
+		ObservableList<Appointment> appointmentData = FXCollections.observableArrayList();
+		try {
+			connection = database.getConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(query);//"SELECT * FROM deadline;"
+			System.out.println(query);
+			ResultSetMetaData rsmd = resultSet.getMetaData();
+			System.out.println(resultSet);
+			int columnsNumber = rsmd.getColumnCount();
+			while(resultSet.next()){
+				for (int i = 1; i <= columnsNumber; i++) {
+					if (i > 1) System.out.print(",  ");
+					String columnValue = resultSet.getString(i);
+					System.out.print(columnValue + " " + rsmd.getColumnName(i));
+				}
+				System.out.println();
+				int appointment_id = resultSet.getInt(1);
+				String appointment_title = resultSet.getString("title");
+				String appointment_room = resultSet.getString("room");
+				String appointment_address = resultSet.getString("address");
+				String appointment_city = resultSet.getString("city");
+				String appointment_state = resultSet.getString("state");
+				String appointment_zip = resultSet.getString("zip");
+				String appointment_date = resultSet.getString("date");
+
+				System.out.println(appointment_id + " " + appointment_title + " " + appointment_room);
+				Case c = getDataFromCaseToReturn(resultSet.getInt("case_id"));
+				appointmentData.add(new Appointment(
+						appointment_id,
+						c,
+						appointment_title,
+						appointment_room,
+						appointment_address,
+						appointment_city,
+						appointment_state,
+						appointment_zip,
+						appointment_date
+				));
+			}
+			connection.close();
+			statement.close();
+			resultSet.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
+		return appointmentData;
 	}
   
   // Event Listener on Button.onAction
@@ -402,6 +452,18 @@ public class CaseListController implements Initializable{
 		dateRemovedColumn.setCellValueFactory(new PropertyValueFactory<Case,LocalDateTime>("dateRemoved"));
 		deletedCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'removed'");
 		deletedCaseTable.getItems().addAll(deletedCases);
+
+		deadlinesTable.getItems().clear();
+		deadlineTitleColumn.setCellValueFactory(new PropertyValueFactory<Deadline, String>("title"));
+		deadlineCaseColumn.setCellValueFactory(new PropertyValueFactory<Deadline, Case>("case"));
+		deadlines = getDataFromADeadlineAndAddToObservableList("SELECT * FROM deadline");
+		deadlinesTable.getItems().addAll(deadlines);
+
+		appointmentsTable.getItems().clear();
+		appointmentTitleColumn.setCellValueFactory(new PropertyValueFactory<Appointment, String>("title"));
+		appointmentCaseColumn.setCellValueFactory(new PropertyValueFactory<Appointment, Case>("case"));
+		appointments = getDataFromAnAppointmentAndAddToObservableList("SELECT * FROM appointment");
+		appointmentsTable.getItems().addAll(appointments);
 	}
 
 	@Override
@@ -426,6 +488,11 @@ public class CaseListController implements Initializable{
 		deadlineCaseColumn.setCellValueFactory(new PropertyValueFactory<Deadline, Case>("case"));
 		deadlines = getDataFromADeadlineAndAddToObservableList("SELECT * FROM deadline");
 		deadlinesTable.getItems().addAll(deadlines);
+
+		appointmentTitleColumn.setCellValueFactory(new PropertyValueFactory<Appointment, String>("title"));
+		appointmentCaseColumn.setCellValueFactory(new PropertyValueFactory<Appointment, Case>("case"));
+		appointments = getDataFromAnAppointmentAndAddToObservableList("SELECT * FROM appointment");
+		appointmentsTable.getItems().addAll(appointments);
 	}
 
 }

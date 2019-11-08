@@ -13,7 +13,7 @@ public class Appointment {
 	private String zip;
 	private LocalDateTime date;
 
-	public Appointment(int appointment_id, Case aCase, String title, String room, String address, String city, String state, String zip, LocalDateTime date) {
+	public Appointment(int appointment_id, Case aCase, String title, String room, String address, String city, String state, String zip, String date) {
 		this.appointment_id = appointment_id;
 		this.aCase = aCase;
 		this.title = title;
@@ -22,7 +22,7 @@ public class Appointment {
 		this.city = city;
 		this.state = state;
 		this.zip = zip;
-		this.date = date;
+		this.date = LocalDateTime.parse(date);
 	}
 	public Appointment(){
 
