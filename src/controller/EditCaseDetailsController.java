@@ -6,9 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.Appointment;
-import model.Case;
-import model.Deadline;
+import model.*;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -35,32 +33,29 @@ public class EditCaseDetailsController {
 	@FXML
 	private TextField caseTitleField;
 	@FXML
-	private TableView clientTable;
+	private TableView <Client> clientTable;
 	@FXML
-	private TableColumn clientNameColumn;
+	private TableColumn <Client, String> clientNameColumn;
 	@FXML
-	private TableColumn clientPhoneColumn;
+	private TableColumn <Client, String> clientPhoneColumn;
 	@FXML
-	private TableColumn clientEmailColumn;
+	private TableColumn <Client, String> clientEmailColumn;
 	@FXML
-	private TableView deadlineTable;
+	private TableView <Deadline> deadlineTable;
 	@FXML
-	private TableColumn deadlineTitleColumn;
+	private TableColumn <Deadline, String> deadlineTitleColumn;
 	@FXML
-	private TableColumn deadlineDateColumn;
+	private TableColumn <Deadline, LocalDateTime> deadlineDateColumn;
 	@FXML
-	private TableView appointmentTable;
+	private TableView <Appointment> appointmentTable;
 	@FXML
-	private TableColumn appointmentTitleColumn;
+	private TableColumn <Appointment, String> appointmentTitleColumn;
 	@FXML
-	private TableColumn appointmentLocationColumn;
+	private TableColumn <Appointment, String> appointmentLocationColumn;
 	@FXML
-	private TableColumn appointmentDateColumn;
+	private TableColumn <Appointment, LocalDateTime> appointmentDateColumn;
 	private Case c;
 	private Stage dialogStage;
-
-	private ObservableList<Deadline> deadlines = FXCollections.observableArrayList();
-	private ObservableList<Appointment> appointments = FXCollections.observableArrayList();
 
 	public void setDialogStage(Stage dialogStage){
 		this.dialogStage = dialogStage;
@@ -168,8 +163,12 @@ public class EditCaseDetailsController {
 	}
 	// Event Listener on Button.onAction
 	@FXML
-	public void handleSubmit(ActionEvent event) {
-		//TODO implement
+	public void handleSubmit(ActionEvent event) throws SQLException{
+		c.setTitle(caseTitleField.getText());
+		c.setClient(clientTable.getSelectionModel().getSelectedItem());
+		c.setClient_id(c.getClient().getClient_id());
+		DatabaseController.editCaseInDB(database, c);
+
 		dialogStage.close();
 	}
 	// Event Listener on Button.onAction
@@ -180,6 +179,46 @@ public class EditCaseDetailsController {
 
 	public void setCase(Case c){
 		this.c = c;
+	}
+
+	private ObservableList<Client> getDataFromAClientAndAddToObservableList(String query) {
+		ObservableList<Client> clientData = FXCollections.observableArrayList();
+		try {
+			connection = database.getConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(query);//"SELECT * FROM deadline;"
+			System.out.println(query);
+			ResultSetMetaData rsmd = resultSet.getMetaData();
+			System.out.println(resultSet);
+			int columnsNumber = rsmd.getColumnCount();
+			while (resultSet.next()) {
+				for (int i = 1; i <= columnsNumber; i++) {
+					if (i > 1) System.out.print(",  ");
+					String columnValue = resultSet.getString(i);
+					System.out.print(columnValue + " " + rsmd.getColumnName(i));
+				}
+				System.out.println();
+				int client_id = resultSet.getInt(1);
+				String client_name = resultSet.getString("name");
+				String client_phone = resultSet.getString("phone");
+				String client_email = resultSet.getString("email");
+
+				System.out.println(client_id + " " + client_name);
+				clientData.add(new Client(
+						client_id,
+						client_name,
+						client_phone,
+						client_email
+				));
+			}
+			connection.close();
+			statement.close();
+			resultSet.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
+		return clientData;
 	}
 
 	private ObservableList<Deadline> getDataFromADeadlineAndAddToObservableList(String query){
@@ -270,22 +309,35 @@ public class EditCaseDetailsController {
 	}
 
 	public void refreshLists(){
+		clientTable.getItems().clear();
+		clientNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+		clientPhoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
+		clientEmailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+		ObservableList<Client> clients = getDataFromAClientAndAddToObservableList("SELECT * FROM client");
+		clientTable.getItems().addAll(clients);
+
 		deadlineTable.getItems().clear();
-		deadlineTitleColumn.setCellValueFactory(new PropertyValueFactory<Deadline,String>("title"));
-		deadlineDateColumn.setCellValueFactory(new PropertyValueFactory<Deadline,LocalDateTime>("date"));
-		deadlines = getDataFromADeadlineAndAddToObservableList("SELECT * FROM deadline WHERE case_id = " + c.getCase_id());
+		deadlineTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+		deadlineDateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+		ObservableList<Deadline> deadlines = getDataFromADeadlineAndAddToObservableList("SELECT * FROM deadline WHERE case_id = " + c.getCase_id());
 		deadlineTable.getItems().addAll(deadlines);
 
 		appointmentTable.getItems().clear();
-		appointmentTitleColumn.setCellValueFactory(new PropertyValueFactory<Appointment,String>("title"));
-		appointmentLocationColumn.setCellValueFactory(new PropertyValueFactory<Appointment,String>("room"));
-		appointmentDateColumn.setCellValueFactory(new PropertyValueFactory<Appointment,LocalDateTime>("date"));
-		appointments = getDataFromAnAppointmentAndAddToObservableList("SELECT * FROM appointment WHERE case_id = " + c.getCase_id());
+		appointmentTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+		appointmentLocationColumn.setCellValueFactory(new PropertyValueFactory<>("room"));
+		appointmentDateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+		ObservableList<Appointment> appointments = getDataFromAnAppointmentAndAddToObservableList("SELECT * FROM appointment WHERE case_id = " + c.getCase_id());
 		appointmentTable.getItems().addAll(appointments);
 	}
 
 	public void setDetails(){
 		refreshLists();
+		caseTitleField.setText(c.getTitle());
+		clientTable.getSelectionModel().select(c.getClient());
+		System.out.println(clientTable.getSelectionModel().getSelectedItem());
 	}
 
+	public Case getCase(){
+		return c;
+	}
 }

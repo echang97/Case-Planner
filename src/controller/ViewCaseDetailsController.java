@@ -90,7 +90,7 @@ public class ViewCaseDetailsController{
 
 	// Event Listener on Button.onAction
 	@FXML
-	public void handleEdit(ActionEvent event) {
+	public void handleEdit(ActionEvent event) throws SQLException{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/EditCaseDetails.fxml"));
 		try {
 			Parent root = (Parent) loader.load();
@@ -107,8 +107,8 @@ public class ViewCaseDetailsController{
 
 			dialogStage.showAndWait();
 
-
-			refreshLists();
+			c = controller.getCase();
+			setDetails();
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -122,7 +122,6 @@ public class ViewCaseDetailsController{
 
 
 	public void setDetails() throws SQLException {
-		// TODO Auto-generated method stub
 		caseTitleLabel.setText(c.getTitle());
 		caseStatusLabel.setText(c.getStatus());
 		caseDateAddLabel.setText(c.getDateAdded().toString());
