@@ -458,13 +458,13 @@ public class CaseListController implements Initializable{
 		deadlinesTable.getItems().clear();
 		deadlineTitleColumn.setCellValueFactory(new PropertyValueFactory<Deadline, String>("title"));
 		deadlineCaseColumn.setCellValueFactory(new PropertyValueFactory<Deadline, Case>("case"));
-		deadlines = getDataFromADeadlineAndAddToObservableList("SELECT * FROM deadline");
+		deadlines = getDataFromADeadlineAndAddToObservableList("SELECT * FROM deadline ORDER BY datetime(date) LIMIT 6");
 		deadlinesTable.getItems().addAll(deadlines);
 
 		appointmentsTable.getItems().clear();
 		appointmentTitleColumn.setCellValueFactory(new PropertyValueFactory<Appointment, String>("title"));
 		appointmentCaseColumn.setCellValueFactory(new PropertyValueFactory<Appointment, Case>("case"));
-		appointments = getDataFromAnAppointmentAndAddToObservableList("SELECT * FROM appointment");
+		appointments = getDataFromAnAppointmentAndAddToObservableList("SELECT * FROM appointment ORDER BY datetime(date) LIMIT 6");
 		appointmentsTable.getItems().addAll(appointments);
 	}
 
@@ -488,12 +488,12 @@ public class CaseListController implements Initializable{
 
 		deadlineTitleColumn.setCellValueFactory(new PropertyValueFactory<Deadline, String>("title"));
 		deadlineCaseColumn.setCellValueFactory(new PropertyValueFactory<Deadline, Case>("case"));
-		deadlines = getDataFromADeadlineAndAddToObservableList("SELECT * FROM deadline");
+		deadlines = getDataFromADeadlineAndAddToObservableList("SELECT * FROM deadline ORDER BY datetime(date) LIMIT 6");
 		deadlinesTable.getItems().addAll(deadlines);
 
 		appointmentTitleColumn.setCellValueFactory(new PropertyValueFactory<Appointment, String>("title"));
 		appointmentCaseColumn.setCellValueFactory(new PropertyValueFactory<Appointment, Case>("case"));
-		appointments = getDataFromAnAppointmentAndAddToObservableList("SELECT * FROM appointment");
+		appointments = getDataFromAnAppointmentAndAddToObservableList("SELECT * FROM appointment ORDER BY datetime(date) LIMIT 6");
 		appointmentsTable.getItems().addAll(appointments);
 	}
 

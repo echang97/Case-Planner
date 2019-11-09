@@ -78,6 +78,9 @@ public class ViewCaseDetailsController{
 					resultSet.getString("phone"),
 					resultSet.getString("email")
 			));
+			connection.close();
+			statement.close();
+			resultSet.close();
 		}
 	}
 
