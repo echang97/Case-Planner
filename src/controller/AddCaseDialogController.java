@@ -92,18 +92,13 @@ public class AddCaseDialogController{
 	// Event Listener on Button.onAction
 	@FXML
 	public void handleSubmit(ActionEvent event) throws SQLException {
-	//	boolean isSelected = false; //////////////
 		c.setTitle(caseTitleField.getText());
 		c.setDateAdded(LocalDateTime.now());
 		c.setStatus("ongoing");
 		client = clientTable.getSelectionModel().getSelectedItem();
-	//	System.out.println("client is selected: " + isSelected);
 		if(client != null){
-	//		isSelected = true;
-	//		System.out.println("client is selected: " + isSelected);
 			c.setClient(client);
 		}
-		System.out.println(c.getClient());
 		
 		DatabaseController.addCaseToDB(database, c);
 		dialogStage.close();
