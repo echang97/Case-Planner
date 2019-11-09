@@ -44,6 +44,8 @@ public class EditClientInfoDialogController {
 		client.setEmail(emailField.getText());
 		client.setPhone(phoneField.getText());
 		DatabaseController.editClientInfoInDB(database, client);
+
+		dialogStage.close();
 	}
 	
 	// Event Listener on Button.onAction
