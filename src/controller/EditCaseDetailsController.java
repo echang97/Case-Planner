@@ -163,8 +163,10 @@ public class EditCaseDetailsController {
 	}
 	// Event Listener on Button.onAction
 	@FXML
-	public void handleSubmit(ActionEvent event) {
-		//TODO implement
+	public void handleSubmit(ActionEvent event) throws SQLException{
+		c.setClient(clientTable.getSelectionModel().getSelectedItem());
+		DatabaseController.editCaseInDB(database, c);
+
 		dialogStage.close();
 	}
 	// Event Listener on Button.onAction

@@ -132,7 +132,7 @@ public class DatabaseController {
 	public static Statement editCaseInDB(DatabaseConnection database, Case c) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
-		String edit = "UPDATE aCase SET title = '" + c.getTitle() + "' client_id = " + c.getClient().getClient_id() +
+		String edit = "UPDATE aCase SET title = '" + c.getTitle() + "', client_id = " + c.getClient().getClient_id() +
 				" WHERE case_id = " + c.getCase_id();
 		System.out.println(edit);
 		statement.executeUpdate(edit);
