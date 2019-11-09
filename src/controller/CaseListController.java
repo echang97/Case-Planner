@@ -352,7 +352,7 @@ public class CaseListController implements Initializable{
 	public void resumeCaseFromArchived(ActionEvent event) throws SQLException {
 		Case selectedCase = archivedCaseTable.getSelectionModel().getSelectedItem();
 		if (selectedCase != null){
-			selectedCase.setDateResolved(null);
+			selectedCase.setDateResolved(LocalDateTime.now());
 			DatabaseController.resumeCaseInDB(selectedCase);
 			refreshLists();
 		}else{
@@ -366,7 +366,7 @@ public class CaseListController implements Initializable{
 	public void archiveCaseFromDeleted(ActionEvent event) throws SQLException {
 		Case selectedCase = deletedCaseTable.getSelectionModel().getSelectedItem();
 		if (selectedCase != null){
-			selectedCase.setDateRemoved(null);
+			selectedCase.setDateRemoved(LocalDateTime.now());
 			DatabaseController.archiveCaseInDB(database, selectedCase);
 			refreshLists();
 		}else{
