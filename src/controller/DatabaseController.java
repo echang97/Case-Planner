@@ -97,6 +97,9 @@ public class DatabaseController {
 	public static Statement delAppointmentInDB(DatabaseConnection database, Appointment a) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
+		String business = "DELETE FROM notification WHERE appointment_id = " + a.getAppointment_id();
+		System.out.println(business);
+		statement.executeUpdate(business);
 		String deletion = "DELETE FROM appointment WHERE appointment_id = " + a.getAppointment_id();
 		System.out.println(deletion);
 		statement.executeUpdate(deletion);
@@ -106,6 +109,9 @@ public class DatabaseController {
 	public static Statement delDeadlineInDB(DatabaseConnection database, Deadline d) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
+		String business = "DELETE FROM notification WHERE deadline_id = " + d.getDeadline_id();
+		System.out.println(business);
+		statement.executeUpdate(business);
 		String deletion = "DELETE FROM deadline WHERE deadline_id = " + d.getDeadline_id();
 		System.out.println(deletion);
 		statement.executeUpdate(deletion);
