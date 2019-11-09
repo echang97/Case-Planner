@@ -22,6 +22,8 @@ public class DatabaseController {
 		statement.executeUpdate(addition);
 		return statement;
 	}
+	
+	
 
 	public static Statement addClientInfoToDB(DatabaseConnection database, Client c) throws SQLException {
 		Connection connection = database.getConnection();
