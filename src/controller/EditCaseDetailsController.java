@@ -3,12 +3,23 @@ package controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Appointment;
 import model.Case;
+import model.Deadline;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.LocalDateTime;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 
 import javafx.scene.control.TableView;
@@ -17,6 +28,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 
 public class EditCaseDetailsController {
+	private DatabaseConnection database = new DatabaseConnection();
+	private Connection connection;
+	private Statement statement;
+	private ResultSet resultSet;
 	@FXML
 	private TextField caseTitleField;
 	@FXML
@@ -44,6 +59,9 @@ public class EditCaseDetailsController {
 	private Case c;
 	private Stage dialogStage;
 
+	private ObservableList<Deadline> deadlines = FXCollections.observableArrayList();
+	private ObservableList<Appointment> appointments = FXCollections.observableArrayList();
+
 	public void setDialogStage(Stage dialogStage){
 		this.dialogStage = dialogStage;
 	}
@@ -65,6 +83,7 @@ public class EditCaseDetailsController {
 			controller.setDialogStage(dialogStage);
 
 			dialogStage.showAndWait();
+			refreshLists();
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -135,6 +154,7 @@ public class EditCaseDetailsController {
 			controller.setDialogStage(dialogStage);
 
 			dialogStage.showAndWait();
+			refreshLists();
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -160,6 +180,112 @@ public class EditCaseDetailsController {
 
 	public void setCase(Case c){
 		this.c = c;
+	}
+
+	private ObservableList<Deadline> getDataFromADeadlineAndAddToObservableList(String query){
+		ObservableList<Deadline> deadlineData = FXCollections.observableArrayList();
+		try {
+			connection = database.getConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(query);//"SELECT * FROM deadline;"
+			System.out.println(query);
+			ResultSetMetaData rsmd = resultSet.getMetaData();
+			System.out.println(resultSet);
+			int columnsNumber = rsmd.getColumnCount();
+			while(resultSet.next()){
+				for (int i = 1; i <= columnsNumber; i++) {
+					if (i > 1) System.out.print(",  ");
+					String columnValue = resultSet.getString(i);
+					System.out.print(columnValue + " " + rsmd.getColumnName(i));
+				}
+				System.out.println();
+				int deadline_id = resultSet.getInt(1);
+				String deadline_title = resultSet.getString("title");
+				String deadline_date = resultSet.getString(4);
+				System.out.println(deadline_id + " " + deadline_title + " " + deadline_date);
+				deadlineData.add(new Deadline(
+						deadline_id,
+						c,
+						deadline_title,
+						deadline_date
+				));
+			}
+			connection.close();
+			statement.close();
+			resultSet.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
+		return deadlineData;
+	}
+
+	private ObservableList<Appointment> getDataFromAnAppointmentAndAddToObservableList(String query){
+		ObservableList<Appointment> appointmentData = FXCollections.observableArrayList();
+		try {
+			connection = database.getConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(query);//"SELECT * FROM deadline;"
+			System.out.println(query);
+			ResultSetMetaData rsmd = resultSet.getMetaData();
+			System.out.println(resultSet);
+			int columnsNumber = rsmd.getColumnCount();
+			while(resultSet.next()){
+				for (int i = 1; i <= columnsNumber; i++) {
+					if (i > 1) System.out.print(",  ");
+					String columnValue = resultSet.getString(i);
+					System.out.print(columnValue + " " + rsmd.getColumnName(i));
+				}
+				System.out.println();
+				int appointment_id = resultSet.getInt(1);
+				String appointment_title = resultSet.getString("title");
+				String appointment_room = resultSet.getString("room");
+				String appointment_address = resultSet.getString("address");
+				String appointment_city = resultSet.getString("city");
+				String appointment_state = resultSet.getString("state");
+				String appointment_zip = resultSet.getString("zip");
+				String appointment_date = resultSet.getString("date");
+
+				System.out.println(appointment_id + " " + appointment_title + " " + appointment_room);
+				appointmentData.add(new Appointment(
+						appointment_id,
+						c,
+						appointment_title,
+						appointment_room,
+						appointment_address,
+						appointment_city,
+						appointment_state,
+						appointment_zip,
+						appointment_date
+				));
+			}
+			connection.close();
+			statement.close();
+			resultSet.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
+		return appointmentData;
+	}
+
+	public void refreshLists(){
+		deadlineTable.getItems().clear();
+		deadlineTitleColumn.setCellValueFactory(new PropertyValueFactory<Deadline,String>("title"));
+		deadlineDateColumn.setCellValueFactory(new PropertyValueFactory<Deadline,LocalDateTime>("date"));
+		deadlines = getDataFromADeadlineAndAddToObservableList("SELECT * FROM deadline WHERE case_id = " + c.getCase_id());
+		deadlineTable.getItems().addAll(deadlines);
+
+		appointmentTable.getItems().clear();
+		appointmentTitleColumn.setCellValueFactory(new PropertyValueFactory<Appointment,String>("title"));
+		appointmentLocationColumn.setCellValueFactory(new PropertyValueFactory<Appointment,String>("room"));
+		appointmentDateColumn.setCellValueFactory(new PropertyValueFactory<Appointment,LocalDateTime>("date"));
+		appointments = getDataFromAnAppointmentAndAddToObservableList("SELECT * FROM appointment WHERE case_id = " + c.getCase_id());
+		appointmentTable.getItems().addAll(appointments);
+	}
+
+	public void setDetails(){
+		refreshLists();
 	}
 
 }
