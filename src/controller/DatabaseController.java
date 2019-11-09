@@ -111,6 +111,15 @@ public class DatabaseController {
 		statement.executeUpdate(deletion);
 		return statement;
 	}
+	
+	public static Statement delClientInfoInDB(DatabaseConnection database, Client c) throws SQLException {
+		Connection connection = database.getConnection();
+		Statement statement = connection.createStatement();
+		String deletion = "DELETE FROM client WHERE client_id = " + c.getClient_id();
+		System.out.println(deletion);
+		statement.executeUpdate(deletion);
+		return statement;
+	}
 
 	public static Statement editCaseInDB(DatabaseConnection database, Case c) throws SQLException {
 		Connection connection = database.getConnection();

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="350.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManageClientsController">
+<AnchorPane prefHeight="340.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManageClientsController">
    <children>
       <TableView fx:id="clientTable" layoutX="25.0" layoutY="79.0" prefHeight="150.0" prefWidth="300.0">
         <columns>
@@ -25,7 +25,6 @@
       </Label>
       <Button layoutX="25.0" layoutY="238.0" mnemonicParsing="false" onAction="#handleEditClient" prefHeight="25.0" prefWidth="84.0" text="Edit Client" />
       <Button layoutX="25.0" layoutY="270.0" mnemonicParsing="false" onAction="#handleDeleteClient" text="Delete Client" />
-      <Button layoutX="110.0" layoutY="311.0" mnemonicParsing="false" onAction="#handleSubmit" text="Confirm" />
-      <Button layoutX="182.0" layoutY="311.0" mnemonicParsing="false" onAction="#handleClose" prefHeight="25.0" prefWidth="59.0" text="Close" />
+      <Button layoutX="146.0" layoutY="301.0" mnemonicParsing="false" onAction="#handleClose" prefHeight="25.0" prefWidth="59.0" text="Close" />
    </children>
 </AnchorPane>
