@@ -447,15 +447,16 @@ public class CaseListController implements Initializable{
 		deletedCaseTable.getItems().addAll(deletedCases);
 
 		deadlinesTable.getItems().clear();
+
 		deadlineTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
 		deadlineCaseColumn.setCellValueFactory(new PropertyValueFactory<>("case"));
-		deadlines = getDataFromADeadlineAndAddToObservableList("SELECT * FROM deadline");
+		deadlines = getDataFromADeadlineAndAddToObservableList("SELECT * FROM deadline ORDER BY datetime(date) LIMIT 6");
 		deadlinesTable.getItems().addAll(deadlines);
 
 		appointmentsTable.getItems().clear();
 		appointmentTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
 		appointmentCaseColumn.setCellValueFactory(new PropertyValueFactory<>("case"));
-		appointments = getDataFromAnAppointmentAndAddToObservableList("SELECT * FROM appointment");
+		appointments = getDataFromAnAppointmentAndAddToObservableList("SELECT * FROM appointment ORDER BY datetime(date) LIMIT 6");
 		appointmentsTable.getItems().addAll(appointments);
 	}
 
