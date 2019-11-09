@@ -9,7 +9,7 @@ public class DatabaseController {
 	public static Statement addCaseToDB(DatabaseConnection database, Case c) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
-
+		//
 		String addition = "INSERT INTO aCase(client_id, title, status, dateAdded) VALUES (";
 		if (c.getClient() != null) {
 			addition = addition + c.getClient().getClient_id() + ", '";
