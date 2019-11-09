@@ -9,21 +9,21 @@ public class DatabaseController {
 	public static Statement addCaseToDB(DatabaseConnection database, Case c) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
-		//
-		String addition = "INSERT INTO aCase(client_id, title, status, dateAdded) VALUES (";
-		if (c.getClient() != null) {
-			addition = addition + c.getClient().getClient_id() + ", '";
-		} else {
-			addition = addition + "null, '";
+
+		String addition;
+		
+		if(c.getClient() != null){ 
+			addition = "INSERT INTO aCase(client_id, title, status, dateAdded) VALUES ('" + 
+					c.getClient().getClient_id() + "', '" + c.getTitle() + "', '" + c.getStatus() + "', '" + c.getDateAdded() + "')"; 
+		} else { 
+			addition = "INSERT INTO aCase(title, status, dateAdded) VALUES ('" + 
+					c.getTitle() + "', '" + c.getStatus() + "', '" + c.getDateAdded() + "')";
 		}
-		addition = addition + c.getTitle() + "', '" + c.getStatus() + "', '" + c.getDateAdded() + "')";
 		
 		System.out.println(addition);
 		statement.executeUpdate(addition);
 		return statement;
 	}
-	
-	
 
 	public static Statement addClientInfoToDB(DatabaseConnection database, Client c) throws SQLException {
 		Connection connection = database.getConnection();
