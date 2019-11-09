@@ -50,6 +50,7 @@ public class ManageClientsController {
 	// Event Listener on Button.onAction
 	@FXML
 	public void handleEditClient(ActionEvent event) {
+		Client client = clientTable.getSelectionModel().getSelectedItem();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/EditClientInfoDialog.fxml"));
 		try {
 			Parent root = (Parent) loader.load();
@@ -60,13 +61,14 @@ public class ManageClientsController {
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 
 			EditClientInfoDialogController controller = loader.getController();
-			controller.setDialogStage(dialogStage);
+			controller.setDialogStage(dialogStage, client);
 
 			dialogStage.showAndWait();
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		refreshClientList();
 	}
 	// Event Listener on Button.onAction
 	@FXML

@@ -138,6 +138,19 @@ public class DatabaseController {
 		statement.executeUpdate(edit);
 		return statement;
 	}
+	
+	public static Statement editClientInfoInDB(DatabaseConnection database, Client c) throws SQLException {
+		Connection connection = database.getConnection();
+		Statement statement = connection.createStatement();
+		
+		String editClient = "UPDATE client SET name = '" + c.getName() + "', phone = '" + c.getPhone() +
+				"', email = '" + c.getEmail() + "' WHERE client_id = " + c.getClient_id();
+		System.out.println(editClient);
+		statement.executeUpdate(editClient);
+
+		statement.executeUpdate(editClient);
+		return statement;
+	}
 
 	public static Statement archiveCaseInDB(DatabaseConnection database, Case c) throws SQLException {
 		Connection connection = database.getConnection();
