@@ -115,6 +115,9 @@ public class DatabaseController {
 	public static Statement delClientInfoInDB(DatabaseConnection database, Client c) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
+		String business = "UPDATE aCase SET client_id = null WHERE client_id = " + c.getClient_id();
+		System.out.println(business);
+		statement.executeUpdate(business);
 		String deletion = "DELETE FROM client WHERE client_id = " + c.getClient_id();
 		System.out.println(deletion);
 		statement.executeUpdate(deletion);
