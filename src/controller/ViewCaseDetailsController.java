@@ -107,7 +107,7 @@ public class ViewCaseDetailsController{
 
 			dialogStage.showAndWait();
 
-
+			c = controller.getCase();
 			setDetails();
 
 		} catch (IOException e) {

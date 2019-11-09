@@ -164,7 +164,9 @@ public class EditCaseDetailsController {
 	// Event Listener on Button.onAction
 	@FXML
 	public void handleSubmit(ActionEvent event) throws SQLException{
+		c.setTitle(caseTitleField.getText());
 		c.setClient(clientTable.getSelectionModel().getSelectedItem());
+		c.setClient_id(c.getClient().getClient_id());
 		DatabaseController.editCaseInDB(database, c);
 
 		dialogStage.close();
@@ -335,4 +337,7 @@ public class EditCaseDetailsController {
 		System.out.println(clientTable.getSelectionModel().getSelectedItem());
 	}
 
+	public Case getCase(){
+		return c;
+	}
 }
