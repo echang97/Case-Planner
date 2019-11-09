@@ -268,7 +268,6 @@ public class CaseListController implements Initializable{
 			controller.setDialogStage(dialogStage);
 
 			dialogStage.showAndWait();
-			//ongoingCases.add(controller.getCase());
 			refreshLists();
 
 		} catch (IOException e) {
@@ -279,9 +278,8 @@ public class CaseListController implements Initializable{
 	// Event Listener on Button.onAction
 	@FXML
 	public void viewCaseDetails(ActionEvent event) {
-		// TODO Implement with Database
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ViewCaseDetails.fxml"));
-		Case selectedCase = null;
+		Case selectedCase;
 		if(archivedTab.isSelected()){
 			selectedCase = archivedCaseTable.getSelectionModel().getSelectedItem();
 		}else if(deletedTab.isSelected()){
@@ -318,7 +316,6 @@ public class CaseListController implements Initializable{
 			DatabaseController.archiveCaseInDB(database, selectedCase);
 			refreshLists();
 		}else{
-			// TODO Make this a pop-up message
 			System.out.println("Must select a case from Ongoing");
 		}
 	}
@@ -332,7 +329,6 @@ public class CaseListController implements Initializable{
 			DatabaseController.removeCaseInDB(database, selectedCase);
 			refreshLists();
 		}else{
-			// TODO Make this a pop-up message
 			System.out.println("Must select a case from Ongoing");
 		}
 	}
@@ -344,10 +340,9 @@ public class CaseListController implements Initializable{
 		Case selectedCase = archivedCaseTable.getSelectionModel().getSelectedItem();
 		if (selectedCase != null){
 			selectedCase.setDateRemoved(LocalDateTime.now());
-			DatabaseController.archiveCaseInDB(database, selectedCase);
+			DatabaseController.removeCaseInDB(database, selectedCase);
 			refreshLists();
 		}else{
-			// TODO Make this a pop-up message
 			System.out.println("Must select a case from Archived");
 		}
 	}
@@ -355,11 +350,10 @@ public class CaseListController implements Initializable{
 	// Event Listener on Button.onAction
 	@FXML
 	public void resumeCaseFromArchived(ActionEvent event) throws SQLException {
-		// TODO implement w Database
 		Case selectedCase = archivedCaseTable.getSelectionModel().getSelectedItem();
 		if (selectedCase != null){
-			//	selectedCase.setDateArchived(LocalDateTime.now());
-			//	DatabaseController.resumeCaseInDB(database, selectedCase);    //no resumeCaseInDB method implemented in DatabaseController
+			selectedCase.setDateResolved(LocalDateTime.now());
+			DatabaseController.resumeCaseInDB(selectedCase);
 			refreshLists();
 		}else{
 			// TODO Make this a pop-up message
@@ -370,14 +364,12 @@ public class CaseListController implements Initializable{
 	// Event Listener on Button.onAction
 	@FXML
 	public void archiveCaseFromDeleted(ActionEvent event) throws SQLException {
-		// TODO implement w Database
 		Case selectedCase = deletedCaseTable.getSelectionModel().getSelectedItem();
 		if (selectedCase != null){
-			selectedCase.setDateResolved(LocalDateTime.now());
+			selectedCase.setDateRemoved(LocalDateTime.now());
 			DatabaseController.archiveCaseInDB(database, selectedCase);
 			refreshLists();
 		}else{
-			// TODO Make this a pop-up message
 			System.out.println("Must select a case from Deleted");
 		}
 	}
@@ -385,11 +377,10 @@ public class CaseListController implements Initializable{
 	// Event Listener on Button.onAction
 	@FXML
 	public void resumeCaseFromDeleted(ActionEvent event) throws SQLException {
-		// TODO implement w Database
 		Case selectedCase = deletedCaseTable.getSelectionModel().getSelectedItem();
 		if (selectedCase != null){
-			selectedCase.setDateResolved(LocalDateTime.now());
-			//	DatabaseController.resumeCaseInDB(database, selectedCase); //no resumeCaseInDB method implemented in DatabaseController
+			// selectedCase.setDateResolved(LocalDateTime.now());
+			DatabaseController.resumeCaseInDB(selectedCase);
 			refreshLists();
 		}else{
 			// TODO Make this a pop-up message
@@ -399,7 +390,7 @@ public class CaseListController implements Initializable{
 
 	// Event Listener on Button.onAction
 	@FXML
-	public void viewAllDeadlines(ActionEvent event) { //////////////////////////
+	public void viewAllDeadlines(ActionEvent event) {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ViewAllDeadlines.fxml"));
 		try {
 			Parent root = (Parent) loader.load();
@@ -418,7 +409,7 @@ public class CaseListController implements Initializable{
 
 	// Event Listener on Button.onAction
 	@FXML
-	public void viewAllAppointments(ActionEvent event) throws SQLException { /////////////////////
+	public void viewAllAppointments(ActionEvent event){
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/ViewAllAppointments.fxml"));
 		try {
 			Parent root = (Parent) loader.load();
@@ -436,65 +427,42 @@ public class CaseListController implements Initializable{
 		}
 	}
 
-	public void refreshLists(){
+	private void refreshLists(){
 		ongoingCaseTable.getItems().clear();
-		ongoingCaseColumn.setCellValueFactory(new PropertyValueFactory<Case,String>("title"));
-		dateAddedColumn.setCellValueFactory(new PropertyValueFactory<Case,LocalDateTime>("dateAdded"));
+		ongoingCaseColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+		dateAddedColumn.setCellValueFactory(new PropertyValueFactory<>("dateAdded"));
 		ongoingCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'ongoing'");
 		ongoingCaseTable.getItems().addAll(ongoingCases);
 
 		archivedCaseTable.getItems().clear();
-		archivedCaseColumn.setCellValueFactory(new PropertyValueFactory<Case,String>("title"));
-		dateArchivedColumn.setCellValueFactory(new PropertyValueFactory<Case,LocalDateTime>("dateResolved"));
+		archivedCaseColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+		dateArchivedColumn.setCellValueFactory(new PropertyValueFactory<>("dateResolved"));
 		archivedCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'resolved'");
 		archivedCaseTable.getItems().addAll(archivedCases);
 
 		deletedCaseTable.getItems().clear();
-		deletedCaseColumn.setCellValueFactory(new PropertyValueFactory<Case,String>("title"));
-		dateRemovedColumn.setCellValueFactory(new PropertyValueFactory<Case,LocalDateTime>("dateRemoved"));
+		deletedCaseColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+		dateRemovedColumn.setCellValueFactory(new PropertyValueFactory<>("dateRemoved"));
 		deletedCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'removed'");
 		deletedCaseTable.getItems().addAll(deletedCases);
 
 		deadlinesTable.getItems().clear();
-		deadlineTitleColumn.setCellValueFactory(new PropertyValueFactory<Deadline, String>("title"));
-		deadlineCaseColumn.setCellValueFactory(new PropertyValueFactory<Deadline, Case>("case"));
+
+		deadlineTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+		deadlineCaseColumn.setCellValueFactory(new PropertyValueFactory<>("case"));
 		deadlines = getDataFromADeadlineAndAddToObservableList("SELECT * FROM deadline ORDER BY datetime(date) LIMIT 6");
 		deadlinesTable.getItems().addAll(deadlines);
 
 		appointmentsTable.getItems().clear();
-		appointmentTitleColumn.setCellValueFactory(new PropertyValueFactory<Appointment, String>("title"));
-		appointmentCaseColumn.setCellValueFactory(new PropertyValueFactory<Appointment, Case>("case"));
+		appointmentTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+		appointmentCaseColumn.setCellValueFactory(new PropertyValueFactory<>("case"));
 		appointments = getDataFromAnAppointmentAndAddToObservableList("SELECT * FROM appointment ORDER BY datetime(date) LIMIT 6");
 		appointmentsTable.getItems().addAll(appointments);
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Implement w Database
-		ongoingCaseColumn.setCellValueFactory(new PropertyValueFactory<Case,String>("title"));
-		dateAddedColumn.setCellValueFactory(new PropertyValueFactory<Case,LocalDateTime>("dateAdded"));
-		ongoingCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'ongoing'");
-		ongoingCaseTable.getItems().addAll(ongoingCases);
-
-		archivedCaseColumn.setCellValueFactory(new PropertyValueFactory<Case,String>("title"));
-		dateArchivedColumn.setCellValueFactory(new PropertyValueFactory<Case,LocalDateTime>("dateResolved"));
-		archivedCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'resolved'");
-		archivedCaseTable.getItems().addAll(archivedCases);
-
-		deletedCaseColumn.setCellValueFactory(new PropertyValueFactory<Case,String>("title"));
-		dateRemovedColumn.setCellValueFactory(new PropertyValueFactory<Case,LocalDateTime>("dateRemoved"));
-		deletedCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'removed'");
-		deletedCaseTable.getItems().addAll(deletedCases);
-
-		deadlineTitleColumn.setCellValueFactory(new PropertyValueFactory<Deadline, String>("title"));
-		deadlineCaseColumn.setCellValueFactory(new PropertyValueFactory<Deadline, Case>("case"));
-		deadlines = getDataFromADeadlineAndAddToObservableList("SELECT * FROM deadline ORDER BY datetime(date) LIMIT 6");
-		deadlinesTable.getItems().addAll(deadlines);
-
-		appointmentTitleColumn.setCellValueFactory(new PropertyValueFactory<Appointment, String>("title"));
-		appointmentCaseColumn.setCellValueFactory(new PropertyValueFactory<Appointment, Case>("case"));
-		appointments = getDataFromAnAppointmentAndAddToObservableList("SELECT * FROM appointment ORDER BY datetime(date) LIMIT 6");
-		appointmentsTable.getItems().addAll(appointments);
+		refreshLists();
 	}
 
 }

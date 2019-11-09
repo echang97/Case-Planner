@@ -1,7 +1,6 @@
 package controller;
 
 import model.*;
-
 import java.sql.*;
 
 public class DatabaseController {
@@ -157,6 +156,15 @@ public class DatabaseController {
 				"' WHERE case_ID = " + c.getCase_id();
 		System.out.println(removal);
 		statement.executeUpdate(removal);
+		return statement;
+	}
+
+	public static Statement resumeCaseInDB(Case c) throws SQLException{
+		Connection connection = DatabaseConnection.getConnection();
+		Statement statement = connection.createStatement();
+		String resume = "UPDATE aCase SET status = 'ongoing' WHERE case_ID = " + c.getCase_id();
+		System.out.println(resume);
+		statement.executeUpdate(resume);
 		return statement;
 	}
 
