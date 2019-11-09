@@ -114,7 +114,7 @@ public class ViewAllAppointmentsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         caseColumn.setCellValueFactory(new PropertyValueFactory<>("case"));
         appointmentColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-        locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
+        locationColumn.setCellValueFactory(new PropertyValueFactory<>("room"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         ObservableList<Appointment> appointments = getDataFromAnAppointmentAndAddToObservableList();
         appointmentTable.getItems().addAll(appointments);
