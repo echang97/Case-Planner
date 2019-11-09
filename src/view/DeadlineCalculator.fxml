@@ -14,13 +14,13 @@
    <children>
       <Label layoutX="75.0" layoutY="128.0" text="The date is " />
       <Label layoutX="182.0" layoutY="128.0" text="days" />
-      <RadioButton fx:id="afterRadioButton" layoutX="110.0" layoutY="191.0" mnemonicParsing="false" text="After">
+      <RadioButton layoutX="110.0" layoutY="191.0" mnemonicParsing="false" text="After">
          <toggleGroup>
             <ToggleGroup fx:id="beforeAfter" />
          </toggleGroup></RadioButton>
       <RadioButton fx:id="beforeRadioButton" layoutX="110.0" layoutY="163.0" mnemonicParsing="false" selected="true" text="Before" toggleGroup="$beforeAfter" />
       <TextField fx:id="days" layoutX="140.0" layoutY="124.0" prefHeight="25.0" prefWidth="37.0" />
-      <DatePicker fx:id="arbitaryDateField" layoutX="56.0" layoutY="228.0" />
+      <DatePicker fx:id="arbitraryDateField" layoutX="56.0" layoutY="228.0" />
       <Button layoutX="87.0" layoutY="390.0" mnemonicParsing="false" onAction="#handleSubmit" text="Submit" />
       <Button layoutX="168.0" layoutY="390.0" mnemonicParsing="false" onAction="#handleClose" text="Close" />
       <Button layoutX="106.0" layoutY="266.0" mnemonicParsing="false" onAction="#handleCalculate" text="Calculate" />

@@ -1,26 +1,16 @@
 package controller;
 
-import controller.*;
 import model.*;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.net.URL;
 import java.sql.*;
 import java.time.LocalDateTime;
-import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -36,8 +26,6 @@ public class AddCaseDialogController{
 	@FXML
 	private TextField caseTitleField;
 	@FXML
-	private Button submitButton;
-	@FXML
 	private TableView<Client> clientTable;
 	@FXML
 	private TableColumn<Client, String> clientNameColumn;
@@ -48,9 +36,6 @@ public class AddCaseDialogController{
 
 	private Stage dialogStage;
 	private Case c = new Case();
-	private Client client;
-	
-	private ObservableList<Client> clientList = FXCollections.observableArrayList();
 
 	public void setDialogStage(Stage dialogStage){
 		this.dialogStage = dialogStage;
@@ -82,10 +67,10 @@ public class AddCaseDialogController{
 	}
 	
 	public void initialize(){
-		clientNameColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("name"));
-		clientPhoneColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("phone"));
-		clientEmailColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("email"));
-		clientList = getClientAndAddToObservableList("SELECT * FROM client");
+		clientNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+		clientPhoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
+		clientEmailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+		ObservableList<Client> clientList = getClientAndAddToObservableList("SELECT * FROM client");
 		clientTable.getItems().addAll(clientList);
 	}
 	
@@ -95,11 +80,10 @@ public class AddCaseDialogController{
 		c.setTitle(caseTitleField.getText());
 		c.setDateAdded(LocalDateTime.now());
 		c.setStatus("ongoing");
-		client = clientTable.getSelectionModel().getSelectedItem();
-		if(client != null){
+		Client client = clientTable.getSelectionModel().getSelectedItem();
+		if(client != null) {
 			c.setClient(client);
 		}
-		
 		DatabaseController.addCaseToDB(database, c);
 		dialogStage.close();
 	}

@@ -45,7 +45,6 @@ public class AddAppointmentDialogController implements Initializable{
 	private TextField notifcationStartField;
 	private Case c;
 	private Stage dialogStage;
-	private Appointment appointment;
 
 	public void setDialogStage(Stage dialogStage){
 		this.dialogStage = dialogStage;
@@ -54,7 +53,7 @@ public class AddAppointmentDialogController implements Initializable{
 	@FXML
 	public void handleSubmit(ActionEvent event) throws SQLException{
 		DatabaseConnection database = new DatabaseConnection();
-		appointment = new Appointment();
+		Appointment appointment = new Appointment();
 		appointment.setTitle(appointmentTitleField.getText());
 		appointment.setDate(makeLocalDateTime());
 		appointment.setRoom(roomField.getText());
@@ -81,7 +80,7 @@ public class AddAppointmentDialogController implements Initializable{
 
 	private LocalDateTime makeLocalDateTime(){
 		int hour = Integer.parseInt(hourField.getText());
-		LocalTime time = null;
+		LocalTime time;
 		if(amPMCombo.getValue().equals("AM") && hour == 12){
 			hour = 0;
 		}

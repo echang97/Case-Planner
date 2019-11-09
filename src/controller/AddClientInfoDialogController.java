@@ -6,17 +6,11 @@ import java.sql.*;
 
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import controller.*;
 import model.Client;
 import javafx.event.ActionEvent;
 
-import javafx.scene.control.ComboBox;
-
 public class AddClientInfoDialogController {
 	private DatabaseConnection database = new DatabaseConnection();
-	private Connection connection;
-	private Statement statement;
-	private ResultSet resultSet;
 	@FXML
 	private TextField phoneField;
 	@FXML
@@ -29,6 +23,7 @@ public class AddClientInfoDialogController {
 
 	public void setDialogStage(Stage dialogStage){
 		this.dialogStage = dialogStage;
+		nameField.requestFocus();
 	}
 
 	// Event Listener on Button.onAction

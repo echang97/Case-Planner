@@ -104,7 +104,7 @@ public class CaseListController implements Initializable{
 		connection = database.getConnection();
 		statement = connection.createStatement();
 		ResultSet aCase = statement.executeQuery("SELECT * FROM aCase WHERE case_id = " + case_id);
-		Case c = new Case(
+		return new Case(
 				aCase.getInt("case_id"),
 				aCase.getInt("client_id"),
 				aCase.getString("title"),
@@ -113,7 +113,6 @@ public class CaseListController implements Initializable{
 				aCase.getString("dateResolved"),
 				aCase.getString("dateRemoved")
 		);
-		return c;
 	}
 
 	private ObservableList<Deadline> getDataFromADeadlineAndAddToObservableList(String query){

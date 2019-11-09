@@ -17,15 +17,13 @@ import javafx.scene.control.DatePicker;
 
 public class DeadlineCalculatorController{
 	@FXML
-	private RadioButton afterRadioButton;
-	@FXML
 	private RadioButton beforeRadioButton;
 	@FXML
 	private ToggleGroup beforeAfter;
 	@FXML
 	private TextField days;
 	@FXML
-	private DatePicker arbitaryDateField;
+	private DatePicker arbitraryDateField;
 	@FXML
 	private DatePicker newDateField;
 	private Stage dialogStage;
@@ -49,7 +47,7 @@ public class DeadlineCalculatorController{
 	}
 
 	public void handleCalculate(ActionEvent event){
-		LocalDate dateOfCalculation = arbitaryDateField.getValue();
+		LocalDate dateOfCalculation = arbitraryDateField.getValue();
 		if(beforeRadioButton.isSelected()){
 			newDateField.setValue(
 					dateOfCalculation.minusDays

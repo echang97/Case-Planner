@@ -17,16 +17,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 
-
 public class AddDeadlineDialogController{
 	private DatabaseConnection database = new DatabaseConnection();
-	private Connection connection;
-	private Statement statement;
-	private ResultSet resultSet;
-	@FXML
-	private DatePicker dateField;
 	@FXML
 	private TextField titleField;
+	@FXML
+	private DatePicker dateField;
 	@FXML
 	private TextField notificationFrequency;
 	@FXML
@@ -50,11 +46,13 @@ public class AddDeadlineDialogController{
 		DatabaseController.addDeadlineToDB(database, deadline);
 		dialogStage.close();
 	}
+
 	// Event Listener on Button.onAction
 	@FXML
 	public void handleClose(ActionEvent event) {
 		dialogStage.close();
 	}
+
 	// Event Listener on Button.onAction
 	@FXML
 	public void handleCalcDeadline(ActionEvent event) {
