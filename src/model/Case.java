@@ -12,6 +12,7 @@ public class Case {
 	private Client client;
 
 	private int case_id;
+	private int client_id;
 	private String title;
 	private String status;
 
@@ -19,8 +20,9 @@ public class Case {
 	private LocalDateTime dateResolved;
 	private LocalDateTime dateRemoved;
 
-	public Case(int case_id, String title, String status, String dateAdded, String dateResolved, String dateRemoved) {
+	public Case(int case_id, int client_id, String title, String status, String dateAdded, String dateResolved, String dateRemoved) {
 		this.case_id = case_id;
+		this.client_id = client_id;
 		this.status = status;
 		this.title = title;
 		this.dateAdded = LocalDateTime.parse(dateAdded);
@@ -38,40 +40,29 @@ public class Case {
 	}
 
 	public Case() {}
-
 	public ObservableList<Appointment> getAppointments() {
 		return appointments;
 	}
-
 	public void addAppointment(Appointment a){
 		appointments.add(a);
 	}
-
 	public ObservableList<Deadline> getDeadlines() {
 		return deadlines;
 	}
-
 	public void setDeadlines(ObservableList<Deadline> deadlines) {
 		this.deadlines = deadlines;
 	}
-
 	public void setAppointments(ObservableList<Appointment> appointments) {
 		this.appointments = appointments;
 	}
-
 	public void addDeadline(Deadline d){
 		deadlines.add(d);
 	}
-
-	public Client getClient() {
-		return client;
-	}
+	public Client getClient() { return client; }
 	public void setClient(Client client) {
 		this.client = client;
 	}
-	public int getCase_id() {
-		return case_id;
-	}
+	public int getCase_id() { return case_id; }
 	public void setCase_id(int case_id) {
 		this.case_id = case_id;
 	}
@@ -81,9 +72,7 @@ public class Case {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getStatus() {
-		return status;
-	}
+	public String getStatus() { return status; }
 	public void setStatus(String status) {
 		this.status = status;
 	}
@@ -105,6 +94,8 @@ public class Case {
 	public void setDateRemoved(LocalDateTime dateRemoved) {
 		this.dateRemoved = dateRemoved;
 	}
+	public int getClient_id() { return client_id; }
+	public void setClient_id(int client_id) { this.client_id = client_id; }
 
 
 }

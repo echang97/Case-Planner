@@ -55,6 +55,7 @@ public class ViewAllDeadlinesController implements Initializable {
         ResultSet aCase = statement.executeQuery("SELECT * FROM aCase WHERE case_id = " + case_id);
         Case c = new Case(
                 aCase.getInt("case_id"),
+                aCase.getInt("client_id"),
                 aCase.getString("title"),
                 aCase.getString("status"),
                 aCase.getString("dateAdded"),

@@ -82,6 +82,7 @@ public class CaseListController implements Initializable{
 
 				personData.add(new Case(
 						resultSet.getInt("case_id"),
+						resultSet.getInt("client_id"),
 						resultSet.getString("title"),
 						resultSet.getString("status"),
 						resultSet.getString("dateAdded"),
@@ -105,6 +106,7 @@ public class CaseListController implements Initializable{
 		ResultSet aCase = statement.executeQuery("SELECT * FROM aCase WHERE case_id = " + case_id);
 		Case c = new Case(
 				aCase.getInt("case_id"),
+				aCase.getInt("client_id"),
 				aCase.getString("title"),
 				aCase.getString("status"),
 				aCase.getString("dateAdded"),
@@ -302,7 +304,7 @@ public class CaseListController implements Initializable{
 
 			dialogStage.showAndWait();
 			refreshLists();
-		} catch (IOException e) {
+		} catch (IOException | SQLException e) {
 			e.printStackTrace();
 		}
 	}

@@ -67,6 +67,20 @@ public class ViewCaseDetailsController{
 		this.c = c;
 	}
 
+	public void setClient(Case c) throws SQLException {
+		if (c.getClient_id() > 0){
+			connection = database.getConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery("SELECT * FROM client WHERE client_id = " + c.getClient_id());
+			c.setClient(new Client(
+					resultSet.getInt("client_id"),
+					resultSet.getString("name"),
+					resultSet.getString("phone"),
+					resultSet.getString("email")
+			));
+		}
+	}
+
 	public void setDialogStage(Stage dialogStage){
 		this.dialogStage = dialogStage;
 	}
@@ -104,12 +118,12 @@ public class ViewCaseDetailsController{
 	}
 
 
-	public void setDetails() {
+	public void setDetails() throws SQLException {
 		// TODO Auto-generated method stub
 		caseTitleLabel.setText(c.getTitle());
 		caseStatusLabel.setText(c.getStatus());
 		caseDateAddLabel.setText(c.getDateAdded().toString());
-
+		setClient(c);
 		if(c.getClient() != null){
 			clientNameLabel.setText(c.getClient().getName());
 			clientPhoneLabel.setText(c.getClient().getPhone());
