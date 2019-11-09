@@ -40,7 +40,7 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <TableView layoutX="24.0" layoutY="191.0" prefHeight="100.0" prefWidth="300.0">
+      <TableView fx:id="clientTable" layoutX="24.0" layoutY="191.0" prefHeight="100.0" prefWidth="300.0">
         <columns>
           <TableColumn fx:id="clientNameColumn" prefWidth="100.0" text="Name" />
           <TableColumn fx:id="clientPhoneColumn" prefWidth="100.0" text="Phone" />

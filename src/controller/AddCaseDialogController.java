@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -21,89 +22,93 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+
 
 public class AddCaseDialogController{
 	private DatabaseConnection database = new DatabaseConnection();
 	private Connection connection;
 	private Statement statement;
 	private ResultSet resultSet;
+
 	@FXML
 	private TextField caseTitleField;
 	@FXML
-	private Label clientNameLabel;
+	private Button submitButton;
 	@FXML
-	private Label clientPhoneLabel;
+	private TableView<Client> clientTable;
 	@FXML
-	private Label clientEmailLabel;
+	private TableColumn<Client, String> clientNameColumn;
 	@FXML
-	private TableView<Deadline> deadlineTable;
+	private TableColumn<Client, String> clientPhoneColumn;
 	@FXML
-	private TableColumn<Deadline, String> deadlineTitleColumn;
-	@FXML
-	private TableColumn<Deadline, LocalDateTime> deadlineDateColumn;
-	@FXML
-	private TableView<Appointment> appointmentTable;
-	@FXML
-	private TableColumn<Appointment, String> appointmentTitleColumn;
-	@FXML
-	private TableColumn<Appointment, String> appointmentLocColumn;
-	@FXML
-	private TableColumn<Appointment, LocalDateTime> appointmentDateColumn;
+	private TableColumn<Client, String> clientEmailColumn;
 
 	private Stage dialogStage;
 	private Case c = new Case();
 	private Client client;
+	
+	private ObservableList<Client> clientList = FXCollections.observableArrayList();
 
 	public void setDialogStage(Stage dialogStage){
 		this.dialogStage = dialogStage;
 	}
-
-	// Event Listener on Button.onAction
-	@FXML
-	public void addClientInfo(ActionEvent event) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AddClientInfoDialog.fxml"));
+	
+	private ObservableList<Client> getClientAndAddToObservableList(String query){
+		ObservableList<Client> clientData = FXCollections.observableArrayList();
 		try {
-			Parent root = (Parent) loader.load();
-			Stage dialogStage = new Stage();
-			Scene scene = new Scene(root);
-			dialogStage.setScene(scene);
-			dialogStage.setTitle("Add Client Information");
-			dialogStage.initModality(Modality.WINDOW_MODAL);
-
-			AddClientInfoDialogController controller = loader.getController();
-			controller.setDialogStage(dialogStage);
-
-			dialogStage.showAndWait();
-
-			client = controller.getClient();
-			c.setClient(client);
-			clientNameLabel.setText(client.getName());
-			clientPhoneLabel.setText(client.getPhone());
-			clientEmailLabel.setText(client.getEmail());
-
-		} catch (IOException e) {
+			
+			connection = database.getConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(query);
+			System.out.println(resultSet);
+			while(resultSet.next()){
+				clientData.add(new Client(
+						resultSet.getInt("client_id"),
+						resultSet.getString("name"),
+						resultSet.getString("phone"),
+						resultSet.getString("email")
+				));
+			}
+			connection.close();
+			statement.close();
+			resultSet.close();
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return clientData;
 	}
+	
+	public void initialize(){
+		clientNameColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("name"));
+		clientPhoneColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("phone"));
+		clientEmailColumn.setCellValueFactory(new PropertyValueFactory<Client,String>("email"));
+		clientList = getClientAndAddToObservableList("SELECT * FROM client");
+		clientTable.getItems().addAll(clientList);
+	}
+	
 	// Event Listener on Button.onAction
 	@FXML
 	public void handleSubmit(ActionEvent event) throws SQLException {
 		c.setTitle(caseTitleField.getText());
 		c.setDateAdded(LocalDateTime.now());
 		c.setStatus("ongoing");
-
+		client = clientTable.getSelectionModel().getSelectedItem();
+		if(client != null){
+			c.setClient(client);
+		}
+		
 		DatabaseController.addCaseToDB(database, c);
 		dialogStage.close();
 	}
+	
 	// Event Listener on Button.onAction
 	@FXML
 	public void handleClose(ActionEvent event) {
 		dialogStage.close();
 	}
-
-	public Case getCase(){
-		return c;
-	}
+	
 
 }
