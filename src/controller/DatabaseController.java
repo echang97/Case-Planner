@@ -187,10 +187,10 @@ public class DatabaseController {
 		//TODO Implement
 	}
 
-	public static void checkDeletedCasesInDB(DatabaseConnection database) throws SQLException {
+	public static void autoDeleteCasesInDB(DatabaseConnection database) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
-		//TODO Implement
+		statement.executeUpdate("DELETE FROM aCase WHERE status = 'removed' AND datetime(dateRemoved) < datetime('now', '-30 days')");
 	}
 
 	public static void sendNotification(DatabaseConnection database, Notification n) throws SQLException {

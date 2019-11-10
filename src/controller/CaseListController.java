@@ -426,6 +426,11 @@ public class CaseListController implements Initializable{
 	}
 
 	private void refreshLists(){
+		try {
+			DatabaseController.autoDeleteCasesInDB(database);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		ongoingCaseTable.getItems().clear();
 		ongoingCaseColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
 		dateAddedColumn.setCellValueFactory(new PropertyValueFactory<>("dateAdded"));
