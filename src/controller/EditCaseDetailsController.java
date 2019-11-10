@@ -95,6 +95,7 @@ public class EditCaseDetailsController {
 	// Event Listener on Button.onAction
 	@FXML
 	public void editDeadline(ActionEvent event) {
+		Deadline deadline = deadlineTable.getSelectionModel().getSelectedItem();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/EditDeadlineDialogue.fxml"));
 		try {
 			Parent root = (Parent) loader.load();
@@ -105,17 +106,19 @@ public class EditCaseDetailsController {
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 
 			EditDeadlineDialogueController controller = loader.getController();
-			controller.setDialogStage(dialogStage);
+			controller.setDialogStage(dialogStage, deadline);
 
 			dialogStage.showAndWait();
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		refreshLists();
 	}
 	// Event Listener on Button.onAction
 	@FXML
 	public void editAppointment(ActionEvent event) {
+		Appointment appointment = appointmentTable.getSelectionModel().getSelectedItem();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/EditAppointmentDialogue.fxml"));
 		try {
 			Parent root = (Parent) loader.load();
@@ -126,13 +129,13 @@ public class EditCaseDetailsController {
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 
 			EditAppointmentDialogueController controller = loader.getController();
-			controller.setDialogStage(dialogStage);
-
+			controller.setDialogStage(dialogStage, appointment);
+			
 			dialogStage.showAndWait();
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		refreshLists();
 	}
 	// Event Listener on Button.onAction
 	@FXML
