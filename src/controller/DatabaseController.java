@@ -142,14 +142,26 @@ public class DatabaseController {
 	public static Statement editClientInfoInDB(DatabaseConnection database, Client c) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
-		
 		String editClient = "UPDATE client SET name = '" + c.getName() + "', phone = '" + c.getPhone() +
 				"', email = '" + c.getEmail() + "' WHERE client_id = " + c.getClient_id();
 		System.out.println(editClient);
 		statement.executeUpdate(editClient);
-
-		statement.executeUpdate(editClient);
 		return statement;
+	}
+	
+	public static Statement editDeadlineInDB(DatabaseConnection database, Deadline d) throws SQLException {
+		Connection connection = database.getConnection();
+		Statement statement = connection.createStatement();
+		String editDeadline = "UPDATE deadline SET title = '" + d.getTitle() + "', date = '" + d.getDate() +
+				"' WHERE deadline_id = " + d.getDeadline_id();
+		System.out.println(editDeadline);
+		statement.executeUpdate(editDeadline);
+		return statement;
+	}
+	
+	public static Statement editAppointmentInDB(DatabaseConnection database, Appointment a) throws SQLException {
+		return null;
+		//TODO
 	}
 
 	public static Statement archiveCaseInDB(DatabaseConnection database, Case c) throws SQLException {
