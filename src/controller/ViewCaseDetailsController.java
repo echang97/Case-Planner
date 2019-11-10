@@ -142,20 +142,20 @@ public class ViewCaseDetailsController{
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(query);//"SELECT * FROM deadline;"
 			System.out.println(query);
-			ResultSetMetaData rsmd = resultSet.getMetaData();
-			System.out.println(resultSet);
-			int columnsNumber = rsmd.getColumnCount();
+			//ResultSetMetaData rsmd = resultSet.getMetaData();
+			//System.out.println(resultSet);
+			//int columnsNumber = rsmd.getColumnCount();
 			while(resultSet.next()){
-				for (int i = 1; i <= columnsNumber; i++) {
-					if (i > 1) System.out.print(",  ");
-					String columnValue = resultSet.getString(i);
-					System.out.print(columnValue + " " + rsmd.getColumnName(i));
-				}
-				System.out.println();
+				//for (int i = 1; i <= columnsNumber; i++) {
+					//if (i > 1) System.out.print(",  ");
+					//String columnValue = resultSet.getString(i);
+					//System.out.print(columnValue + " " + rsmd.getColumnName(i));
+				//}
+				//System.out.println();
 				int deadline_id = resultSet.getInt(1);
 				String deadline_title = resultSet.getString("title");
 				String deadline_date = resultSet.getString(4);
-				System.out.println(deadline_id + " " + deadline_title + " " + deadline_date);
+				//System.out.println(deadline_id + " " + deadline_title + " " + deadline_date);
 				deadlineData.add(new Deadline(
 						deadline_id,
 						c,
@@ -180,16 +180,16 @@ public class ViewCaseDetailsController{
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(query);//"SELECT * FROM deadline;"
 			System.out.println(query);
-			ResultSetMetaData rsmd = resultSet.getMetaData();
-			System.out.println(resultSet);
-			int columnsNumber = rsmd.getColumnCount();
+			//ResultSetMetaData rsmd = resultSet.getMetaData();
+			//System.out.println(resultSet);
+			//int columnsNumber = rsmd.getColumnCount();
 			while(resultSet.next()){
-				for (int i = 1; i <= columnsNumber; i++) {
-					if (i > 1) System.out.print(",  ");
-					String columnValue = resultSet.getString(i);
-					System.out.print(columnValue + " " + rsmd.getColumnName(i));
-				}
-				System.out.println();
+				//for (int i = 1; i <= columnsNumber; i++) {
+					//if (i > 1) System.out.print(",  ");
+					//String columnValue = resultSet.getString(i);
+					//System.out.print(columnValue + " " + rsmd.getColumnName(i));
+				//}
+				//System.out.println();
 				int appointment_id = resultSet.getInt(1);
 				String appointment_title = resultSet.getString("title");
 				String appointment_room = resultSet.getString("room");
@@ -199,7 +199,7 @@ public class ViewCaseDetailsController{
 				String appointment_zip = resultSet.getString("zip");
 				String appointment_date = resultSet.getString("date");
 
-				System.out.println(appointment_id + " " + appointment_title + " " + appointment_room);
+				//System.out.println(appointment_id + " " + appointment_title + " " + appointment_room);
 				appointmentData.add(new Appointment(
 						appointment_id,
 						c,
