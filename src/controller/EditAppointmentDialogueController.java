@@ -50,7 +50,7 @@ public class EditAppointmentDialogueController {
 		appointment.setCity(cityField.getText());
 		appointment.setState(stateField.getText());
 		appointment.setZip(zipField.getText());
-		appointment.setDate(appointment.getDate());
+		appointment.setDate(dateField.getValue().atStartOfDay());
 		
 		DatabaseController.editAppointmentInDB(database, appointment);
 

@@ -35,7 +35,7 @@ public class EditDeadlineDialogueController {
 	@FXML
 	public void handleSubmit(ActionEvent event) throws SQLException {
 		deadline.setTitle(titleField.getText());
-		deadline.setDate(deadline.getDate());
+		deadline.setDate(dateField.getValue().atStartOfDay());
 		DatabaseController.editDeadlineInDB(database, deadline);
 
 		dialogStage.close();
