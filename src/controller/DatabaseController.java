@@ -160,8 +160,14 @@ public class DatabaseController {
 	}
 	
 	public static Statement editAppointmentInDB(DatabaseConnection database, Appointment a) throws SQLException {
-		return null;
-		//TODO
+		Connection connection = database.getConnection();
+		Statement statement = connection.createStatement();
+		String editAppointment = "UPDATE appointment SET title = '" + a.getTitle() + "', room = '" + a.getRoom() +
+				"', address = '" + a.getAddress() + "', city = '" + a.getCity() + "', state = '" + a.getState() +
+				"', zip = '" + a.getZip() + "' WHERE appointment_id = " + a.getAppointment_id();
+		System.out.println(editAppointment);
+		statement.executeUpdate(editAppointment);
+		return statement;
 	}
 
 	public static Statement archiveCaseInDB(DatabaseConnection database, Case c) throws SQLException {
