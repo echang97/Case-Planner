@@ -231,7 +231,7 @@ public class ViewCaseDetailsController{
 
 		appointmentTable.getItems().clear();
 		appointmentTitleColumn.setCellValueFactory(new PropertyValueFactory<Appointment,String>("title"));
-		appointmentLocColumn.setCellValueFactory(new PropertyValueFactory<Appointment,String>("room"));
+		appointmentLocColumn.setCellValueFactory(new PropertyValueFactory<Appointment,String>("address"));
 		appointmentDateColumn.setCellValueFactory(new PropertyValueFactory<Appointment,LocalDateTime>("date"));
 		appointments = getDataFromAnAppointmentAndAddToObservableList("SELECT * FROM appointment WHERE case_id = " + c.getCase_id());
 		appointmentTable.getItems().addAll(appointments);

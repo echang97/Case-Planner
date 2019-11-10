@@ -331,7 +331,7 @@ public class EditCaseDetailsController {
 
 		appointmentTable.getItems().clear();
 		appointmentTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-		appointmentLocationColumn.setCellValueFactory(new PropertyValueFactory<>("room"));
+		appointmentLocationColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
 		appointmentDateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
 		ObservableList<Appointment> appointments = getDataFromAnAppointmentAndAddToObservableList("SELECT * FROM appointment WHERE case_id = " + c.getCase_id());
 		appointmentTable.getItems().addAll(appointments);
