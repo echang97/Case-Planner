@@ -9,9 +9,12 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddAppointmentDialogController">
    <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e0" height="66.0" stroke="BLACK" strokeType="INSIDE" width="400.0" />
       <Label layoutX="77.0" layoutY="103.0" text="Title:" />
       <Label layoutX="76.0" layoutY="154.0" text="Date:" />
       <Label layoutX="76.0" layoutY="215.0" text="Time:" />
@@ -27,7 +30,10 @@
       <TextField fx:id="notificationStartField" layoutX="165.0" layoutY="504.0" prefHeight="25.0" prefWidth="45.0" text="20" />
       <TextField fx:id="notificationFrequencyField" layoutX="198.0" layoutY="471.0" prefHeight="25.0" prefWidth="45.0" text="5" />
       <Label layoutX="253.0" layoutY="475.0" text="days," />
-      <Label layoutX="139.0" layoutY="31.0" text="Add Appointment" />
+      <Label layoutX="115.0" layoutY="18.0" text="Add Appointment">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font></Label>
       <GridPane layoutX="87.0" layoutY="297.0" prefWidth="200.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="54.0" />
