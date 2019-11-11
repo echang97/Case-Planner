@@ -57,9 +57,6 @@ public class AddCaseDialogController{
 						resultSet.getString("email")
 				));
 			}
-			connection.close();
-			statement.close();
-			resultSet.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

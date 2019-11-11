@@ -72,20 +72,11 @@ public class ViewAllDeadlinesController implements Initializable {
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);//"SELECT * FROM deadline;"
             System.out.println(query);
-            ResultSetMetaData rsmd = resultSet.getMetaData();
-            System.out.println(resultSet);
-            int columnsNumber = rsmd.getColumnCount();
             while(resultSet.next()){
-                for (int i = 1; i <= columnsNumber; i++) {
-                    if (i > 1) System.out.print(",  ");
-                    String columnValue = resultSet.getString(i);
-                    System.out.print(columnValue + " " + rsmd.getColumnName(i));
-                }
                 System.out.println();
                 int deadline_id = resultSet.getInt(1);
                 String deadline_title = resultSet.getString("title");
                 String deadline_date = resultSet.getString(4);
-                System.out.println(deadline_id + " " + deadline_title + " " + deadline_date);
                 Case c = getDataFromCaseToReturn(resultSet.getInt("case_id"));
                 if(c.getStatus().equals("ongoing")) {
                     deadlineData.add(new Deadline(
@@ -96,9 +87,6 @@ public class ViewAllDeadlinesController implements Initializable {
                     ));
                 }
             }
-            connection.close();
-            statement.close();
-            resultSet.close();
         } catch (SQLException e) {
             e.printStackTrace();
 
