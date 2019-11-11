@@ -85,7 +85,6 @@ public class ManageClientsController {
 	}
 	
 	private ObservableList<Client> getClientAndAddToObservableList(String query){
-		//ObservableList<Client> clientData = FXCollections.observableArrayList();
 		try {
 			
 			connection = database.getConnection();
@@ -100,9 +99,6 @@ public class ManageClientsController {
 						resultSet.getString("email")
 				));
 			}
-			connection.close();
-			statement.close();
-			resultSet.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
