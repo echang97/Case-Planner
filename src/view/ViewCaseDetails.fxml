@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -12,15 +8,17 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewCaseDetailsController">
+<AnchorPane prefHeight="600.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewCaseDetailsController">
    <children>
-      <Label layoutX="15.0" layoutY="65.0" text="Case Information">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e0" height="63.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" width="450.0" />
+      <Label layoutX="15.0" layoutY="74.0" text="Case Information">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <TableView fx:id="deadlineTable" layoutX="15.0" layoutY="204.0" prefHeight="140.0" prefWidth="420.0">
+      <TableView fx:id="deadlineTable" layoutX="15.0" layoutY="213.0" prefHeight="140.0" prefWidth="420.0">
         <columns>
           <TableColumn fx:id="deadlineTitleColumn" prefWidth="75.0" text="Title" />
           <TableColumn fx:id="deadlineDateColumn" prefWidth="75.0" text="Date" />
@@ -30,7 +28,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <TableView fx:id="appointmentTable" layoutX="15.0" layoutY="387.0" prefHeight="140.0" prefWidth="420.0">
+      <TableView fx:id="appointmentTable" layoutX="15.0" layoutY="396.0" prefHeight="140.0" prefWidth="420.0">
         <columns>
           <TableColumn fx:id="appointmentTitleColumn" prefWidth="75.0" text="Title" />
           <TableColumn fx:id="appointmentLocColumn" prefWidth="75.0" text="Location" />
@@ -41,15 +39,15 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Label layoutX="275.0" layoutY="65.0" text="Client Information">
+      <Label layoutX="275.0" layoutY="74.0" text="Client Information">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <Label fx:id="caseTitleLabel" layoutX="169.0" layoutY="24.0" text="Case Details">
+      <Label fx:id="caseTitleLabel" layoutX="169.0" layoutY="15.0" text="Case Details">
          <font>
             <Font name="System Bold" size="20.0" />
          </font></Label>
-      <GridPane layoutX="15.0" layoutY="85.0" prefHeight="90.0" prefWidth="211.0">
+      <GridPane layoutX="15.0" layoutY="94.0" prefHeight="90.0" prefWidth="211.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="80.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="131.0" minWidth="10.0" prefWidth="131.0" />
@@ -72,12 +70,12 @@
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Label>
-            <Label fx:id="caseTitleLabel" prefHeight="17.0" prefWidth="130.0" text="title" GridPane.columnIndex="1" />
-            <Label fx:id="caseStatusLabel" prefHeight="17.0" prefWidth="130.0" text="status" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label fx:id="caseDateAddLabel" prefHeight="17.0" prefWidth="130.0" text="dateAdded" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="caseTitleLabel" prefHeight="17.0" prefWidth="130.0" text="-" GridPane.columnIndex="1" />
+            <Label fx:id="caseStatusLabel" prefHeight="17.0" prefWidth="130.0" text="-" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="caseDateAddLabel" prefHeight="17.0" prefWidth="130.0" text="-" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <GridPane layoutX="275.0" layoutY="89.0" prefHeight="90.0" prefWidth="161.0">
+      <GridPane layoutX="275.0" layoutY="98.0" prefHeight="90.0" prefWidth="161.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="74.0" minWidth="10.0" prefWidth="51.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="113.0" minWidth="10.0" prefWidth="110.0" />
@@ -100,20 +98,20 @@
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Label>
-            <Label fx:id="clientNameLabel" prefHeight="17.0" prefWidth="110.0" text="name" GridPane.columnIndex="1" />
-            <Label fx:id="clientPhoneLabel" prefHeight="17.0" prefWidth="110.0" text="phone" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label fx:id="clientEmailLabel" prefHeight="17.0" prefWidth="110.0" text="email" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="clientNameLabel" prefHeight="17.0" prefWidth="110.0" text="-" GridPane.columnIndex="1" />
+            <Label fx:id="clientPhoneLabel" prefHeight="17.0" prefWidth="110.0" text="-" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="clientEmailLabel" prefHeight="17.0" prefWidth="110.0" text="-" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Label layoutX="14.0" layoutY="184.0" text="Deadlines">
+      <Label layoutX="14.0" layoutY="193.0" text="Deadlines">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <Label layoutX="14.0" layoutY="367.0" text="Appointments">
+      <Label layoutX="14.0" layoutY="376.0" text="Appointments">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <Button layoutX="171.0" layoutY="552.0" mnemonicParsing="false" onAction="#handleEdit" text="Edit" />
-      <Button layoutX="234.0" layoutY="552.0" mnemonicParsing="false" onAction="#handleClose" text="Close" />
+      <Button layoutX="171.0" layoutY="554.0" mnemonicParsing="false" onAction="#handleEdit" text="Edit" />
+      <Button layoutX="234.0" layoutY="554.0" mnemonicParsing="false" onAction="#handleClose" text="Close" />
    </children>
 </AnchorPane>
