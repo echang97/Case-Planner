@@ -4,11 +4,13 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="420.0" prefWidth="337.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewAllDeadlinesController">
    <children>
-      <Label fx:id="ViewDeadlinesLabel" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="90.0" layoutY="14.0" prefHeight="30.0" prefWidth="157.0" text="View Deadlines" textAlignment="CENTER" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="14.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e0" height="54.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" width="337.0" />
+      <Label fx:id="ViewDeadlinesLabel" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="90.0" layoutY="10.0" prefHeight="30.0" prefWidth="157.0" text="View Deadlines" textAlignment="CENTER" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="10.0">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>

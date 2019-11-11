@@ -172,8 +172,16 @@ public class EditCaseDetailsController {
 	@FXML
 	public void handleSubmit(ActionEvent event) throws SQLException{
 		c.setTitle(caseTitleField.getText());
-		c.setClient(clientTable.getSelectionModel().getSelectedItem());
-		c.setClient_id(c.getClient().getClient_id());
+		try {
+			System.out.println(clientTable.getSelectionModel().getSelectedItem());
+			c.setClient(clientTable.getSelectionModel().getSelectedItem());
+			c.setClient_id(c.getClient().getClient_id());
+		}
+		catch (Exception e){
+			c.setClient(null);
+			c.setClient_id(-1);
+		}
+		System.out.println (c.getClient_id());
 		DatabaseController.editCaseInDB(database, c);
 
 		dialogStage.close();
@@ -195,22 +203,12 @@ public class EditCaseDetailsController {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(query);//"SELECT * FROM deadline;"
 			System.out.println(query);
-			ResultSetMetaData rsmd = resultSet.getMetaData();
-			System.out.println(resultSet);
-			int columnsNumber = rsmd.getColumnCount();
 			while (resultSet.next()) {
-				for (int i = 1; i <= columnsNumber; i++) {
-					if (i > 1) System.out.print(",  ");
-					String columnValue = resultSet.getString(i);
-					System.out.print(columnValue + " " + rsmd.getColumnName(i));
-				}
-				System.out.println();
 				int client_id = resultSet.getInt(1);
 				String client_name = resultSet.getString("name");
 				String client_phone = resultSet.getString("phone");
 				String client_email = resultSet.getString("email");
 
-				System.out.println(client_id + " " + client_name);
 				clientData.add(new Client(
 						client_id,
 						client_name,
@@ -218,9 +216,6 @@ public class EditCaseDetailsController {
 						client_email
 				));
 			}
-			connection.close();
-			statement.close();
-			resultSet.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 
@@ -235,20 +230,10 @@ public class EditCaseDetailsController {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(query);//"SELECT * FROM deadline;"
 			System.out.println(query);
-			ResultSetMetaData rsmd = resultSet.getMetaData();
-			System.out.println(resultSet);
-			int columnsNumber = rsmd.getColumnCount();
 			while(resultSet.next()){
-				for (int i = 1; i <= columnsNumber; i++) {
-					if (i > 1) System.out.print(",  ");
-					String columnValue = resultSet.getString(i);
-					System.out.print(columnValue + " " + rsmd.getColumnName(i));
-				}
-				System.out.println();
 				int deadline_id = resultSet.getInt(1);
 				String deadline_title = resultSet.getString("title");
 				String deadline_date = resultSet.getString(4);
-				System.out.println(deadline_id + " " + deadline_title + " " + deadline_date);
 				deadlineData.add(new Deadline(
 						deadline_id,
 						c,
@@ -256,9 +241,6 @@ public class EditCaseDetailsController {
 						deadline_date
 				));
 			}
-			connection.close();
-			statement.close();
-			resultSet.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 
@@ -273,16 +255,7 @@ public class EditCaseDetailsController {
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery(query);//"SELECT * FROM deadline;"
 			System.out.println(query);
-			ResultSetMetaData rsmd = resultSet.getMetaData();
-			System.out.println(resultSet);
-			int columnsNumber = rsmd.getColumnCount();
 			while(resultSet.next()){
-				for (int i = 1; i <= columnsNumber; i++) {
-					if (i > 1) System.out.print(",  ");
-					String columnValue = resultSet.getString(i);
-					System.out.print(columnValue + " " + rsmd.getColumnName(i));
-				}
-				System.out.println();
 				int appointment_id = resultSet.getInt(1);
 				String appointment_title = resultSet.getString("title");
 				String appointment_room = resultSet.getString("room");
@@ -292,7 +265,6 @@ public class EditCaseDetailsController {
 				String appointment_zip = resultSet.getString("zip");
 				String appointment_date = resultSet.getString("date");
 
-				System.out.println(appointment_id + " " + appointment_title + " " + appointment_room);
 				appointmentData.add(new Appointment(
 						appointment_id,
 						c,
@@ -305,9 +277,6 @@ public class EditCaseDetailsController {
 						appointment_date
 				));
 			}
-			connection.close();
-			statement.close();
-			resultSet.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 
@@ -340,7 +309,7 @@ public class EditCaseDetailsController {
 	public void setDetails(){
 		refreshLists();
 		caseTitleField.setText(c.getTitle());
-		clientTable.getSelectionModel().select(c.getClient());
+		//clientTable.getSelectionModel().select(c.getClient());
 		System.out.println(clientTable.getSelectionModel().getSelectedItem());
 	}
 
