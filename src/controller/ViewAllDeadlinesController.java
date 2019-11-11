@@ -73,7 +73,6 @@ public class ViewAllDeadlinesController implements Initializable {
             ResultSet resultSet = statement.executeQuery(query);//"SELECT * FROM deadline;"
             System.out.println(query);
             while(resultSet.next()){
-                System.out.println();
                 int deadline_id = resultSet.getInt(1);
                 String deadline_title = resultSet.getString("title");
                 String deadline_date = resultSet.getString(4);
