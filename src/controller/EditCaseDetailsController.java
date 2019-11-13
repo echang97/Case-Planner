@@ -130,7 +130,7 @@ public class EditCaseDetailsController {
 
 			EditAppointmentDialogueController controller = loader.getController();
 			controller.setDialogStage(dialogStage, appointment);
-			
+
 			dialogStage.showAndWait();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -309,11 +309,16 @@ public class EditCaseDetailsController {
 	public void setDetails(){
 		refreshLists();
 		caseTitleField.setText(c.getTitle());
-		//clientTable.getSelectionModel().select(c.getClient());
+		clientTable.getSelectionModel().select(c.getClient());
 		System.out.println(clientTable.getSelectionModel().getSelectedItem());
 	}
 
 	public Case getCase(){
 		return c;
 	}
+
+	public void clearSelectedClient(){
+		clientTable.getSelectionModel().clearSelection();
+	}
+
 }

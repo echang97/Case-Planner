@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.shape.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="623.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditCaseDetailsController">
+<AnchorPane prefHeight="623.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditCaseDetailsController">
    <children>
       <TextField fx:id="caseTitleField" layoutX="152.0" layoutY="73.0" />
       <Text layoutX="7.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Case Title :" wrappingWidth="94.609375">
@@ -79,5 +75,6 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
+      <Button layoutX="7.0" layoutY="165.0" mnemonicParsing="false" onAction="#clearSelectedClient" prefHeight="25.0" prefWidth="134.0" text="Clear Client Selection" />
    </children>
 </AnchorPane>

@@ -127,6 +127,10 @@ public class ViewCaseDetailsController{
 			clientNameLabel.setText(c.getClient().getName());
 			clientPhoneLabel.setText(c.getClient().getPhone());
 			clientEmailLabel.setText(c.getClient().getEmail());
+		}else{
+			clientNameLabel.setText("No Client");
+			clientPhoneLabel.setText("-");
+			clientEmailLabel.setText("-");
 		}
 
 		refreshLists();
