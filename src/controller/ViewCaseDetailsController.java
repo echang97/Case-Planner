@@ -45,6 +45,8 @@ public class ViewCaseDetailsController{
 	@FXML
 	private TableColumn<Appointment, String> appointmentLocColumn;
 	@FXML
+	private TableColumn<Appointment, String> appointmentStatusColumn;
+	@FXML
 	private Label caseTitleLabel;
 	@FXML
 	private Label caseStatusLabel;
@@ -147,11 +149,13 @@ public class ViewCaseDetailsController{
 				int deadline_id = resultSet.getInt(1);
 				String deadline_title = resultSet.getString("title");
 				String deadline_date = resultSet.getString(4);
+				String deadline_status = resultSet.getString(5);
 				deadlineData.add(new Deadline(
 						deadline_id,
 						c,
 						deadline_title,
-						deadline_date
+						deadline_date,
+						deadline_status
 				));
 			}
 		} catch (SQLException e) {
@@ -177,6 +181,7 @@ public class ViewCaseDetailsController{
 				String appointment_state = resultSet.getString("state");
 				String appointment_zip = resultSet.getString("zip");
 				String appointment_date = resultSet.getString("date");
+				String appointment_status = resultSet.getString("status");
 				appointmentData.add(new Appointment(
 						appointment_id,
 						c,
@@ -186,7 +191,8 @@ public class ViewCaseDetailsController{
 						appointment_city,
 						appointment_state,
 						appointment_zip,
-						appointment_date
+						appointment_date,
+						appointment_status
 				));
 			}
 		} catch (SQLException e) {
@@ -200,6 +206,7 @@ public class ViewCaseDetailsController{
 		deadlineTable.getItems().clear();
 		deadlineTitleColumn.setCellValueFactory(new PropertyValueFactory<Deadline,String>("title"));
 		deadlineDateColumn.setCellValueFactory(new PropertyValueFactory<Deadline,LocalDateTime>("date"));
+		deadlineStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 		deadlines = getDataFromADeadlineAndAddToObservableList("SELECT * FROM deadline WHERE case_id = " + c.getCase_id());
 		deadlineTable.getItems().addAll(deadlines);
 
@@ -207,6 +214,7 @@ public class ViewCaseDetailsController{
 		appointmentTitleColumn.setCellValueFactory(new PropertyValueFactory<Appointment,String>("title"));
 		appointmentLocColumn.setCellValueFactory(new PropertyValueFactory<Appointment,String>("address"));
 		appointmentDateColumn.setCellValueFactory(new PropertyValueFactory<Appointment,LocalDateTime>("date"));
+		appointmentStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 		appointments = getDataFromAnAppointmentAndAddToObservableList("SELECT * FROM appointment WHERE case_id = " + c.getCase_id());
 		appointmentTable.getItems().addAll(appointments);
 	}

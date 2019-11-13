@@ -234,11 +234,13 @@ public class EditCaseDetailsController {
 				int deadline_id = resultSet.getInt(1);
 				String deadline_title = resultSet.getString("title");
 				String deadline_date = resultSet.getString(4);
+				String deadline_status = resultSet.getString(5);
 				deadlineData.add(new Deadline(
 						deadline_id,
 						c,
 						deadline_title,
-						deadline_date
+						deadline_date,
+						deadline_status
 				));
 			}
 		} catch (SQLException e) {
@@ -264,6 +266,7 @@ public class EditCaseDetailsController {
 				String appointment_state = resultSet.getString("state");
 				String appointment_zip = resultSet.getString("zip");
 				String appointment_date = resultSet.getString("date");
+				String appointment_status = resultSet.getString("status");
 
 				appointmentData.add(new Appointment(
 						appointment_id,
@@ -274,7 +277,8 @@ public class EditCaseDetailsController {
 						appointment_city,
 						appointment_state,
 						appointment_zip,
-						appointment_date
+						appointment_date,
+						appointment_status
 				));
 			}
 		} catch (SQLException e) {

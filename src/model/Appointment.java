@@ -12,7 +12,9 @@ public class Appointment {
 	private String state;
 	private String zip;
 	private LocalDateTime date;
+	private String status;
 
+	//Constructor should be obsolete now. Can likely be removed.
 	public Appointment(int appointment_id, Case aCase, String title, String room, String address, String city, String state, String zip, String date) {
 		this.appointment_id = appointment_id;
 		this.aCase = aCase;
@@ -23,9 +25,23 @@ public class Appointment {
 		this.state = state;
 		this.zip = zip;
 		this.date = LocalDateTime.parse(date);
+		this.status = "Incomplete";
+	}
+
+	public Appointment(int appointment_id, Case aCase, String title, String room, String address, String city, String state, String zip, String date, String status) {
+		this.appointment_id = appointment_id;
+		this.aCase = aCase;
+		this.title = title;
+		this.room = room;
+		this.address = address;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
+		this.date = LocalDateTime.parse(date);
+		this.status = status;
 	}
 	public Appointment(){
-
+		this.status = "Incomplete";
 	}
 
 	public int getAppointment_id() { return appointment_id; }
@@ -74,4 +90,6 @@ public class Appointment {
 	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
+	public String getStatus() {return status;}
+	public void setStatus(String status) { this.status = status; }
 }

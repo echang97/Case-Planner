@@ -76,13 +76,15 @@ public class ViewAllDeadlinesController implements Initializable {
                 int deadline_id = resultSet.getInt(1);
                 String deadline_title = resultSet.getString("title");
                 String deadline_date = resultSet.getString(4);
+                String deadline_status = resultSet.getString(5);
                 Case c = getDataFromCaseToReturn(resultSet.getInt("case_id"));
-                if(c.getStatus().equals("ongoing")) {
+                if(c.getStatus().equals("ongoing") && deadline_status == "Incomplete") {
                     deadlineData.add(new Deadline(
                             deadline_id,
                             c,
                             deadline_title,
-                            deadline_date
+                            deadline_date,
+							deadline_status
                     ));
                 }
             }

@@ -45,7 +45,7 @@ public class DatabaseController {
 	public static Statement addAppointmentToDB(DatabaseConnection database, Appointment a) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
-		String addition = "INSERT INTO appointment(case_id, title, room, address, city, state, zip, date) VALUES (" +
+		String addition = "INSERT INTO appointment(case_id, title, room, address, city, state, zip, date, status) VALUES (" +
 				a.getCase().getCase_id() + ", '" + a.getTitle() + "', ";
 		if (a.getRoom() != null) {
 			addition = addition + "'" + a.getRoom() + "', ";
@@ -77,7 +77,7 @@ public class DatabaseController {
 		else {
 			addition = addition + "NULL, ";
 		}
-		addition = addition + "'" + a.getDate().toString() + "')";
+		addition = addition + "'" + a.getDate().toString() + "', '" + a.getStatus() + "')";
 		System.out.println(addition);
 		statement.executeUpdate(addition);
 		return statement;
@@ -86,8 +86,8 @@ public class DatabaseController {
 	public static Statement addDeadlineToDB(DatabaseConnection database, Deadline d) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
-		String addition = "INSERT INTO deadline(case_id, title, date) VALUES (" + d.getCase().getCase_id() + ", '" +
-				d.getTitle() + "', '" + d.getDate() + "')";
+		String addition = "INSERT INTO deadline(case_id, title, date, status) VALUES (" + d.getCase().getCase_id() + ", '" +
+				d.getTitle() + "', '" + d.getDate() + "', '" + d.getStatus() + "')";
 		System.out.println(addition);
 		statement.executeUpdate(addition);
 		return statement;
@@ -159,7 +159,7 @@ public class DatabaseController {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
 		String editDeadline = "UPDATE deadline SET title = '" + d.getTitle() + "', date = '" + d.getDate() +
-				"' WHERE deadline_id = " + d.getDeadline_id();
+				"', status = '" + d.getStatus() + "' WHERE deadline_id = " + d.getDeadline_id();
 		System.out.println(editDeadline);
 		statement.executeUpdate(editDeadline);
 		return statement;
@@ -170,7 +170,8 @@ public class DatabaseController {
 		Statement statement = connection.createStatement();
 		String editAppointment = "UPDATE appointment SET title = '" + a.getTitle() + "', room = '" + a.getRoom() +
 				"', address = '" + a.getAddress() + "', city = '" + a.getCity() + "', state = '" + a.getState() +
-				"', zip = '" + a.getZip() + "', date = '" + a.getDate() + "' WHERE appointment_id = " + a.getAppointment_id();
+				"', zip = '" + a.getZip() + "', date = '" + a.getDate() + "', status = '" + a.getStatus() +
+				"' WHERE appointment_id = " + a.getAppointment_id();
 		System.out.println(editAppointment);
 		statement.executeUpdate(editAppointment);
 		return statement;

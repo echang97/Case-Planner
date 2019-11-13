@@ -74,9 +74,10 @@ public class ViewAllAppointmentsController implements Initializable {
                 String appointment_state = resultSet.getString("state");
                 String appointment_zip = resultSet.getString("zip");
                 String appointment_date = resultSet.getString("date");
+                String appointment_status = resultSet.getString("status");
 
                 Case c = getDataFromCaseToReturn(resultSet.getInt("case_id"));
-                if(c.getStatus().equals("ongoing")){
+                if(c.getStatus().equals("ongoing") && appointment_status.equals("Incomplete")){
                     appointmentData.add(new Appointment(
                             appointment_id,
                             c,
@@ -86,7 +87,8 @@ public class ViewAllAppointmentsController implements Initializable {
                             appointment_city,
                             appointment_state,
                             appointment_zip,
-                            appointment_date
+                            appointment_date,
+							appointment_status
                     ));
                 }
             }

@@ -122,12 +122,14 @@ public class CaseListController implements Initializable{
 				int deadline_id = resultSet.getInt(1);
 				String deadline_title = resultSet.getString("title");
 				String deadline_date = resultSet.getString(4);
+				String deadline_status = resultSet.getString(5);
 				Case c = getDataFromCaseToReturn(resultSet.getInt("case_id"));
 				deadlineData.add(new Deadline(
 						deadline_id,
 						c,
 						deadline_title,
-						deadline_date
+						deadline_date,
+						deadline_status
 				));
 			}
 		} catch (SQLException e) {
@@ -153,6 +155,7 @@ public class CaseListController implements Initializable{
 				String appointment_state = resultSet.getString("state");
 				String appointment_zip = resultSet.getString("zip");
 				String appointment_date = resultSet.getString("date");
+				String appointment_status = resultSet.getString("status");
 
 				Case c = getDataFromCaseToReturn(resultSet.getInt("case_id"));
 				appointmentData.add(new Appointment(
@@ -164,7 +167,8 @@ public class CaseListController implements Initializable{
 						appointment_city,
 						appointment_state,
 						appointment_zip,
-						appointment_date
+						appointment_date,
+						appointment_status
 				));
 			}
 		} catch (SQLException e) {
