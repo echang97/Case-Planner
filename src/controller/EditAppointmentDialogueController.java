@@ -9,7 +9,7 @@ import model.Appointment;
 import java.sql.SQLException;
 
 import javafx.event.ActionEvent;
-
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 
 public class EditAppointmentDialogueController {
@@ -32,6 +32,8 @@ public class EditAppointmentDialogueController {
 	private TextField stateField;
 	@FXML
 	private TextField zipField;
+	@FXML
+	private ComboBox<String> statusCombo;
 	private Stage dialogStage;
 	private Appointment appointment;
 
@@ -51,7 +53,7 @@ public class EditAppointmentDialogueController {
 		appointment.setState(stateField.getText());
 		appointment.setZip(zipField.getText());
 		appointment.setDate(dateField.getValue().atStartOfDay());
-		
+		appointment.setStatus(statusCombo.getValue());
 		DatabaseController.editAppointmentInDB(database, appointment);
 
 		dialogStage.close();
@@ -70,6 +72,10 @@ public class EditAppointmentDialogueController {
 		stateField.setText(appointment.getState());
 		zipField.setText(appointment.getZip());
 		dateField.setValue(appointment.getDate().toLocalDate());
+	}
 
+	public void initialize() {
+		statusCombo.getItems().addAll("Complete", "Incomplete");
+		statusCombo.setValue("Incomplete");
 	}
 }

@@ -12,37 +12,37 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="511.0" prefWidth="330.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditAppointmentDialogueController">
+<AnchorPane prefHeight="520.0" prefWidth="341.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditAppointmentDialogueController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e04f" height="61.0" layoutX="-2.0" stroke="#00000046" strokeType="INSIDE" width="343.0" />
       <Label layoutX="55.0" layoutY="87.0" text="Title:">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <DatePicker fx:id="dateField" layoutX="93.0" layoutY="331.0" prefHeight="25.0" prefWidth="175.0" />
-      <Label layoutX="54.0" layoutY="335.0" text="Date:">
+      <DatePicker fx:id="dateField" layoutX="89.0" layoutY="323.0" prefHeight="25.0" prefWidth="175.0" />
+      <Label layoutX="50.0" layoutY="327.0" text="Date:">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
       <TextField fx:id="titleField" layoutX="90.0" layoutY="83.0" prefHeight="25.0" prefWidth="175.0" />
-      <Button layoutX="106.0" layoutY="464.0" mnemonicParsing="false" onAction="#handleSubmit" text="Submit" />
-      <Button layoutX="178.0" layoutY="464.0" mnemonicParsing="false" onAction="#handleClose" text="Close" />
+      <Button layoutX="102.0" layoutY="481.0" mnemonicParsing="false" onAction="#handleSubmit" text="Submit" />
+      <Button layoutX="174.0" layoutY="481.0" mnemonicParsing="false" onAction="#handleClose" text="Close" />
       <Label layoutX="78.0" layoutY="14.0" text="Edit Appointment">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="18.0" layoutY="386.0" text="Notifications: ">
+      <Label layoutX="14.0" layoutY="371.0" text="Notifications: ">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="101.0" layoutY="380.0" prefHeight="30.0" prefWidth="88.0" text="Appear every" />
-      <TextField fx:id="notificationFrequency" layoutX="178.0" layoutY="383.0" prefHeight="25.0" prefWidth="28.0" text="5" />
-      <Label layoutX="213.0" layoutY="388.0" text="days," />
-      <Label layoutX="104.0" layoutY="418.0" text="starting" />
-      <TextField fx:id="notificationStart" layoutX="154.0" layoutY="414.0" prefHeight="25.0" prefWidth="28.0" text="20" />
-      <Label layoutX="191.0" layoutY="418.0" text="days before the date." />
+      <Label layoutX="97.0" layoutY="365.0" prefHeight="30.0" prefWidth="88.0" text="Appear every" />
+      <TextField fx:id="notificationFrequency" layoutX="174.0" layoutY="368.0" prefHeight="25.0" prefWidth="28.0" text="5" />
+      <Label layoutX="209.0" layoutY="373.0" text="days," />
+      <Label layoutX="100.0" layoutY="403.0" text="starting" />
+      <TextField fx:id="notificationStart" layoutX="150.0" layoutY="399.0" prefHeight="25.0" prefWidth="28.0" text="20" />
+      <Label layoutX="187.0" layoutY="403.0" text="days before the date." />
       <Label layoutX="50.0" layoutY="127.0" text="Room: ">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -68,5 +68,11 @@
             <Font name="System Bold" size="12.0" />
          </font></Label>
       <TextField fx:id="zipField" layoutX="97.0" layoutY="279.0" prefHeight="25.0" prefWidth="162.0" />
+      <ComboBox fx:id="statusCombo" layoutX="85.0" layoutY="440.0" prefHeight="25.0" prefWidth="175.0" visibleRowCount="2" />
+      <Label layoutX="41.0" layoutY="444.0" text="Status:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
