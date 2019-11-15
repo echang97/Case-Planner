@@ -44,9 +44,9 @@
       </Text>
       <TableView fx:id="deadlineTable" layoutX="152.0" layoutY="267.0" prefHeight="128.0" prefWidth="431.0">
         <columns>
-          <TableColumn fx:id="deadlineTitleColumn" prefWidth="230.0" text="Title" />
-          <TableColumn fx:id="deadlineDateColumn" prefWidth="228.0" text="Date" />
-            <TableColumn fx:id="deadlineStatusColumn" prefWidth="75.0" text="Status" />
+          <TableColumn fx:id="deadlineTitleColumn" prefWidth="-1.0" text="Title" />
+          <TableColumn fx:id="deadlineDateColumn" prefWidth="-1.0" text="Date" />
+            <TableColumn fx:id="deadlineStatusColumn" prefWidth="-1.0" text="Status" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -62,10 +62,10 @@
       </Text>
       <TableView fx:id="appointmentTable" layoutX="157.0" layoutY="421.0" prefHeight="137.0" prefWidth="431.0">
         <columns>
-          <TableColumn fx:id="appointmentTitleColumn" prefWidth="146.0" text="Title" />
-          <TableColumn fx:id="appointmentLocationColumn" prefWidth="206.0" text="Location" />
-            <TableColumn fx:id="appointmentDateColumn" prefWidth="115.0" text="Date" />
-            <TableColumn fx:id="appointmentStatusColumn" prefWidth="75.0" text="Status" />
+          <TableColumn fx:id="appointmentTitleColumn" prefWidth="-1.0" text="Title" />
+          <TableColumn fx:id="appointmentLocationColumn" prefWidth="-1.0" text="Location" />
+            <TableColumn fx:id="appointmentDateColumn" prefWidth="-1.0" text="Date" />
+            <TableColumn fx:id="appointmentStatusColumn" prefWidth="-1.0" text="Status" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
