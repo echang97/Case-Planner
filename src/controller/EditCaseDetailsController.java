@@ -47,6 +47,8 @@ public class EditCaseDetailsController {
 	@FXML
 	private TableColumn <Deadline, LocalDateTime> deadlineDateColumn;
 	@FXML
+	private TableColumn<Deadline, String> deadlineStatusColumn;
+	@FXML
 	private TableView <Appointment> appointmentTable;
 	@FXML
 	private TableColumn <Appointment, String> appointmentTitleColumn;
@@ -54,6 +56,8 @@ public class EditCaseDetailsController {
 	private TableColumn <Appointment, String> appointmentLocationColumn;
 	@FXML
 	private TableColumn <Appointment, LocalDateTime> appointmentDateColumn;
+	@FXML
+	private TableColumn<Appointment, String> appointmentStatusColumn;
 	private Case c;
 	private Stage dialogStage;
 
@@ -299,6 +303,7 @@ public class EditCaseDetailsController {
 		deadlineTable.getItems().clear();
 		deadlineTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
 		deadlineDateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+		deadlineStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 		ObservableList<Deadline> deadlines = getDataFromADeadlineAndAddToObservableList("SELECT * FROM deadline WHERE case_id = " + c.getCase_id());
 		deadlineTable.getItems().addAll(deadlines);
 
@@ -306,6 +311,7 @@ public class EditCaseDetailsController {
 		appointmentTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
 		appointmentLocationColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
 		appointmentDateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+		appointmentStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 		ObservableList<Appointment> appointments = getDataFromAnAppointmentAndAddToObservableList("SELECT * FROM appointment WHERE case_id = " + c.getCase_id());
 		appointmentTable.getItems().addAll(appointments);
 	}
