@@ -12,6 +12,7 @@ import java.awt.*;
 
 public class CaseApplication extends Application{
 
+    private static TrayIcon trayIcon;
     private Stage stage;
 
 	@Override
@@ -27,7 +28,7 @@ public class CaseApplication extends Application{
             stage.setTitle("Case Planner");
             stage.setScene(new Scene(root));
             stage.getIcons().add(new Image("/view/case.png"));
-            stage.show();
+            showStage();
 
         } catch(Exception e) {
             e.printStackTrace();
@@ -41,7 +42,7 @@ public class CaseApplication extends Application{
     private void makeTrayItems() throws AWTException{
 	    SystemTray tray = SystemTray.getSystemTray();
         java.awt.Image icon = Toolkit.getDefaultToolkit().getImage("icon.png");
-        TrayIcon trayIcon = new TrayIcon(icon);
+        trayIcon = new TrayIcon(icon);
 	    PopupMenu popup = new PopupMenu();
 
 	    MenuItem openItem = new MenuItem("Open");
@@ -63,4 +64,7 @@ public class CaseApplication extends Application{
         launch(args);
     }
 
+    public static TrayIcon getTrayIcon() {
+        return trayIcon;
+    }
 }
