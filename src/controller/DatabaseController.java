@@ -209,7 +209,10 @@ public class DatabaseController {
 	public static void checkNotificationsInDB(DatabaseConnection database) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
-		//TODO Implement
+		String check = "SELECT * FROM notification";
+		System.out.println(check);
+		statement.executeUpdate(check);
+		//return statement;
 	}
 
 	public static void autoDeleteCasesInDB(DatabaseConnection database) throws SQLException {
