@@ -1,5 +1,7 @@
 package view;
 
+import controller.DatabaseConnection;
+import controller.DatabaseController;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +11,10 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.awt.*;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class CaseApplication extends Application{
 
@@ -29,6 +35,11 @@ public class CaseApplication extends Application{
             stage.setScene(new Scene(root));
             stage.getIcons().add(new Image("/view/case.png"));
             showStage();
+
+            Timer t = new Timer();
+            //3600000
+            t.scheduleAtFixedRate(new NotificationTask(),0,30000);
+
 
         } catch(Exception e) {
             e.printStackTrace();
@@ -66,5 +77,17 @@ public class CaseApplication extends Application{
 
     public static TrayIcon getTrayIcon() {
         return trayIcon;
+    }
+
+    class NotificationTask extends TimerTask{
+        @Override
+        public void run() {
+            try {
+                DatabaseConnection database = new DatabaseConnection();
+                DatabaseController.checkNotificationsInDB(database);
+            }catch (SQLException s){
+                System.out.println(s);
+            }
+        }
     }
 }
