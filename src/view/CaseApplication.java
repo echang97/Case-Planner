@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -79,14 +78,14 @@ public class CaseApplication extends Application{
         return trayIcon;
     }
 
-    class NotificationTask extends TimerTask{
+    private class NotificationTask extends TimerTask{
         @Override
         public void run() {
             try {
                 DatabaseConnection database = new DatabaseConnection();
                 DatabaseController.checkNotificationsInDB(database);
             }catch (SQLException s){
-                System.out.println(s);
+                System.out.println("Something went wrong: " + s);
             }
         }
     }
