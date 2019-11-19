@@ -211,27 +211,43 @@ public class DatabaseController {
 	public static void checkNotificationsInDB(DatabaseConnection database) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
-		String check = "SELECT * FROM notification";
+		String check = "SELECT * FROM notification WHERE datetime(sendDate) <= datetime('now')";
 		System.out.println(check);
 		ResultSet resultSet = statement.executeQuery(check);
+
 		while(resultSet.next()){
 			Notification notification = new Notification();
-			//appointment_id can't be found in resultSet
 			int appointment_id = resultSet.getInt("appointment_id");
 			int deadline_id = resultSet.getInt("deadline_id");
 			if(appointment_id > 0){
 				String aQuery = "SELECT * FROM appointment WHERE appointment_id = " + appointment_id;
 				ResultSet appointmentSet = statement.executeQuery(aQuery);
-				notification.setAppointment(
-						new Appointment());
+				Appointment appointment = new Appointment();
+				appointment.setTitle(appointmentSet.getString("title"));
+				int case_id = appointmentSet.getInt("case_id");
+				String cQuery = "SELECT * FROM aCase WHERE case_id = " + case_id;
+				ResultSet caseSet = statement.executeQuery(cQuery);
+				Case c = new Case(caseSet.getInt("case_id"), caseSet.getInt("client_id"),
+						caseSet.getString("title"), caseSet.getString("status"),
+						caseSet.getString("dateAdded"), caseSet.getString("dateResolved"),
+						caseSet.getString("dateRemoved"));
+				appointment.setCase(c);
+				notification.setAppointment(appointment);
 			}else{
 				String dQuery = "SELECT * FROM deadline WHERE deadline_id = " + deadline_id;
 				ResultSet deadlineSet = statement.executeQuery(dQuery);
 				System.out.println(dQuery);
-				notification.setDeadline(
-						new Deadline(deadlineSet.getString("title"),
-								LocalDateTime.parse(deadlineSet.getString("date")))
-				);
+				Deadline deadline = new Deadline(deadlineSet.getString("title"),
+						LocalDateTime.parse(deadlineSet.getString("date")));
+				int case_id = deadlineSet.getInt("case_id");
+				String cQuery = "SELECT * FROM aCase WHERE case_id = " + case_id;
+				ResultSet caseSet = statement.executeQuery(cQuery);
+				Case c = new Case(caseSet.getInt("case_id"), caseSet.getInt("client_id"),
+						caseSet.getString("title"), caseSet.getString("status"),
+						caseSet.getString("dateAdded"), caseSet.getString("dateResolved"),
+						caseSet.getString("dateRemoved"));
+				deadline.setCase(c);
+				notification.setDeadline(deadline);
 			}
 			sendNotification(database, notification);
 		}

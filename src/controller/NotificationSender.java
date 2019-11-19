@@ -23,15 +23,14 @@ public class NotificationSender {
 			message =  daysUntil + message + a.getDate();
 		}else{
 			Deadline d = n.getDeadline();
-			//Figure out how to get case later
-			//c = d.getCase();
+			c = d.getCase();
 			name = d.getTitle();
 			daysUntil = LocalDateTime.now().until(d.getDate(), ChronoUnit.DAYS);
 			message =  daysUntil + message + d.getDate();
 		}
 
 		CaseApplication.getTrayIcon()
-				.displayMessage(name, message, TrayIcon.MessageType.INFO);
+				.displayMessage(name + " for " + c.getTitle(), message, TrayIcon.MessageType.INFO);
 	}
 
 }
