@@ -36,8 +36,9 @@ public class CaseApplication extends Application{
             showStage();
 
             Timer t = new Timer();
-            //3600000
-            t.scheduleAtFixedRate(new NotificationTask(),0,30000);
+            // Timer set for 1 hour (3600000)
+            // For testing use 30 seconds (30000)
+            t.scheduleAtFixedRate(new NotificationTask(),1,30000);
 
 
         } catch(Exception e) {
@@ -81,11 +82,11 @@ public class CaseApplication extends Application{
     private class NotificationTask extends TimerTask{
         @Override
         public void run() {
-            try {
+            try{
                 DatabaseConnection database = new DatabaseConnection();
                 DatabaseController.checkNotificationsInDB(database);
             }catch (SQLException s){
-                System.out.println("Something went wrong: " + s);
+                System.out.println(s);
             }
         }
     }

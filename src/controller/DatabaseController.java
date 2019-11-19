@@ -1,7 +1,9 @@
 package controller;
 
 import model.*;
+
 import java.sql.*;
+import java.time.LocalDateTime;
 
 public class DatabaseController {
 
@@ -211,8 +213,28 @@ public class DatabaseController {
 		Statement statement = connection.createStatement();
 		String check = "SELECT * FROM notification";
 		System.out.println(check);
-		statement.executeUpdate(check);
-		//return statement;
+		ResultSet resultSet = statement.executeQuery(check);
+		while(resultSet.next()){
+			Notification notification = new Notification();
+			//appointment_id can't be found in resultSet
+			int appointment_id = resultSet.getInt("appointment_id");
+			int deadline_id = resultSet.getInt("deadline_id");
+			if(appointment_id > 0){
+				String aQuery = "SELECT * FROM appointment WHERE appointment_id = " + appointment_id;
+				ResultSet appointmentSet = statement.executeQuery(aQuery);
+				notification.setAppointment(
+						new Appointment());
+			}else{
+				String dQuery = "SELECT * FROM deadline WHERE deadline_id = " + deadline_id;
+				ResultSet deadlineSet = statement.executeQuery(dQuery);
+				System.out.println(dQuery);
+				notification.setDeadline(
+						new Deadline(deadlineSet.getString("title"),
+								LocalDateTime.parse(deadlineSet.getString("date")))
+				);
+			}
+			sendNotification(database, notification);
+		}
 	}
 
 	public static void autoDeleteCasesInDB(DatabaseConnection database) throws SQLException {
@@ -224,7 +246,8 @@ public class DatabaseController {
 	public static void sendNotification(DatabaseConnection database, Notification n) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
-		//TODO Implement
+		NotificationSender sender = new NotificationSender();
+		sender.sendNotification(n);
 	}
 
 }
