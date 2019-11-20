@@ -5,7 +5,9 @@ import model.Deadline;
 
 import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +18,7 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
+import model.Notification;
 
 public class AddDeadlineDialogController{
 	private DatabaseConnection database = new DatabaseConnection();
@@ -44,6 +47,7 @@ public class AddDeadlineDialogController{
 		deadline = new Deadline(title, date);
 		deadline.setCase(c);
 		DatabaseController.addDeadlineToDB(database, deadline);
+		addDeadlineNotifications(date);
 		dialogStage.close();
 	}
 
@@ -76,6 +80,19 @@ public class AddDeadlineDialogController{
 
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+
+	private void addDeadlineNotifications(LocalDateTime date) throws SQLException{
+		long start = Long.parseLong(notificationStart.getText());
+		long frequency = Long.parseLong(notificationFrequency.getText());
+		LocalDateTime startDate = date.minusDays(start);
+		long daysUntil = startDate.until(date, ChronoUnit.DAYS);
+		for(long i = 0; i < daysUntil; i+=frequency){
+			Notification n = new Notification(startDate.plusDays(i));
+			n.setDeadline(deadline);
+			n.setMessage(daysUntil - i + " Days Until " + date);
+			DatabaseController.addNotificationToDB(n);
 		}
 	}
 

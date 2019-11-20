@@ -13,24 +13,18 @@ public class NotificationSender {
 	public void sendNotification(Notification n){
 		Appointment a = n.getAppointment();
 		String name;
-		String message = " Days Until ";
 		Case c;
-		long daysUntil;
 		if(a != null){
 			c = a.getCase();
 			name = a.getTitle();
-			daysUntil = LocalDateTime.now().until(a.getDate(), ChronoUnit.DAYS);
-			message =  daysUntil + message + a.getDate();
 		}else{
 			Deadline d = n.getDeadline();
 			c = d.getCase();
 			name = d.getTitle();
-			daysUntil = LocalDateTime.now().until(d.getDate(), ChronoUnit.DAYS);
-			message =  daysUntil + message + d.getDate();
 		}
 
 		CaseApplication.getTrayIcon()
-				.displayMessage(name + " for " + c.getTitle(), message, TrayIcon.MessageType.INFO);
+				.displayMessage(name + " for " + c.getTitle(), n.getMessage(), TrayIcon.MessageType.INFO);
 	}
 
 }

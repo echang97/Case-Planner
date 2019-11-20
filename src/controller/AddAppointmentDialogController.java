@@ -63,7 +63,6 @@ public class AddAppointmentDialogController implements Initializable{
 		appointment.setZip(zipField.getText());
 		appointment.setCase(c);
 		DatabaseController.addAppointmentToDB(database, appointment);
-
 		dialogStage.close();
 	}
 	// Event Listener on Button.onAction

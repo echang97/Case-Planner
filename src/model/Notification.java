@@ -11,6 +11,14 @@ public class Notification {
 	private LocalDateTime sendDate;
 	private boolean sent;
 
+	public Notification(){
+
+	}
+
+	public Notification(LocalDateTime sendDate){
+		this.sendDate = sendDate;
+	}
+
 	public int getNotification_id() { return notification_id; }
 	public void setNotification_id(int notification_id) { this.notification_id = notification_id;}
 	public Deadline getDeadline() { return deadline; }

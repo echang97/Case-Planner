@@ -208,6 +208,22 @@ public class DatabaseController {
 		return statement;
 	}
 
+	public static Statement addNotificationToDB(Notification n) throws SQLException{
+		Connection connection = DatabaseConnection.getConnection();
+		Statement statement = connection.createStatement();
+		String addition = "INSERT INTO notification(deadline_id, appointment_id, message, location, sendDate, sent) VALUES " + "(";
+		if (n.getDeadline() != null) {
+			addition = addition  + n.getDeadline().getDeadline_id() + ", 0";
+		}
+		else {
+			addition = addition + "0, " + n.getAppointment().getAppointment_id();
+		}
+		addition = addition + ", '" + n.getMessage() + "', NULL, '" + n.getSendDate() + "', FALSE)";
+		System.out.println(addition);
+		statement.executeUpdate(addition);
+		return statement;
+	}
+
 	public static void checkNotificationsInDB(DatabaseConnection database) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
@@ -260,8 +276,6 @@ public class DatabaseController {
 	}
 
 	public static void sendNotification(DatabaseConnection database, Notification n) throws SQLException {
-		Connection connection = database.getConnection();
-		Statement statement = connection.createStatement();
 		NotificationSender sender = new NotificationSender();
 		sender.sendNotification(n);
 	}
