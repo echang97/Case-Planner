@@ -5,92 +5,55 @@ import java.sql.*;
 
 public class DatabaseController {
 
-	public static Statement addCaseToDB(DatabaseConnection database, Case c) throws SQLException {
+	public static void addCaseToDB(DatabaseConnection database, Case c) throws SQLException {
 		Connection connection = database.getConnection();
-		Statement statement = connection.createStatement();
-		String addition = "INSERT INTO aCase(client_id, title, status, dateAdded) VALUES (";
+		PreparedStatement addition = connection.prepareStatement("INSERT INTO aCase(client_id, title, status, dateAdded)" +
+				"VALUES (?, ?, ?, ?)");
 		if (c.getClient() != null) {
-			addition = addition + c.getClient().getClient_id() + ", '";
+			addition.setInt(1, c.getClient().getClient_id());
 		}
 		else {
-			addition = addition + "null, '";
+			addition.setNull(1, Types.INTEGER);
 		}
-		addition = addition + c.getTitle() + "', '" + c.getStatus() + "', '" + c.getDateAdded() + "')";
-		System.out.println(addition);
-		statement.executeUpdate(addition);
-		return statement;
+		addition.setString(2, c.getTitle());
+		addition.setString(3, c.getStatus());
+		addition.setString(4, c.getDateAdded().toString());
+		addition.executeUpdate();
 	}
 
-	public static Statement addClientInfoToDB(DatabaseConnection database, Client c) throws SQLException {
+	public static void addClientInfoToDB(DatabaseConnection database, Client c) throws SQLException {
 		Connection connection = database.getConnection();
-		Statement statement = connection.createStatement();
-		String addition = "INSERT INTO client(name, phone, email) VALUES ('" + c.getName() + "', ";
-		if (c.getPhone() != null) {
-			addition = addition + "'" + c.getPhone() + "', ";
-		}
-		else {
-			addition = addition + "NULL, ";
-		}
-		if (c.getEmail() != null) {
-			addition = addition + "'" + c.getEmail() + "')";
-		}
-		else {
-			addition = addition + "NULL)";
-		}
-		System.out.println(addition);
-		statement.executeUpdate(addition);
-		return statement;
+		PreparedStatement addition = connection.prepareStatement("INSERT INTO client(name, phone, email) VALUES (?, ?, ?)");
+		addition.setString(1, c.getName());
+		addition.setString(2, c.getPhone());
+		addition.setString(3, c.getEmail());
+		addition.executeUpdate();
 	}
 
-	public static Statement addAppointmentToDB(DatabaseConnection database, Appointment a) throws SQLException {
+	public static void addAppointmentToDB(DatabaseConnection database, Appointment a) throws SQLException {
 		Connection connection = database.getConnection();
-		Statement statement = connection.createStatement();
-		String addition = "INSERT INTO appointment(case_id, title, room, address, city, state, zip, date, status) VALUES (" +
-				a.getCase().getCase_id() + ", '" + a.getTitle() + "', ";
-		if (a.getRoom() != null) {
-			addition = addition + "'" + a.getRoom() + "', ";
-		}
-		else {
-			addition = addition + "NULL, ";
-		}
-		if (a.getAddress() != null) {
-			addition = addition + "'" + a.getAddress() + "', ";
-		}
-		else {
-			addition = addition + "NULL, ";
-		}
-		if (a.getCity() != null) {
-			addition = addition + "'" + a.getCity() + "', ";
-		}
-		else {
-			addition = addition + "NULL, ";
-		}
-		if (a.getState() != null) {
-			addition = addition + "'" + a.getState() + "', ";
-		}
-		else {
-			addition = addition + "NULL, ";
-		}
-		if (a.getZip() != null) {
-			addition = addition + "'" + a.getZip() + "', ";
-		}
-		else {
-			addition = addition + "NULL, ";
-		}
-		addition = addition + "'" + a.getDate().toString() + "', '" + a.getStatus() + "')";
-		System.out.println(addition);
-		statement.executeUpdate(addition);
-		return statement;
+		PreparedStatement addition = connection.prepareStatement("INSERT INTO appointment(case_id, title, room, " +
+				"address, city, state, zip, date, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+		addition.setInt(1, a.getCase().getCase_id());
+		addition.setString(2, a.getTitle());
+		addition.setString(3, a.getRoom());
+		addition.setString(4, a.getAddress());
+		addition.setString(5, a.getCity());
+		addition.setString(6, a.getState());
+		addition.setString(7, a.getZip());
+		addition.setString(8, a.getDate().toString());
+		addition.setString(9, a.getStatus());
+		addition.executeUpdate();
 	}
 
-	public static Statement addDeadlineToDB(DatabaseConnection database, Deadline d) throws SQLException {
+	public static void addDeadlineToDB(DatabaseConnection database, Deadline d) throws SQLException {
 		Connection connection = database.getConnection();
-		Statement statement = connection.createStatement();
-		String addition = "INSERT INTO deadline(case_id, title, date, status) VALUES (" + d.getCase().getCase_id() + ", '" +
-				d.getTitle() + "', '" + d.getDate() + "', '" + d.getStatus() + "')";
-		System.out.println(addition);
-		statement.executeUpdate(addition);
-		return statement;
+		PreparedStatement addition = connection.prepareStatement("INSERT INTO deadline(case_id, title, date, status) VALUES (?, ?, ?, ?)");
+		addition.setInt(1, d.getCase().getCase_id());
+		addition.setString(2, d.getTitle());
+		addition.setString(3, d.getDate().toString());
+		addition.setString(4, d.getStatus());
+		addition.executeUpdate();
 	}
 
 	public static Statement delAppointmentInDB(DatabaseConnection database, Appointment a) throws SQLException {
@@ -129,52 +92,56 @@ public class DatabaseController {
 		return statement;
 	}
 
-	public static Statement editCaseInDB(DatabaseConnection database, Case c) throws SQLException {
+	public static void editCaseInDB(DatabaseConnection database, Case c) throws SQLException {
 		Connection connection = database.getConnection();
-		Statement statement = connection.createStatement();
-		String edit = "UPDATE aCase SET title = '" + c.getTitle();
+		PreparedStatement edit = connection.prepareStatement("UPDATE aCase SET title = ?, " +
+				"client_id = ? WHERE case_id = ?");
+		edit.setString(1, c.getTitle());
 		if (c.getClient_id() > 0) {
-			edit = edit + "', client_id = " + c.getClient().getClient_id();
+			edit.setInt(2, c.getClient().getClient_id());
 		}
 		else {
-			edit = edit + "', client_id = NULL";
+			edit.setNull(2, Types.INTEGER);
 		}
-		edit = edit + " WHERE case_id = " + c.getCase_id();
-		System.out.println(edit);
-		statement.executeUpdate(edit);
-		return statement;
+		edit.setInt(3, c.getCase_id());
 	}
 	
-	public static Statement editClientInfoInDB(DatabaseConnection database, Client c) throws SQLException {
+	public static void editClientInfoInDB(DatabaseConnection database, Client c) throws SQLException {
 		Connection connection = database.getConnection();
-		Statement statement = connection.createStatement();
-		String editClient = "UPDATE client SET name = '" + c.getName() + "', phone = '" + c.getPhone() +
-				"', email = '" + c.getEmail() + "' WHERE client_id = " + c.getClient_id();
-		System.out.println(editClient);
-		statement.executeUpdate(editClient);
-		return statement;
+		PreparedStatement edit = connection.prepareStatement("UPDATE client SET name = ?, phone = ?, " +
+				"email = ? WHERE client_id = ?");
+		edit.setString(1, c.getName());
+		edit.setString(2, c.getPhone());
+		edit.setString(3, c.getEmail());
+		edit.setInt(4, c.getClient_id());
+		edit.executeUpdate();
 	}
 	
-	public static Statement editDeadlineInDB(DatabaseConnection database, Deadline d) throws SQLException {
+	public static void editDeadlineInDB(DatabaseConnection database, Deadline d) throws SQLException {
 		Connection connection = database.getConnection();
-		Statement statement = connection.createStatement();
-		String editDeadline = "UPDATE deadline SET title = '" + d.getTitle() + "', date = '" + d.getDate() +
-				"', status = '" + d.getStatus() + "' WHERE deadline_id = " + d.getDeadline_id();
-		System.out.println(editDeadline);
-		statement.executeUpdate(editDeadline);
-		return statement;
+		PreparedStatement edit = connection.prepareStatement("UPDATE deadline SET title = ?, date = ?, " +
+				"status = ? WHERE deadline_id = ?");
+		edit.setString(1, d.getTitle());
+		edit.setString(2, d.getDate().toString());
+		edit.setString(3, d.getStatus());
+		edit.setInt(4, d.getDeadline_id());
+		edit.executeUpdate();
 	}
 	
-	public static Statement editAppointmentInDB(DatabaseConnection database, Appointment a) throws SQLException {
+	public static void editAppointmentInDB(DatabaseConnection database, Appointment a) throws SQLException {
 		Connection connection = database.getConnection();
-		Statement statement = connection.createStatement();
-		String editAppointment = "UPDATE appointment SET title = '" + a.getTitle() + "', room = '" + a.getRoom() +
-				"', address = '" + a.getAddress() + "', city = '" + a.getCity() + "', state = '" + a.getState() +
-				"', zip = '" + a.getZip() + "', date = '" + a.getDate() + "', status = '" + a.getStatus() +
-				"' WHERE appointment_id = " + a.getAppointment_id();
-		System.out.println(editAppointment);
-		statement.executeUpdate(editAppointment);
-		return statement;
+		PreparedStatement edit = connection.prepareStatement("UPDATE appointment SET title = ?, room = ?, " +
+				"address = ?, city = ?, state = ?, zip = ?, date = ?, status = ? WHERE appointment_id = ?");
+		edit.setString(1, a.getTitle());
+		edit.setString(2, a.getRoom());
+		edit.setString(3, a.getAddress());
+		edit.setString(4, a.getCity());
+		edit.setString(5, a.getState());
+		edit.setString(6, a.getZip());
+		edit.setString(7, a.getDate().toString());
+		edit.setString(8, a.getStatus());
+		edit.setInt(9, a.getAppointment_id());
+		edit.executeUpdate();
 	}
 
 	public static Statement archiveCaseInDB(DatabaseConnection database, Case c) throws SQLException {
