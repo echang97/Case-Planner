@@ -178,14 +178,18 @@ public class DatabaseController {
 	public static Statement addNotificationToDB(Notification n) throws SQLException{
 		Connection connection = DatabaseConnection.getConnection();
 		Statement statement = connection.createStatement();
+		String location = "', NULL, '";
 		String addition = "INSERT INTO notification(deadline_id, appointment_id, message, location, sendDate, sent) VALUES " + "(";
 		if (n.getDeadline() != null) {
-			addition = addition  + n.getDeadline().getDeadline_id() + ", 0";
+			ResultSet deadlineSet = statement.executeQuery("SELECT * FROM deadline ORDER BY deadline_id DESC LIMIT 1");
+			addition = addition  + deadlineSet.getInt("deadline_id") + ", 0";
 		}
 		else {
-			addition = addition + "0, " + n.getAppointment().getAppointment_id();
+			ResultSet appointmentSet = statement.executeQuery("SELECT * FROM appointment ORDER BY appointment_id DESC LIMIT 1");
+			addition = addition + "0, " + appointmentSet.getInt("appointment_id");
+			location = "', " + n.getAppointment().getAddress() +", '";
 		}
-		addition = addition + ", '" + n.getMessage() + "', NULL, '" + n.getSendDate() + "', FALSE)";
+		addition = addition + ", '" + n.getMessage() + location + n.getSendDate() + "', FALSE)";
 		System.out.println(addition);
 		statement.executeUpdate(addition);
 		return statement;
@@ -202,8 +206,10 @@ public class DatabaseController {
 			Notification notification = new Notification();
 			int appointment_id = resultSet.getInt("appointment_id");
 			int deadline_id = resultSet.getInt("deadline_id");
+			notification.setMessage(resultSet.getString("message"));
 			if(appointment_id > 0){
 				String aQuery = "SELECT * FROM appointment WHERE appointment_id = " + appointment_id;
+				System.out.println(aQuery);
 				ResultSet appointmentSet = statement.executeQuery(aQuery);
 				Appointment appointment = new Appointment();
 				appointment.setTitle(appointmentSet.getString("title"));
@@ -215,7 +221,6 @@ public class DatabaseController {
 						caseSet.getString("dateAdded"), caseSet.getString("dateResolved"),
 						caseSet.getString("dateRemoved"));
 				appointment.setCase(c);
-				notification.setAppointment(appointment);
 			}else{
 				String dQuery = "SELECT * FROM deadline WHERE deadline_id = " + deadline_id;
 				ResultSet deadlineSet = statement.executeQuery(dQuery);

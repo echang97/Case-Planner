@@ -2,11 +2,8 @@ package controller;
 
 import model.*;
 import view.CaseApplication;
-import java.time.LocalDateTime;
 
 import java.awt.*;
-import java.time.temporal.ChronoUnit;
-
 
 public class NotificationSender {
 
