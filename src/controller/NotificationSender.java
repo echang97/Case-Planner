@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class NotificationSender {
 
-	public void sendNotification(Notification n){
+	public static void sendNotification(Notification n){
 		Appointment a = n.getAppointment();
 		String name;
 		Case c;
