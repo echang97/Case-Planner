@@ -138,6 +138,7 @@ public class EditAppointmentDialogueController {
 		Notification today = new Notification();
 		today.setAppointment(appointment);
 		today.setMessage(appointment.getTitle() + " is due today!");
+		today.setSendDate(appointment.getDate());
 		DatabaseController.addNotificationToDB(today);
 	}
 

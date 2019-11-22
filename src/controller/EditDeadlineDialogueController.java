@@ -80,6 +80,7 @@ public class EditDeadlineDialogueController {
 		Notification today = new Notification();
 		today.setDeadline(deadline);
 		today.setMessage(deadline.getTitle() + " is due today!");
+		today.setSendDate(deadline.getDate());
 		DatabaseController.addNotificationToDB(today);
 	}
 }
