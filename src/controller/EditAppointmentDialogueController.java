@@ -107,15 +107,17 @@ public class EditAppointmentDialogueController {
 		String date = appointment.getDate().toString();
 		Integer hour = Integer.parseInt(date.substring(11, 13));
 		Integer minute = Integer.parseInt(date.substring(14, 16));
-		hourField.setText(hour.toString());
+		
 		minuteField.setText(minute.toString());
 		if(hour < 12){
 			amPMCombo.setValue("AM");
-			hour += 12;
+			
 			hourField.setText(hour.toString());
 		} else {
 			amPMCombo.setValue("PM");
+			hour -= 12;
 		}
+		hourField.setText(hour.toString());
 	}
 
 	public void initialize() {
