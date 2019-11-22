@@ -20,6 +20,10 @@ public class Case {
 	private LocalDateTime dateResolved;
 	private LocalDateTime dateRemoved;
 
+	private String dateAddedString;
+	private String dateResolvedString;
+	private String dateRemovedString;
+
 	public Case(int case_id, int client_id, String title, String status, String dateAdded, String dateResolved, String dateRemoved) {
 		this.case_id = case_id;
 		this.client_id = client_id;
@@ -31,6 +35,13 @@ public class Case {
 		}
 		if (dateRemoved != null) {
 			this.dateRemoved = LocalDateTime.parse(dateRemoved);
+		}
+		this.dateAddedString = dateAdded.substring(0,dateAdded.indexOf("T"));
+		if(dateRemoved != null){
+			this.dateRemovedString = dateRemoved.substring(0,dateAdded.indexOf("T"));
+		}
+		if(dateResolved != null){
+			this.dateResolvedString = dateResolved.substring(0,dateAdded.indexOf("T"));
 		}
 	}
 
@@ -96,6 +107,7 @@ public class Case {
 	}
 	public int getClient_id() { return client_id; }
 	public void setClient_id(int client_id) { this.client_id = client_id; }
-
-
+	public String getDateAddedString() { return dateAddedString; }
+	public String getDateRemovedString() { return dateRemovedString; }
+	public String getDateResolvedString() { return dateResolvedString; }
 }

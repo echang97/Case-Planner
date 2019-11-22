@@ -28,7 +28,7 @@ public class ViewAllDeadlinesController implements Initializable {
 	@FXML
 	private TableColumn<Deadline, String> deadlineColumn;
 	@FXML
-	private TableColumn<Deadline, LocalDateTime> dateColumn;
+	private TableColumn<Deadline, String> dateColumn;
 	
 	private Stage dialogStage;
 	
@@ -43,7 +43,7 @@ public class ViewAllDeadlinesController implements Initializable {
 
 	public void initialize(URL location, ResourceBundle bundle){
 	    deadlineColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-	    dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+	    dateColumn.setCellValueFactory(new PropertyValueFactory<>("dateString"));
 	    caseColumn.setCellValueFactory(new PropertyValueFactory<>("case"));
         ObservableList<Deadline> deadlines = getDataFromADeadlineAndAddToObservableList("SELECT * FROM deadline");
         deadlineTable.getItems().addAll(deadlines);

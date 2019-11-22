@@ -35,7 +35,7 @@ public class CaseListController implements Initializable{
 	@FXML
 	private TableColumn<Case, String> ongoingCaseColumn;
 	@FXML
-	private TableColumn<Case, LocalDateTime> dateAddedColumn;
+	private TableColumn<Case, String> dateAddedColumn;
 	@FXML
 	private Tab archivedTab;
 	@FXML
@@ -43,7 +43,7 @@ public class CaseListController implements Initializable{
 	@FXML
 	private TableColumn<Case, String> archivedCaseColumn;
 	@FXML
-	private TableColumn<Case, LocalDateTime> dateArchivedColumn;
+	private TableColumn<Case, String> dateArchivedColumn;
 	@FXML
 	private Tab deletedTab;
 	@FXML
@@ -51,7 +51,7 @@ public class CaseListController implements Initializable{
 	@FXML
 	private TableColumn<Case, String> deletedCaseColumn;
 	@FXML
-	private TableColumn<Case, LocalDateTime> dateRemovedColumn;
+	private TableColumn<Case, String> dateRemovedColumn;
 	@FXML
 	private TableView<Deadline> deadlinesTable;
 	@FXML
@@ -64,12 +64,6 @@ public class CaseListController implements Initializable{
 	private TableColumn<Appointment, String> appointmentTitleColumn;
 	@FXML
 	private TableColumn<Appointment, Case> appointmentCaseColumn;
-
-	private ObservableList<Case> ongoingCases = FXCollections.observableArrayList();
-	private ObservableList<Case> archivedCases = FXCollections.observableArrayList();
-	private ObservableList<Case> deletedCases = FXCollections.observableArrayList();
-	private ObservableList<Deadline> deadlines = FXCollections.observableArrayList();
-	private ObservableList<Appointment> appointments = FXCollections.observableArrayList();
 
 	private ObservableList<Case> getDataFromACaseAndAddToObservableList(String query){
 		ObservableList<Case> personData = FXCollections.observableArrayList();
@@ -407,33 +401,33 @@ public class CaseListController implements Initializable{
 		}
 		ongoingCaseTable.getItems().clear();
 		ongoingCaseColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-		dateAddedColumn.setCellValueFactory(new PropertyValueFactory<>("dateAdded"));
-		ongoingCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'ongoing'");
+		dateAddedColumn.setCellValueFactory(new PropertyValueFactory<>("dateAddedString"));
+		ObservableList<Case> ongoingCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'ongoing'");
 		ongoingCaseTable.getItems().addAll(ongoingCases);
 
 		archivedCaseTable.getItems().clear();
 		archivedCaseColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-		dateArchivedColumn.setCellValueFactory(new PropertyValueFactory<>("dateResolved"));
-		archivedCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'resolved'");
+		dateArchivedColumn.setCellValueFactory(new PropertyValueFactory<>("dateResolvedString"));
+		ObservableList<Case> archivedCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'resolved'");
 		archivedCaseTable.getItems().addAll(archivedCases);
 
 		deletedCaseTable.getItems().clear();
 		deletedCaseColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-		dateRemovedColumn.setCellValueFactory(new PropertyValueFactory<>("dateRemoved"));
-		deletedCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'removed'");
+		dateRemovedColumn.setCellValueFactory(new PropertyValueFactory<>("dateRemovedString"));
+		ObservableList<Case> deletedCases = getDataFromACaseAndAddToObservableList("SELECT * FROM aCase WHERE status = 'removed'");
 		deletedCaseTable.getItems().addAll(deletedCases);
 
 		deadlinesTable.getItems().clear();
 
 		deadlineTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
 		deadlineCaseColumn.setCellValueFactory(new PropertyValueFactory<>("case"));
-		deadlines = getDataFromADeadlineAndAddToObservableList("SELECT * FROM deadline ORDER BY datetime(date) LIMIT 6");
+		ObservableList<Deadline> deadlines = getDataFromADeadlineAndAddToObservableList("SELECT * FROM deadline ORDER BY datetime(date) LIMIT 6");
 		deadlinesTable.getItems().addAll(deadlines);
 
 		appointmentsTable.getItems().clear();
 		appointmentTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
 		appointmentCaseColumn.setCellValueFactory(new PropertyValueFactory<>("case"));
-		appointments = getDataFromAnAppointmentAndAddToObservableList("SELECT * FROM appointment ORDER BY datetime(date) LIMIT 6");
+		ObservableList<Appointment> appointments = getDataFromAnAppointmentAndAddToObservableList("SELECT * FROM appointment ORDER BY datetime(date) LIMIT 6");
 		appointmentsTable.getItems().addAll(appointments);
 	}
 
