@@ -131,6 +131,7 @@ public class DatabaseController {
 			edit.setNull(2, Types.INTEGER);
 		}
 		edit.setInt(3, c.getCase_id());
+		edit.executeUpdate();
 	}
 	
 	public static void editClientInfoInDB(DatabaseConnection database, Client c) throws SQLException {
