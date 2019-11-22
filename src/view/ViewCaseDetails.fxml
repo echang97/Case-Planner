@@ -18,7 +18,7 @@
 
 <AnchorPane prefHeight="580.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewCaseDetailsController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e04f" height="56.0" stroke="#00000046" strokeType="INSIDE" width="450.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e04f" height="50.0" stroke="#00000046" strokeType="INSIDE" width="450.0" />
       <Label layoutX="15.0" layoutY="74.0" text="Case Information">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -48,7 +48,7 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <Label fx:id="caseTitleLabel" layoutX="169.0" layoutY="15.0" text="Case Details">
+      <Label fx:id="caseTitleLabel" layoutX="170.0" layoutY="10.0" text="Case Details">
          <font>
             <Font name="System Bold" size="20.0" />
          </font></Label>
@@ -129,7 +129,7 @@
          </font></Button>
       <Button layoutX="231.0" layoutY="543.0" mnemonicParsing="false" onAction="#handleClose" text="Close">
          <tooltip>
-            <Tooltip text="Close window">
+            <Tooltip text="Close Window">
                <font>
                   <Font size="14.0" />
                </font>

@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -10,30 +15,93 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="351.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DeadlineCalculatorController">
+<AnchorPane prefHeight="351.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DeadlineCalculatorController">
    <children>
-      <Label layoutX="83.0" layoutY="81.0" text="The date is " />
-      <Label layoutX="190.0" layoutY="81.0" text="days" />
-      <RadioButton layoutX="118.0" layoutY="144.0" mnemonicParsing="false" text="After">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e04f" height="50.0" stroke="#00000046" strokeType="INSIDE" width="300.0" />
+      <Label layoutX="71.0" layoutY="73.0" text="The date is ">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label layoutX="190.0" layoutY="74.0" text="days">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <RadioButton layoutX="118.0" layoutY="137.0" mnemonicParsing="false" text="After">
          <toggleGroup>
             <ToggleGroup fx:id="beforeAfter" />
-         </toggleGroup></RadioButton>
-      <RadioButton fx:id="beforeRadioButton" layoutX="118.0" layoutY="116.0" mnemonicParsing="false" selected="true" text="Before" toggleGroup="$beforeAfter" />
-      <TextField fx:id="days" layoutX="148.0" layoutY="77.0" prefHeight="25.0" prefWidth="37.0" />
-      <DatePicker fx:id="arbitraryDateField" layoutX="64.0" layoutY="181.0" />
-      <Button layoutX="88.0" layoutY="312.0" mnemonicParsing="false" onAction="#handleSubmit" text="Submit" />
-      <Button layoutX="169.0" layoutY="312.0" mnemonicParsing="false" onAction="#handleClose" text="Close" />
-      <Button layoutX="116.0" layoutY="223.0" mnemonicParsing="false" onAction="#handleCalculate" text="Calculate" />
+         </toggleGroup>
+         <font>
+            <Font size="14.0" />
+         </font></RadioButton>
+      <RadioButton fx:id="beforeRadioButton" layoutX="118.0" layoutY="109.0" mnemonicParsing="false" selected="true" text="Before" toggleGroup="$beforeAfter">
+         <font>
+            <Font size="14.0" />
+         </font></RadioButton>
+      <TextField fx:id="days" layoutX="148.0" layoutY="70.0" prefHeight="25.0" prefWidth="37.0">
+         <tooltip>
+            <Tooltip text="Enter Number of Days">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Tooltip>
+         </tooltip></TextField>
+      <DatePicker fx:id="arbitraryDateField" layoutX="71.0" layoutY="174.0" prefHeight="25.0" prefWidth="167.0">
+         <tooltip>
+            <Tooltip text="Select Date to Compare">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Tooltip>
+         </tooltip></DatePicker>
+      <Button layoutX="88.0" layoutY="312.0" mnemonicParsing="false" onAction="#handleSubmit" text="Submit">
+         <font>
+            <Font size="13.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Confirm Calculation and Close">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Tooltip>
+         </tooltip></Button>
+      <Button layoutX="161.0" layoutY="312.0" mnemonicParsing="false" onAction="#handleClose" prefHeight="29.0" prefWidth="59.0" text="Close">
+         <font>
+            <Font size="13.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Close Window">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Tooltip>
+         </tooltip></Button>
+      <Button layoutX="116.0" layoutY="209.0" mnemonicParsing="false" onAction="#handleCalculate" text="Calculate">
+         <font>
+            <Font size="13.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Perform Calculation">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Tooltip>
+         </tooltip></Button>
       <Label layoutX="28.0" layoutY="273.0" text="Date:">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e0" height="58.0" stroke="BLACK" strokeType="INSIDE" width="300.0" />
-      <Label layoutX="63.0" layoutY="14.0" text="Calculate Deadline">
+      <Label layoutX="64.0" layoutY="10.0" text="Calculate Deadline">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <DatePicker fx:id="newDateField" layoutX="64.0" layoutY="270.0" />
+      <DatePicker fx:id="newDateField" layoutX="71.0" layoutY="270.0" prefHeight="25.0" prefWidth="167.0">
+         <tooltip>
+            <Tooltip text="The Calculated Deadline">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Tooltip>
+         </tooltip></DatePicker>
    </children>
 </AnchorPane>

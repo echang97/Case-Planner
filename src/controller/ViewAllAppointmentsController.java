@@ -107,6 +107,6 @@ public class ViewAllAppointmentsController implements Initializable {
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         ObservableList<Appointment> appointments = getDataFromAnAppointmentAndAddToObservableList();
         appointmentTable.getItems().addAll(appointments);
-
     }
+	
 }

@@ -12,42 +12,93 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="350.0" prefWidth="328.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditDeadlineDialogueController">
+<AnchorPane prefHeight="330.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditDeadlineDialogueController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e04f" height="61.0" layoutX="-2.0" layoutY="-1.0" stroke="#00000046" strokeType="INSIDE" width="330.0" />
-      <Label layoutX="32.0" layoutY="88.0" text="Title:">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e04f" height="50.0" layoutY="-1.0" stroke="#00000046" strokeType="INSIDE" width="300.0" />
+      <Label layoutX="20.0" layoutY="70.0" text="Title:">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="14.0" />
          </font></Label>
-      <DatePicker fx:id="dateField" layoutX="66.0" layoutY="137.0" prefHeight="25.0" prefWidth="213.0" />
-      <Label layoutX="31.0" layoutY="141.0" text="Date:">
+      <DatePicker fx:id="dateField" layoutX="67.0" layoutY="121.0" prefHeight="25.0" prefWidth="190.0">
+         <tooltip>
+            <Tooltip text="Change Deadline Date" />
+         </tooltip></DatePicker>
+      <Label layoutX="19.0" layoutY="123.0" text="Date:">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="14.0" />
          </font></Label>
-      <TextField fx:id="titleField" layoutX="66.0" layoutY="84.0" prefHeight="25.0" prefWidth="213.0" />
-      <Button layoutX="109.0" layoutY="302.0" mnemonicParsing="false" onAction="#handleSubmit" text="Submit" />
-      <Button layoutX="175.0" layoutY="302.0" mnemonicParsing="false" onAction="#handleClose" text="Close" />
-      <Label layoutX="99.0" layoutY="15.0" text="Edit Deadline">
+      <TextField fx:id="titleField" layoutX="67.0" layoutY="68.0" prefHeight="25.0" prefWidth="190.0">
+         <tooltip>
+            <Tooltip text="Edit Deadline Title">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Tooltip>
+         </tooltip></TextField>
+      <Button layoutX="97.0" layoutY="284.0" mnemonicParsing="false" onAction="#handleSubmit" text="Submit">
+         <tooltip>
+            <Tooltip text="Submit Changes">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Tooltip>
+         </tooltip>
+         <font>
+            <Font size="13.0" />
+         </font></Button>
+      <Button layoutX="163.0" layoutY="284.0" mnemonicParsing="false" onAction="#handleClose" text="Close">
+         <tooltip>
+            <Tooltip text="Close Window">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Tooltip>
+         </tooltip>
+         <font>
+            <Font size="13.0" />
+         </font></Button>
+      <Label layoutX="91.0" layoutY="9.0" text="Edit Deadline">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="26.0" layoutY="190.0" text="Notifications: ">
+      <Label layoutX="20.0" layoutY="171.0" text="Notifications: ">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="109.0" layoutY="184.0" prefHeight="30.0" prefWidth="88.0" text="Appear every" />
-      <TextField fx:id="notificationFrequency" layoutX="186.0" layoutY="187.0" prefHeight="25.0" prefWidth="28.0" text="5" />
-      <Label layoutX="221.0" layoutY="192.0" text="days," />
-      <Label layoutX="112.0" layoutY="222.0" text="starting" />
-      <TextField fx:id="notificationStart" layoutX="162.0" layoutY="218.0" prefHeight="25.0" prefWidth="28.0" text="20" />
-      <Label layoutX="199.0" layoutY="222.0" text="days before the date." />
-      <Label layoutX="22.0" layoutY="262.0" text="Status:">
+      <Label layoutX="113.0" layoutY="166.0" prefHeight="30.0" prefWidth="88.0" text="Appear every" />
+      <TextField fx:id="notificationFrequency" layoutX="189.0" layoutY="169.0" prefHeight="25.0" prefWidth="28.0" text="5">
+         <tooltip>
+            <Tooltip text="Change Notification Frequency">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Tooltip>
+         </tooltip></TextField>
+      <Label layoutX="222.0" layoutY="169.0" prefHeight="25.0" prefWidth="27.0" text="days," />
+      <Label layoutX="113.0" layoutY="196.0" prefHeight="25.0" prefWidth="41.0" text="starting" />
+      <TextField fx:id="notificationStart" layoutX="157.0" layoutY="196.0" prefHeight="25.0" prefWidth="28.0" text="20">
+         <tooltip>
+            <Tooltip text="Change Notification Start">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Tooltip>
+         </tooltip></TextField>
+      <Label layoutX="190.0" layoutY="196.0" prefHeight="25.0" prefWidth="92.0" text="days before date." />
+      <Label layoutX="14.0" layoutY="243.0" text="Status:">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <ComboBox fx:id="statusCombo" layoutX="66.0" layoutY="258.0" prefHeight="25.0" prefWidth="213.0" visibleRowCount="2" />
+      <ComboBox fx:id="statusCombo" layoutX="66.0" layoutY="241.0" prefHeight="25.0" prefWidth="190.0" visibleRowCount="2">
+         <tooltip>
+            <Tooltip text="Change Deadline Status">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Tooltip>
+         </tooltip></ComboBox>
    </children>
 </AnchorPane>

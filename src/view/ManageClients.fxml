@@ -13,10 +13,10 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="340.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManageClientsController">
+<AnchorPane prefHeight="320.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManageClientsController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e0" height="57.0" stroke="BLACK" strokeType="INSIDE" width="350.0" />
-      <TableView fx:id="clientTable" layoutX="25.0" layoutY="79.0" prefHeight="150.0" prefWidth="300.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e04f" height="50.0" stroke="#00000046" strokeType="INSIDE" width="350.0" />
+      <TableView fx:id="clientTable" layoutX="25.0" layoutY="70.0" prefHeight="150.0" prefWidth="300.0">
         <columns>
           <TableColumn fx:id="clientNameColumn" prefWidth="75.0" text="Name" />
           <TableColumn fx:id="clientPhoneColumn" prefWidth="75.0" text="Phone" />
@@ -26,34 +26,43 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Label layoutX="103.0" layoutY="14.0" text="Manage Clients">
+      <Label layoutX="103.0" layoutY="10.0" text="Manage Clients">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Button layoutX="25.0" layoutY="238.0" mnemonicParsing="false" onAction="#handleEditClient" prefHeight="25.0" prefWidth="84.0" text="Edit Client">
+      <Button layoutX="25.0" layoutY="231.0" mnemonicParsing="false" onAction="#handleEditClient" prefHeight="29.0" prefWidth="94.0" text="Edit Client">
          <tooltip>
-            <Tooltip text="Edit selected client">
+            <Tooltip text="Edit Selected Client">
                <font>
                   <Font size="14.0" />
                </font>
             </Tooltip>
-         </tooltip></Button>
-      <Button layoutX="25.0" layoutY="270.0" mnemonicParsing="false" onAction="#handleDeleteClient" text="Delete Client">
+         </tooltip>
+         <font>
+            <Font size="13.0" />
+         </font></Button>
+      <Button layoutX="25.0" layoutY="265.0" mnemonicParsing="false" onAction="#handleDeleteClient" prefHeight="29.0" prefWidth="94.0" text="Delete Client">
          <tooltip>
-            <Tooltip text="Delete selected client">
+            <Tooltip text="Delete Selected Client">
                <font>
                   <Font size="14.0" />
                </font>
             </Tooltip>
-         </tooltip></Button>
-      <Button layoutX="146.0" layoutY="301.0" mnemonicParsing="false" onAction="#handleClose" prefHeight="25.0" prefWidth="59.0" text="Close">
+         </tooltip>
+         <font>
+            <Font size="13.0" />
+         </font></Button>
+      <Button layoutX="146.0" layoutY="280.0" mnemonicParsing="false" onAction="#handleClose" prefHeight="25.0" prefWidth="59.0" text="Close">
          <tooltip>
             <Tooltip text="Close Window">
                <font>
                   <Font size="14.0" />
                </font>
             </Tooltip>
-         </tooltip></Button>
+         </tooltip>
+         <font>
+            <Font size="13.0" />
+         </font></Button>
    </children>
 </AnchorPane>

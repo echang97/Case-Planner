@@ -12,9 +12,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="442.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewAllDeadlinesController">
+<AnchorPane prefHeight="440.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewAllDeadlinesController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e04f" height="50.0" stroke="#00000046" strokeType="INSIDE" width="350.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e04f" height="50.0" stroke="#00000046" strokeType="INSIDE" width="340.0" />
       <Label fx:id="ViewDeadlinesLabel" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" layoutX="91.0" layoutY="10.0" prefHeight="30.0" prefWidth="157.0" text="View Deadlines" textAlignment="CENTER" AnchorPane.leftAnchor="91.0" AnchorPane.rightAnchor="89.0" AnchorPane.topAnchor="10.0">
          <font>
             <Font name="System Bold" size="20.0" />
@@ -25,7 +25,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TableView fx:id="deadlineTable" layoutX="19.0" layoutY="86.0" prefHeight="340.0" prefWidth="313.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="86.0">
+      <TableView fx:id="deadlineTable" layoutX="19.0" layoutY="86.0" prefHeight="300.0" prefWidth="300.0" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="86.0">
         <columns>
           <TableColumn fx:id="caseColumn" prefWidth="100.0" text="Case" />
           <TableColumn fx:id="deadlineColumn" prefWidth="100.0" text="Deadline" />
@@ -35,5 +35,17 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
+      <Button layoutX="144.0" layoutY="397.0" mnemonicParsing="false" onAction="#handleClose" text="Close">
+         <font>
+            <Font size="13.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Close Window">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Tooltip>
+         </tooltip>
+      </Button>
    </children>
 </AnchorPane>
