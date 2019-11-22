@@ -45,7 +45,7 @@ public class EditCaseDetailsController {
 	@FXML
 	private TableColumn <Deadline, String> deadlineTitleColumn;
 	@FXML
-	private TableColumn <Deadline, LocalDateTime> deadlineDateColumn;
+	private TableColumn <Deadline, String> deadlineDateColumn;
 	@FXML
 	private TableColumn<Deadline, String> deadlineStatusColumn;
 	@FXML
@@ -55,7 +55,7 @@ public class EditCaseDetailsController {
 	@FXML
 	private TableColumn <Appointment, String> appointmentLocationColumn;
 	@FXML
-	private TableColumn <Appointment, LocalDateTime> appointmentDateColumn;
+	private TableColumn <Appointment, String> appointmentDateColumn;
 	@FXML
 	private TableColumn<Appointment, String> appointmentStatusColumn;
 	private Case c;
@@ -302,7 +302,7 @@ public class EditCaseDetailsController {
 
 		deadlineTable.getItems().clear();
 		deadlineTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-		deadlineDateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+		deadlineDateColumn.setCellValueFactory(new PropertyValueFactory<>("dateString"));
 		deadlineStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 		ObservableList<Deadline> deadlines = getDataFromADeadlineAndAddToObservableList("SELECT * FROM deadline WHERE case_id = " + c.getCase_id());
 		deadlineTable.getItems().addAll(deadlines);
@@ -310,7 +310,7 @@ public class EditCaseDetailsController {
 		appointmentTable.getItems().clear();
 		appointmentTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
 		appointmentLocationColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
-		appointmentDateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+		appointmentDateColumn.setCellValueFactory(new PropertyValueFactory<>("dateString"));
 		appointmentStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 		ObservableList<Appointment> appointments = getDataFromAnAppointmentAndAddToObservableList("SELECT * FROM appointment WHERE case_id = " + c.getCase_id());
 		appointmentTable.getItems().addAll(appointments);

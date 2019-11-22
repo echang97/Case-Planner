@@ -33,7 +33,7 @@ public class ViewCaseDetailsController{
 	@FXML
 	private TableColumn<Deadline, String> deadlineTitleColumn;
 	@FXML
-	private TableColumn<Deadline, LocalDateTime> deadlineDateColumn;
+	private TableColumn<Deadline, String> deadlineDateColumn;
 	@FXML
 	private TableColumn<Deadline, String> deadlineStatusColumn;
 	@FXML
@@ -41,7 +41,7 @@ public class ViewCaseDetailsController{
 	@FXML
 	private TableColumn<Appointment, String> appointmentTitleColumn;
 	@FXML
-	private TableColumn<Appointment, LocalDateTime> appointmentDateColumn;
+	private TableColumn<Appointment, String> appointmentDateColumn;
 	@FXML
 	private TableColumn<Appointment, String> appointmentLocColumn;
 	@FXML
@@ -61,9 +61,6 @@ public class ViewCaseDetailsController{
 
 	private Stage dialogStage;
 	private Case c;
-
-	private ObservableList<Deadline> deadlines = FXCollections.observableArrayList();
-	private ObservableList<Appointment> appointments = FXCollections.observableArrayList();
 
 	public void setCase(Case c){
 		this.c = c;
@@ -123,7 +120,7 @@ public class ViewCaseDetailsController{
 	public void setDetails() throws SQLException {
 		caseTitleLabel.setText(c.getTitle());
 		caseStatusLabel.setText(c.getStatus());
-		caseDateAddLabel.setText(c.getDateAdded().toString());
+		caseDateAddLabel.setText(c.getDateAddedString());
 		setClient(c);
 		if(c.getClient() != null){
 			clientNameLabel.setText(c.getClient().getName());
@@ -202,20 +199,20 @@ public class ViewCaseDetailsController{
 		return appointmentData;
 	}
 
-	public void refreshLists(){
+	private void refreshLists(){
 		deadlineTable.getItems().clear();
-		deadlineTitleColumn.setCellValueFactory(new PropertyValueFactory<Deadline,String>("title"));
-		deadlineDateColumn.setCellValueFactory(new PropertyValueFactory<Deadline,LocalDateTime>("date"));
+		deadlineTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+		deadlineDateColumn.setCellValueFactory(new PropertyValueFactory<>("dateString"));
 		deadlineStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-		deadlines = getDataFromADeadlineAndAddToObservableList("SELECT * FROM deadline WHERE case_id = " + c.getCase_id());
+		ObservableList<Deadline> deadlines = getDataFromADeadlineAndAddToObservableList("SELECT * FROM deadline WHERE case_id = " + c.getCase_id());
 		deadlineTable.getItems().addAll(deadlines);
 
 		appointmentTable.getItems().clear();
-		appointmentTitleColumn.setCellValueFactory(new PropertyValueFactory<Appointment,String>("title"));
-		appointmentLocColumn.setCellValueFactory(new PropertyValueFactory<Appointment,String>("address"));
-		appointmentDateColumn.setCellValueFactory(new PropertyValueFactory<Appointment,LocalDateTime>("date"));
+		appointmentTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+		appointmentLocColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
+		appointmentDateColumn.setCellValueFactory(new PropertyValueFactory<>("dateString"));
 		appointmentStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-		appointments = getDataFromAnAppointmentAndAddToObservableList("SELECT * FROM appointment WHERE case_id = " + c.getCase_id());
+		ObservableList<Appointment> appointments = getDataFromAnAppointmentAndAddToObservableList("SELECT * FROM appointment WHERE case_id = " + c.getCase_id());
 		appointmentTable.getItems().addAll(appointments);
 	}
 }

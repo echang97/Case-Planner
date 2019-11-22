@@ -7,16 +7,8 @@ public class Deadline {
 	private Case aCase;
 	private String title;
 	private LocalDateTime date;
+	private String dateString;
 	private String status;
-
-	//Constructor should be obsolete now. Can likely be removed.
-	public Deadline(int deadline_id, Case aCase, String title, String date){
-		this.deadline_id = deadline_id;
-		this.aCase = aCase;
-		this.title = title;
-		this.date = LocalDateTime.parse(date);
-		this.status = "Incomplete";
-	}
 
 	public Deadline(int deadline_id, Case aCase, String title, String date, String status){
 		this.deadline_id = deadline_id;
@@ -24,6 +16,7 @@ public class Deadline {
 		this.title = title;
 		this.date = LocalDateTime.parse(date);
 		this.status = status;
+		this.dateString = date.substring(0,date.indexOf("T"));
 	}
 
 	public Deadline(String title, LocalDateTime date) {
@@ -42,4 +35,5 @@ public class Deadline {
 	public void setDate(LocalDateTime date) { this.date = date; }
 	public String getStatus() {return status;}
 	public void setStatus(String status) { this.status = status; }
+	public String getDateString() { return dateString; }
 }
