@@ -281,4 +281,13 @@ public class DatabaseController {
 		statement.executeUpdate("DELETE FROM aCase WHERE status = 'removed' AND datetime(dateRemoved) < datetime('now', '-30 days')");
 	}
 
+	public static void deleteNotifications(int appointment_id, int deadline_id) throws SQLException{
+		Connection connection = DatabaseConnection.getConnection();
+		Statement statement = connection.createStatement();
+		if(appointment_id > 0){
+			statement.executeUpdate("DELETE FROM notification WHERE appointment_id = " + appointment_id);
+		}else{
+			statement.executeUpdate("DELETE FROM notification WHERE deadline_id = " + deadline_id);
+		}
+	}
 }

@@ -8,10 +8,12 @@ import model.Appointment;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import model.Notification;
 
 public class EditAppointmentDialogueController {
 	private DatabaseConnection database = new DatabaseConnection();
@@ -43,6 +45,7 @@ public class EditAppointmentDialogueController {
 	private ComboBox<String> statusCombo;
 	private Stage dialogStage;
 	private Appointment appointment;
+	private int id;
 
 	public void setDialogStage(Stage dialogStage, Appointment appointment){
 		this.appointment = appointment;
@@ -62,6 +65,9 @@ public class EditAppointmentDialogueController {
 		appointment.setDate(makeLocalDateTime());
 		appointment.setStatus(statusCombo.getValue());
 		DatabaseController.editAppointmentInDB(database, appointment);
+		DatabaseController.deleteNotifications(appointment.getAppointment_id(),0);
+		addAppointmentNotifications(appointment, makeLocalDateTime());
+
 		dialogStage.close();
 	}
 	
@@ -116,5 +122,18 @@ public class EditAppointmentDialogueController {
 		statusCombo.getItems().addAll("Complete", "Incomplete");
 		statusCombo.setValue("Incomplete");
 		amPMCombo.getItems().addAll("AM", "PM");
+	}
+
+	private void addAppointmentNotifications(Appointment appointment, LocalDateTime date) throws SQLException{
+		long start = Long.parseLong(notificationStart.getText());
+		long frequency = Long.parseLong(notificationFrequency.getText());
+		LocalDateTime startDate = date.minusDays(start);
+		long daysUntil = startDate.until(date, ChronoUnit.DAYS);
+		for(long i = 0; i < daysUntil; i+=frequency){
+			Notification n = new Notification(startDate.plusDays(i));
+			n.setAppointment(appointment);
+			n.setMessage(daysUntil - i + " Days Until " + date);
+			DatabaseController.addNotificationToDB(n);
+		}
 	}
 }
