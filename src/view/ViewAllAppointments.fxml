@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -7,15 +12,15 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="435.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewAllAppointmentsController">
+<AnchorPane prefHeight="451.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ViewAllAppointmentsController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e0" height="59.0" stroke="BLACK" strokeType="INSIDE" width="450.0" />
-      <Label fx:id="ViewAppointmentsLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="130.0" layoutY="14.0" prefHeight="30.0" text="View Appointments" textAlignment="CENTER" AnchorPane.leftAnchor="130.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="14.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e04f" height="50.0" stroke="#00000046" strokeType="INSIDE" width="440.0" />
+      <Label fx:id="ViewAppointmentsLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="101.0" layoutY="10.0" prefHeight="30.0" prefWidth="238.0" text="View Appointments" textAlignment="CENTER" AnchorPane.leftAnchor="101.0" AnchorPane.rightAnchor="101.0" AnchorPane.topAnchor="10.0">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <TableView fx:id="appointmentTable" layoutX="19.0" layoutY="89.0" prefHeight="309.0" prefWidth="410.0" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="19.0" AnchorPane.rightAnchor="21.0" AnchorPane.topAnchor="89.0">
+      <TableView fx:id="appointmentTable" layoutX="25.0" layoutY="89.0" prefHeight="341.0" prefWidth="400.0" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="89.0">
         <columns>
           <TableColumn fx:id="caseColumn" prefWidth="100.0" text="Case" />
           <TableColumn fx:id="appointmentColumn" prefWidth="100.0" text="Appointment" />
@@ -26,7 +31,7 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Label fx:id="upcomingAppointmentsLabel" layoutX="19.0" layoutY="69.0" text="Upcoming Appointments" AnchorPane.topAnchor="69.0">
+      <Label fx:id="upcomingAppointmentsLabel" layoutX="25.0" layoutY="69.0" text="Upcoming Appointments" AnchorPane.topAnchor="69.0">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
