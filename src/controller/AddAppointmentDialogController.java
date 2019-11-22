@@ -13,9 +13,11 @@ import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import model.Notification;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
 
 public class AddAppointmentDialogController implements Initializable{
@@ -42,7 +44,7 @@ public class AddAppointmentDialogController implements Initializable{
 	@FXML
 	private TextField notificationFrequencyField;
 	@FXML
-	private TextField notifcationStartField;
+	private TextField notificationStartField;
 	private Case c;
 	private Stage dialogStage;
 
@@ -53,9 +55,10 @@ public class AddAppointmentDialogController implements Initializable{
 	@FXML
 	public void handleSubmit(ActionEvent event) throws SQLException{
 		DatabaseConnection database = new DatabaseConnection();
+		LocalDateTime date = makeLocalDateTime();
 		Appointment appointment = new Appointment();
 		appointment.setTitle(appointmentTitleField.getText());
-		appointment.setDate(makeLocalDateTime());
+		appointment.setDate(date);
 		appointment.setRoom(roomField.getText());
 		appointment.setAddress(addressField.getText());
 		appointment.setCity(cityField.getText());
@@ -63,7 +66,7 @@ public class AddAppointmentDialogController implements Initializable{
 		appointment.setZip(zipField.getText());
 		appointment.setCase(c);
 		DatabaseController.addAppointmentToDB(database, appointment);
-
+		addAppointmentNotifications(appointment, date);
 		dialogStage.close();
 	}
 	// Event Listener on Button.onAction
@@ -97,7 +100,24 @@ public class AddAppointmentDialogController implements Initializable{
 		}
 		return LocalDateTime.of(dateField.getValue(), time);
 	}
-	
+
+	private void addAppointmentNotifications(Appointment appointment, LocalDateTime date) throws SQLException{
+		long start = Long.parseLong(notificationStartField.getText());
+		long frequency = Long.parseLong(notificationFrequencyField.getText());
+		LocalDateTime startDate = date.minusDays(start);
+		long daysUntil = startDate.until(date, ChronoUnit.DAYS);
+		for(long i = 0; i < daysUntil; i+=frequency){
+			Notification n = new Notification(startDate.plusDays(i));
+			n.setAppointment(appointment);
+			n.setMessage(daysUntil - i + " Days Until " + date);
+			DatabaseController.addNotificationToDB(n);
+		}
+		Notification today = new Notification();
+		today.setAppointment(appointment);
+		today.setMessage(appointment.getTitle() + " is due today!");
+		DatabaseController.addNotificationToDB(today);
+	}
+
 	public void setCase(Case c){
 		this.c = c;
 	}

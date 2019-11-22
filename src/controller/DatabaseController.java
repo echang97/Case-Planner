@@ -1,7 +1,9 @@
 package controller;
 
 import model.*;
+
 import java.sql.*;
+import java.time.LocalDateTime;
 
 public class DatabaseController {
 
@@ -53,6 +55,31 @@ public class DatabaseController {
 		addition.setString(2, d.getTitle());
 		addition.setString(3, d.getDate().toString());
 		addition.setString(4, d.getStatus());
+		addition.executeUpdate();
+	}
+
+	public static void addNotificationToDB(Notification n) throws SQLException{
+		Connection connection = DatabaseConnection.getConnection();
+		Statement statement = connection.createStatement();
+		PreparedStatement addition = connection.prepareStatement("INSERT INTO " +
+				"notification(deadline_id, appointment_id, message, location, sendDate, sent) " +
+				"VALUES (?, ?, ?, ?, ?, ?)");
+		System.out.println(addition);
+		if (n.getDeadline() != null) {
+			ResultSet deadlineSet = statement.executeQuery("SELECT * FROM deadline ORDER BY deadline_id DESC LIMIT 1");
+			addition.setInt(1, deadlineSet.getInt("deadline_id"));
+			addition.setNull(2, Types.INTEGER);
+			addition.setNull(4, Types.VARCHAR);
+		}
+		else {
+			ResultSet appointmentSet = statement.executeQuery("SELECT * FROM appointment ORDER BY appointment_id DESC LIMIT 1");
+			addition.setNull(1, Types.INTEGER);
+			addition.setInt(2, appointmentSet.getInt("appointment_id"));
+			addition.setString(4, n.getLocation());
+		}
+		addition.setString(3, n.getMessage());
+		addition.setString(5, n.getSendDate().toString());
+		addition.setString(6, "False");
 		addition.executeUpdate();
 	}
 
@@ -176,7 +203,76 @@ public class DatabaseController {
 	public static void checkNotificationsInDB(DatabaseConnection database) throws SQLException {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
-		//TODO Implement
+		// Get notifications that are past today
+		String check = "SELECT * FROM notification WHERE datetime(sendDate) <= datetime('now')";
+		System.out.println(check);
+		ResultSet resultSet = statement.executeQuery(check);
+
+		while(resultSet.next()){
+			Notification notification = new Notification();
+			int deadline_id = resultSet.getInt("deadline_id");
+			int appointment_id = resultSet.getInt("appointment_id");
+			notification.setMessage(resultSet.getString("message"));
+			// Set the appointment if valid ID, otherwise set the deadline
+			if(appointment_id > 0){
+				notification.setAppointment(notificationGetAppointment(appointment_id));
+			}else{
+				notification.setDeadline(notificationGetDeadline(deadline_id));
+			}
+			// Send the notification, then delete it from the Database
+			NotificationSender.sendNotification(notification);
+			String deletion = "DELETE FROM notification WHERE notification_id = "
+					+ resultSet.getInt("notification_id");
+			statement.executeUpdate(deletion);
+			System.out.println(deletion);
+
+		}
+	}
+
+	// Gets the appointment and case related to the notification
+	private static Appointment notificationGetAppointment(int appointment_id) throws SQLException{
+		Connection connection = DatabaseConnection.getConnection();
+		Statement statement = connection.createStatement();
+		String aQuery = "SELECT * FROM appointment WHERE appointment_id = " + appointment_id;
+		System.out.println(aQuery);
+
+		ResultSet appointmentSet = statement.executeQuery(aQuery);
+		Appointment appointment = new Appointment();
+		appointment.setTitle(appointmentSet.getString("title"));
+
+		// Create a new case based on on the given case_id
+		int case_id = appointmentSet.getInt("case_id");
+		String cQuery = "SELECT * FROM aCase WHERE case_id = " + case_id;
+		ResultSet caseSet = statement.executeQuery(cQuery);
+		Case c = new Case(caseSet.getInt("case_id"), caseSet.getInt("client_id"),
+				caseSet.getString("title"), caseSet.getString("status"),
+				caseSet.getString("dateAdded"), caseSet.getString("dateResolved"),
+				caseSet.getString("dateRemoved"));
+		appointment.setCase(c);
+		return appointment;
+	}
+
+	// Gets the deadline and case related to the notification
+	private static Deadline notificationGetDeadline(int deadline_id) throws  SQLException{
+		Connection connection = DatabaseConnection.getConnection();
+		Statement statement = connection.createStatement();
+		String dQuery = "SELECT * FROM deadline WHERE deadline_id = " + deadline_id;
+		ResultSet deadlineSet = statement.executeQuery(dQuery);
+		System.out.println(dQuery);
+
+		Deadline deadline = new Deadline(deadlineSet.getString("title"),
+				LocalDateTime.parse(deadlineSet.getString("date")));
+
+		// Create a new case based on on the given case_id
+		int case_id = deadlineSet.getInt("case_id");
+		String cQuery = "SELECT * FROM aCase WHERE case_id = " + case_id;
+		ResultSet caseSet = statement.executeQuery(cQuery);
+		Case c = new Case(caseSet.getInt("case_id"), caseSet.getInt("client_id"),
+				caseSet.getString("title"), caseSet.getString("status"),
+				caseSet.getString("dateAdded"), caseSet.getString("dateResolved"),
+				caseSet.getString("dateRemoved"));
+		deadline.setCase(c);
+		return deadline;
 	}
 
 	public static void autoDeleteCasesInDB(DatabaseConnection database) throws SQLException {
@@ -185,10 +281,13 @@ public class DatabaseController {
 		statement.executeUpdate("DELETE FROM aCase WHERE status = 'removed' AND datetime(dateRemoved) < datetime('now', '-30 days')");
 	}
 
-	public static void sendNotification(DatabaseConnection database, Notification n) throws SQLException {
-		Connection connection = database.getConnection();
+	public static void deleteNotifications(int appointment_id, int deadline_id) throws SQLException{
+		Connection connection = DatabaseConnection.getConnection();
 		Statement statement = connection.createStatement();
-		//TODO Implement
+		if(appointment_id > 0){
+			statement.executeUpdate("DELETE FROM notification WHERE appointment_id = " + appointment_id);
+		}else{
+			statement.executeUpdate("DELETE FROM notification WHERE deadline_id = " + deadline_id);
+		}
 	}
-
 }

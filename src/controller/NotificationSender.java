@@ -1,37 +1,27 @@
 package controller;
 
-import model.Appointment;
-import model.Deadline;
-import model.Notification;
+import model.*;
 import view.CaseApplication;
-import java.time.LocalDateTime;
 
 import java.awt.*;
-import java.time.temporal.ChronoUnit;
-
 
 public class NotificationSender {
 
-	public void sendNotification(Notification n){
+	public static void sendNotification(Notification n){
 		Appointment a = n.getAppointment();
-		String type = "Deadline";
 		String name;
-		String message = " Days Until ";
-		long daysUntil;
+		Case c;
 		if(a != null){
-			type = "Appointment";
+			c = a.getCase();
 			name = a.getTitle();
-			daysUntil = LocalDateTime.now().until(a.getDate(), ChronoUnit.DAYS);
-			message =  daysUntil + message + a.getDate();
 		}else{
 			Deadline d = n.getDeadline();
-			name = n.getDeadline().getTitle();
-			daysUntil = LocalDateTime.now().until(d.getDate(), ChronoUnit.DAYS);
-			message =  daysUntil + message + d.getDate();
+			c = d.getCase();
+			name = d.getTitle();
 		}
 
 		CaseApplication.getTrayIcon()
-				.displayMessage(type + ": " + name, message, TrayIcon.MessageType.INFO);
+				.displayMessage(name + " for " + c.getTitle(), n.getMessage(), TrayIcon.MessageType.INFO);
 	}
 
 }
