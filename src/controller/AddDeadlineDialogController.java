@@ -96,6 +96,10 @@ public class AddDeadlineDialogController{
 			n.setMessage(daysUntil - i + " Days Until " + date);
 			DatabaseController.addNotificationToDB(n);
 		}
+		Notification today = new Notification();
+		today.setDeadline(deadline);
+		today.setMessage(deadline.getTitle() + " is due today!");
+		DatabaseController.addNotificationToDB(today);
 	}
 
 	public Deadline getDeadline(){

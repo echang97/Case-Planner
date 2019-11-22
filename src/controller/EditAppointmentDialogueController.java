@@ -135,5 +135,10 @@ public class EditAppointmentDialogueController {
 			n.setMessage(daysUntil - i + " Days Until " + date);
 			DatabaseController.addNotificationToDB(n);
 		}
+		Notification today = new Notification();
+		today.setAppointment(appointment);
+		today.setMessage(appointment.getTitle() + " is due today!");
+		DatabaseController.addNotificationToDB(today);
 	}
+
 }
