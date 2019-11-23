@@ -61,7 +61,10 @@
       </TableView>
       <Button layoutX="12.0" layoutY="322.0" mnemonicParsing="false" onAction="#addDeadline" prefHeight="25.0" prefWidth="127.0" text="Add Deadline">
          <tooltip>
-            <Tooltip text="Add New Deadline" />
+            <Tooltip text="Add New Deadline">
+               <font>
+                  <Font size="14.0" />
+               </font></Tooltip>
          </tooltip></Button>
       <Button layoutX="12.0" layoutY="361.0" mnemonicParsing="false" onAction="#deleteDeadline" prefHeight="25.0" prefWidth="127.0" text="Delete Deadline">
          <tooltip>
