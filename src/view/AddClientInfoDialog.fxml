@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -10,9 +15,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="301.0" prefWidth="319.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddClientInfoDialogController">
+<AnchorPane prefHeight="286.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddClientInfoDialogController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e0" height="55.0" stroke="BLACK" strokeType="INSIDE" width="319.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e04f" height="50.0" stroke="#00000046" strokeType="INSIDE" width="320.0" />
       <GridPane layoutX="33.0" layoutY="52.0" prefHeight="179.0" prefWidth="253.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="122.0" minWidth="10.0" prefWidth="53.0" />
@@ -36,13 +41,54 @@
                <font>
                   <Font name="System Bold" size="14.0" />
                </font></Label>
-            <TextField fx:id="phoneField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="nameField" GridPane.columnIndex="1" />
+            <TextField fx:id="phoneField" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <tooltip>
+                  <Tooltip text="Enter Client's Phone #">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Tooltip>
+               </tooltip></TextField>
+            <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <tooltip>
+                  <Tooltip text="Enter Client's Email">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Tooltip>
+               </tooltip></TextField>
+            <TextField fx:id="nameField" GridPane.columnIndex="1">
+               <tooltip>
+                  <Tooltip text="Enter Client's Name">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Tooltip>
+               </tooltip></TextField>
          </children>
       </GridPane>
-      <Button layoutX="98.0" layoutY="244.0" mnemonicParsing="false" onAction="#handleSubmit" text="Submit" />
-      <Button layoutX="177.0" layoutY="244.0" mnemonicParsing="false" onAction="#handleClose" text="Close" />
+      <Button layoutX="91.0" layoutY="238.0" mnemonicParsing="false" onAction="#handleSubmit" text="Submit">
+         <font>
+            <Font size="13.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Create Client and Close">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Tooltip>
+         </tooltip></Button>
+      <Button layoutX="170.0" layoutY="238.0" mnemonicParsing="false" onAction="#handleClose" prefHeight="29.0" prefWidth="59.0" text="Close">
+         <font>
+            <Font size="13.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Close Window">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Tooltip>
+         </tooltip></Button>
       <Label layoutX="88.0" layoutY="13.0" text="Add Client Info">
          <font>
             <Font name="System Bold" size="20.0" />

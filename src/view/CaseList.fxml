@@ -17,7 +17,7 @@
 
 <AnchorPane prefHeight="559.0" prefWidth="499.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CaseListController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e04f" height="61.0" stroke="#00000046" strokeType="INSIDE" width="499.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e04f" height="60.0" stroke="#00000046" strokeType="INSIDE" width="499.0" />
       <Label layoutX="194.0" layoutY="16.0" text="Case Planner">
          <font>
             <Font name="System Bold" size="20.0" />
@@ -52,13 +52,34 @@
                         <Button layoutY="293.0" mnemonicParsing="false" onAction="#archiveCaseFromOngoing" prefHeight="29.0" prefWidth="119.0" text="Archive Case">
                            <font>
                               <Font size="13.0" />
-                           </font></Button>
+                           </font>
+                           <tooltip>
+                              <Tooltip text="Archive Selected Case">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Tooltip>
+                           </tooltip></Button>
                         <Button layoutX="131.0" layoutY="293.0" mnemonicParsing="false" onAction="#removeCaseFromOngoing" prefHeight="29.0" prefWidth="119.0" text="Remove Case">
                            <font>
                               <Font size="13.0" />
-                           </font></Button>
+                           </font>
+                           <tooltip>
+                              <Tooltip text="Mark Selected Case for Removal">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Tooltip>
+                           </tooltip></Button>
                      </children></AnchorPane>
             </content>
+               <tooltip>
+                  <Tooltip text="Display Ongoing Cases">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Tooltip>
+               </tooltip>
           </Tab>
           <Tab id="archivedTab" fx:id="archivedTab" text="Archived">
             <content>
@@ -76,13 +97,34 @@
                         <Button layoutX="131.0" layoutY="293.0" mnemonicParsing="false" onAction="#removeCaseFromArchived" prefHeight="29.0" prefWidth="119.0" text="Remove Case">
                            <font>
                               <Font size="13.0" />
-                           </font></Button>
+                           </font>
+                           <tooltip>
+                              <Tooltip text="Mark Selected Case for Removal">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Tooltip>
+                           </tooltip></Button>
                         <Button layoutY="293.0" mnemonicParsing="false" onAction="#resumeCaseFromArchived" prefHeight="29.0" prefWidth="119.0" text="Resume Case">
                            <font>
                               <Font size="13.0" />
-                           </font></Button>
+                           </font>
+                           <tooltip>
+                              <Tooltip text="Resume Selected Case">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Tooltip>
+                           </tooltip></Button>
                      </children></AnchorPane>
             </content>
+               <tooltip>
+                  <Tooltip text="Display Archived Cases">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Tooltip>
+               </tooltip>
           </Tab>
             <Tab id="deletedTab" fx:id="deletedTab" text="Deleted">
               <content>
@@ -100,21 +142,49 @@
                         <Button layoutY="293.0" mnemonicParsing="false" onAction="#archiveCaseFromDeleted" prefHeight="29.0" prefWidth="119.0" text="Archive Case">
                            <font>
                               <Font size="13.0" />
-                           </font></Button>
-                        <Button layoutX="130.0" layoutY="293.0" mnemonicParsing="false" onAction="#resumeCaseFromDeleted" prefHeight="29.0" prefWidth="119.0" text="Resume Case">
+                           </font>
+                           <tooltip>
+                              <Tooltip text="Archive Selected Case">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Tooltip>
+                           </tooltip></Button>
+                        <Button layoutX="132.0" layoutY="293.0" mnemonicParsing="false" onAction="#resumeCaseFromDeleted" prefHeight="29.0" prefWidth="119.0" text="Resume Case">
                            <font>
                               <Font size="13.0" />
-                           </font></Button>
+                           </font>
+                           <tooltip>
+                              <Tooltip text="Resume Selected Case">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Tooltip>
+                           </tooltip></Button>
                      </children>
                   </AnchorPane>
               </content>
+               <tooltip>
+                  <Tooltip text="Display Deleted Cases">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Tooltip>
+               </tooltip>
             </Tab>
         </tabs>
       </TabPane>
       <Button layoutX="146.0" layoutY="449.0" mnemonicParsing="false" onAction="#addCase" prefHeight="29.0" prefWidth="119.0" text="Add Case">
          <font>
             <Font size="13.0" />
-         </font></Button>
+         </font>
+         <tooltip>
+            <Tooltip text="Add a Case">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Tooltip>
+         </tooltip></Button>
       <TableView fx:id="deadlinesTable" layoutX="286.0" layoutY="90.0" prefHeight="180.0" prefWidth="200.0">
          <columns>
             <TableColumn fx:id="deadlineTitleColumn" prefWidth="100.0" text="Deadline" />
@@ -130,23 +200,58 @@
       <Button layoutX="14.0" layoutY="449.0" mnemonicParsing="false" onAction="#viewCaseDetails" text="View Case Details">
          <font>
             <Font size="13.0" />
-         </font></Button>
+         </font>
+         <tooltip>
+            <Tooltip text="View or Edit Selected Case">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Tooltip>
+         </tooltip></Button>
       <Button layoutX="69.0" layoutY="517.0" mnemonicParsing="false" onAction="#addClient" text="Add Client">
          <font>
             <Font size="13.0" />
-         </font></Button>
+         </font>
+         <tooltip>
+            <Tooltip text="Add a Client">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Tooltip>
+         </tooltip></Button>
       <Button layoutX="286.0" layoutY="275.0" mnemonicParsing="false" onAction="#viewAllDeadlines" prefHeight="29.0" prefWidth="149.0" text="View All Deadlines">
          <font>
             <Font size="13.0" />
-         </font></Button>
+         </font>
+         <tooltip>
+            <Tooltip text="View Ongoing Deadlines">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Tooltip>
+         </tooltip></Button>
       <Button layoutX="286.0" layoutY="517.0" mnemonicParsing="false" onAction="#viewAllAppointments" text="View All Appointments">
          <font>
             <Font size="13.0" />
-         </font></Button>
+         </font>
+         <tooltip>
+            <Tooltip text="View Ongoing Appointments">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Tooltip>
+         </tooltip></Button>
       <Button layoutX="156.0" layoutY="517.0" mnemonicParsing="false" onAction="#manageClients" prefHeight="29.0" prefWidth="109.0" text="Manage Clients">
          <font>
             <Font size="13.0" />
-         </font></Button>
+         </font>
+         <tooltip>
+            <Tooltip text="View and Edit Clients">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Tooltip>
+         </tooltip></Button>
       <Label layoutX="14.0" layoutY="519.0" text="Clients">
          <font>
             <Font name="System Bold" size="15.0" />
