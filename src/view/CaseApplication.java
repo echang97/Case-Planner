@@ -59,16 +59,29 @@ public class CaseApplication extends Application{
 	    MenuItem openItem = new MenuItem("Open");
         MenuItem exitItem = new MenuItem("Exit");
         MenuItem notificationItem = new MenuItem("Test Notification");
+        MenuItem dumpAllItem = new MenuItem("Dump all notifications");
         openItem.addActionListener(e -> Platform.runLater(this::showStage));
         exitItem.addActionListener(e -> System.exit(1));
         notificationItem.addActionListener
                 (e -> trayIcon.displayMessage("Case Planner","Hello! :)", TrayIcon.MessageType.INFO));
+        dumpAllItem.addActionListener
+                (e -> dumpAll());
         popup.add(openItem);
         popup.add(notificationItem);
+        popup.add(dumpAllItem);
         popup.add(exitItem);
 
         trayIcon.setPopupMenu(popup);
         tray.add(trayIcon);
+    }
+
+    private void dumpAll(){
+        try{
+            DatabaseConnection database = new DatabaseConnection();
+            DatabaseController.checkNotificationsInDB(database);
+        }catch (SQLException s){
+            s.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
@@ -86,7 +99,7 @@ public class CaseApplication extends Application{
                 DatabaseConnection database = new DatabaseConnection();
                 DatabaseController.checkNotificationsInDB(database);
             }catch (SQLException s){
-                System.out.println(s);
+                s.printStackTrace();
             }
         }
     }

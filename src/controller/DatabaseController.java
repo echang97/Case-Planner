@@ -202,7 +202,7 @@ public class DatabaseController {
 	}
 
 	public static void checkNotificationsInDB(DatabaseConnection database) throws SQLException {
-		Connection connection = database.getConnection();
+		Connection connection = DatabaseConnection.getConnection();
 		Statement statement = connection.createStatement();
 		// Get notifications that are past today
 		String check = "SELECT * FROM notification WHERE datetime(sendDate) <= datetime('now')";
@@ -210,6 +210,14 @@ public class DatabaseController {
 		ResultSet resultSet = statement.executeQuery(check);
 
 		while(resultSet.next()){
+//			ResultSetMetaData rsmd = resultSet.getMetaData();
+//			int columnsNumber = rsmd.getColumnCount();
+//			for (int i = 1; i <= columnsNumber; i++) {
+//				if (i > 1) System.out.print(",  ");
+//				String columnValue = resultSet.getString(i);
+//				System.out.print(columnValue + " " + rsmd.getColumnName(i));
+//			}
+//			System.out.println();
 			Notification notification = new Notification();
 			int deadline_id = resultSet.getInt("deadline_id");
 			int appointment_id = resultSet.getInt("appointment_id");
@@ -222,11 +230,7 @@ public class DatabaseController {
 			}
 			// Send the notification, then delete it from the Database
 			NotificationSender.sendNotification(notification);
-			String deletion = "DELETE FROM notification WHERE notification_id = "
-					+ resultSet.getInt("notification_id");
-			statement.executeUpdate(deletion);
-			System.out.println(deletion);
-
+			autoDeleteNotificationinDB(resultSet.getInt("deadline_id"));
 		}
 	}
 
@@ -280,6 +284,15 @@ public class DatabaseController {
 		Connection connection = database.getConnection();
 		Statement statement = connection.createStatement();
 		statement.executeUpdate("DELETE FROM aCase WHERE status = 'removed' AND datetime(dateRemoved) < datetime('now', '-30 days')");
+	}
+
+	public static void autoDeleteNotificationinDB(int notification_id) throws SQLException{
+		Connection connection = DatabaseConnection.getConnection();
+		Statement statement = connection.createStatement();
+		String deletion = "DELETE FROM notification WHERE notification_id = "
+				+ notification_id;
+		statement.executeUpdate(deletion);
+		System.out.println(deletion);
 	}
 
 	public static void deleteNotifications(int appointment_id, int deadline_id) throws SQLException{
