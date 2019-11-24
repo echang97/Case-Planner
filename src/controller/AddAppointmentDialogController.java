@@ -54,6 +54,7 @@ public class AddAppointmentDialogController implements Initializable{
 	// Event Listener on Button.onAction
 	@FXML
 	public void handleSubmit(ActionEvent event) throws SQLException{
+		DatabaseConnection database = new DatabaseConnection();
 		String dateString = makeLocalDateTime().toString();
 		Appointment appointment = new Appointment(
 				123,c,
@@ -65,7 +66,9 @@ public class AddAppointmentDialogController implements Initializable{
 				zipField.getText(),
 				dateString
 				, "Incomplete");
+		DatabaseController.addAppointmentToDB(database, appointment);
 		addAppointmentNotifications(appointment, makeLocalDateTime());
+		dialogStage.close();
 	}
 	// Event Listener on Button.onAction
 	@FXML
@@ -113,6 +116,7 @@ public class AddAppointmentDialogController implements Initializable{
 		Notification today = new Notification();
 		today.setAppointment(appointment);
 		today.setMessage(appointment.getTitle() + " is due today!");
+		today.setSendDate(appointment.getDate());
 		DatabaseController.addNotificationToDB(today);
 	}
 
