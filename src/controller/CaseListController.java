@@ -365,7 +365,8 @@ public class CaseListController implements Initializable{
 			dialogStage.setScene(scene);
 			dialogStage.setTitle("View Deadlines");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
-
+			ViewAllDeadlinesController controller = loader.getController();
+			controller.setDialogStage(dialogStage);
 			dialogStage.showAndWait();
 			refreshLists();
 		} catch (IOException e) {
@@ -384,7 +385,8 @@ public class CaseListController implements Initializable{
 			dialogStage.setScene(scene);
 			dialogStage.setTitle("View Appointments");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
-
+			ViewAllAppointmentsController controller = loader.getController();
+			controller.setDialogStage(dialogStage);
 			dialogStage.showAndWait();
 			refreshLists();
 			

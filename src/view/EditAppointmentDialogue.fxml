@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="560.0" prefWidth="341.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditAppointmentDialogueController">
+<AnchorPane prefHeight="560.0" prefWidth="341.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditAppointmentDialogueController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e04f" height="61.0" layoutX="-2.0" stroke="#00000046" strokeType="INSIDE" width="343.0" />
-      <Button layoutX="115.0" layoutY="521.0" mnemonicParsing="false" onAction="#handleSubmit" text="Submit" />
-      <Button layoutX="187.0" layoutY="521.0" mnemonicParsing="false" onAction="#handleClose" text="Close" />
+      <Button layoutX="115.0" layoutY="521.0" mnemonicParsing="false" onAction="#handleSubmit" text="Submit">
+         <tooltip>
+            <Tooltip text="Submit Changes" />
+         </tooltip></Button>
+      <Button layoutX="187.0" layoutY="521.0" mnemonicParsing="false" onAction="#handleClose" text="Close">
+         <tooltip>
+            <Tooltip text="Close Window" />
+         </tooltip></Button>
       <Label layoutX="86.0" layoutY="16.0" text="Edit Appointment">
          <font>
             <Font name="System Bold" size="20.0" />
@@ -28,27 +35,57 @@
          </font>
       </Label>
       <Label layoutX="111.0" layoutY="398.0" prefHeight="30.0" prefWidth="88.0" text="Appear every" />
-      <TextField fx:id="notificationFrequency" layoutX="188.0" layoutY="401.0" prefHeight="25.0" prefWidth="28.0" text="5" />
+      <TextField fx:id="notificationFrequency" layoutX="188.0" layoutY="401.0" prefHeight="25.0" prefWidth="28.0" text="5">
+         <tooltip>
+            <Tooltip text="Change Notification Frequency" />
+         </tooltip></TextField>
       <Label layoutX="223.0" layoutY="406.0" text="days," />
       <Label layoutX="114.0" layoutY="436.0" text="starting" />
-      <TextField fx:id="notificationStart" layoutX="164.0" layoutY="432.0" prefHeight="25.0" prefWidth="28.0" text="20" />
+      <TextField fx:id="notificationStart" layoutX="164.0" layoutY="432.0" prefHeight="25.0" prefWidth="28.0" text="20">
+         <tooltip>
+            <Tooltip text="Change Notification Start" />
+         </tooltip></TextField>
       <Label layoutX="201.0" layoutY="436.0" text="days before the date." />
-      <ComboBox fx:id="statusCombo" layoutX="98.0" layoutY="480.0" prefHeight="25.0" prefWidth="175.0" visibleRowCount="2" />
+      <ComboBox fx:id="statusCombo" layoutX="98.0" layoutY="480.0" prefHeight="25.0" prefWidth="175.0" visibleRowCount="2">
+         <tooltip>
+            <Tooltip text="Change Appointment Status" />
+         </tooltip></ComboBox>
       <Label layoutX="54.0" layoutY="484.0" text="Status:">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <ComboBox fx:id="amPMCombo" layoutX="204.0" layoutY="157.0" prefHeight="25.0" prefWidth="61.0" visibleRowCount="2" />
+      <ComboBox fx:id="amPMCombo" layoutX="204.0" layoutY="157.0" prefHeight="25.0" prefWidth="61.0" visibleRowCount="2">
+         <tooltip>
+            <Tooltip text="Change Time (AM/PM)" />
+         </tooltip></ComboBox>
       <Label layoutX="151.0" layoutY="162.0" prefHeight="17.0" prefWidth="5.0" text=":" />
-      <TextField fx:id="minuteField" layoutX="158.0" layoutY="157.0" prefHeight="25.0" prefWidth="35.0" promptText="mm" />
+      <TextField fx:id="minuteField" layoutX="158.0" layoutY="157.0" prefHeight="25.0" prefWidth="35.0" promptText="mm">
+         <tooltip>
+            <Tooltip text="Change Time (Minute)" />
+         </tooltip></TextField>
       <GridPane layoutX="61.0" layoutY="229.0" prefHeight="149.0" prefWidth="205.0">
          <children>
-            <TextField fx:id="roomField" GridPane.columnIndex="1" />
-            <TextField fx:id="addressField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="cityField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="stateField" text="PA" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="zipField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="roomField" GridPane.columnIndex="1">
+               <tooltip>
+                  <Tooltip text="Edit Location Room" />
+               </tooltip></TextField>
+            <TextField fx:id="addressField" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <tooltip>
+                  <Tooltip text="Edit Location Address" />
+               </tooltip></TextField>
+            <TextField fx:id="cityField" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <tooltip>
+                  <Tooltip text="Edit Location City" />
+               </tooltip></TextField>
+            <TextField fx:id="stateField" text="PA" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <tooltip>
+                  <Tooltip text="Edit Location State" />
+               </tooltip></TextField>
+            <TextField fx:id="zipField" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <tooltip>
+                  <Tooltip text="Edit Location ZIP" />
+               </tooltip></TextField>
             <Label text="Room:">
                <font>
                   <Font name="System Bold" size="12.0" />
@@ -87,9 +124,18 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <DatePicker fx:id="dateField" layoutX="111.0" layoutY="120.0" prefHeight="25.0" prefWidth="153.0" />
-      <TextField fx:id="hourField" layoutX="113.0" layoutY="157.0" prefHeight="25.0" prefWidth="35.0" promptText="hh" />
-      <TextField fx:id="titleField" layoutX="110.0" layoutY="75.0" prefHeight="25.0" prefWidth="153.0" />
+      <DatePicker fx:id="dateField" layoutX="111.0" layoutY="120.0" prefHeight="25.0" prefWidth="153.0">
+         <tooltip>
+            <Tooltip text="Edit Appointment Date" />
+         </tooltip></DatePicker>
+      <TextField fx:id="hourField" layoutX="113.0" layoutY="157.0" prefHeight="25.0" prefWidth="35.0" promptText="hh">
+         <tooltip>
+            <Tooltip text="Change Time (Hour)" />
+         </tooltip></TextField>
+      <TextField fx:id="titleField" layoutX="110.0" layoutY="75.0" prefHeight="25.0" prefWidth="153.0">
+         <tooltip>
+            <Tooltip text="Edit Appointment Title" />
+         </tooltip></TextField>
       <Label layoutX="143.0" layoutY="202.0" text="Location:">
          <font>
             <Font name="System Bold" size="14.0" />

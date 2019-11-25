@@ -16,7 +16,14 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EditCaseDetailsController">
    <children>
-      <TextField fx:id="caseTitleField" layoutX="152.0" layoutY="73.0" />
+      <TextField fx:id="caseTitleField" layoutX="152.0" layoutY="73.0" prefHeight="25.0" prefWidth="180.0">
+         <tooltip>
+            <Tooltip text="Edit Case Title">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Tooltip>
+         </tooltip></TextField>
       <Text layoutX="7.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Case Title :" wrappingWidth="94.609375">
          <font>
             <Font name="System Bold" size="15.0" />
@@ -37,12 +44,12 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Text layoutX="7.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deadlines :">
+      <Text layoutX="10.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Deadlines :">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Text>
-      <TableView fx:id="deadlineTable" layoutX="152.0" layoutY="267.0" prefHeight="128.0" prefWidth="431.0">
+      <TableView fx:id="deadlineTable" layoutX="155.0" layoutY="259.0" prefHeight="128.0" prefWidth="431.0">
         <columns>
           <TableColumn fx:id="deadlineTitleColumn" prefWidth="-1.0" text="Title" />
           <TableColumn fx:id="deadlineDateColumn" prefWidth="-1.0" text="Date" />
@@ -52,15 +59,35 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button layoutX="9.0" layoutY="330.0" mnemonicParsing="false" onAction="#addDeadline" prefHeight="25.0" prefWidth="127.0" text="Add Deadline" />
-      <Button layoutX="9.0" layoutY="369.0" mnemonicParsing="false" onAction="#deleteDeadline" prefHeight="25.0" prefWidth="127.0" text="Delete Deadline" />
-      <Button layoutX="9.0" layoutY="289.0" mnemonicParsing="false" onAction="#editDeadline" prefHeight="25.0" prefWidth="127.0" text="Edit Deadline" />
-      <Text layoutX="12.0" layoutY="437.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointments :">
+      <Button layoutX="12.0" layoutY="322.0" mnemonicParsing="false" onAction="#addDeadline" prefHeight="25.0" prefWidth="127.0" text="Add Deadline">
+         <tooltip>
+            <Tooltip text="Add New Deadline">
+               <font>
+                  <Font size="12.0" />
+               </font></Tooltip>
+         </tooltip></Button>
+      <Button layoutX="12.0" layoutY="361.0" mnemonicParsing="false" onAction="#deleteDeadline" prefHeight="25.0" prefWidth="127.0" text="Delete Deadline">
+         <tooltip>
+            <Tooltip text="Delete Selected Deadline">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Tooltip>
+         </tooltip></Button>
+      <Button layoutX="12.0" layoutY="283.0" mnemonicParsing="false" onAction="#editDeadline" prefHeight="25.0" prefWidth="127.0" text="Edit Deadline">
+         <tooltip>
+            <Tooltip text="Edit Selected Deadline">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Tooltip>
+         </tooltip></Button>
+      <Text layoutX="13.0" layoutY="421.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointments :">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Text>
-      <TableView fx:id="appointmentTable" layoutX="157.0" layoutY="421.0" prefHeight="137.0" prefWidth="431.0">
+      <TableView fx:id="appointmentTable" layoutX="158.0" layoutY="405.0" prefHeight="137.0" prefWidth="431.0">
         <columns>
           <TableColumn fx:id="appointmentTitleColumn" prefWidth="-1.0" text="Title" />
           <TableColumn fx:id="appointmentLocationColumn" prefWidth="-1.0" text="Location" />
@@ -71,17 +98,65 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button layoutX="15.0" layoutY="447.0" mnemonicParsing="false" onAction="#editAppointment" prefHeight="25.0" prefWidth="127.0" text="Edit Appointment" />
-      <Button layoutX="14.0" layoutY="489.0" mnemonicParsing="false" onAction="#addAppointment" prefHeight="25.0" prefWidth="127.0" text="Add Appointment" />
-      <Button layoutX="15.0" layoutY="532.0" mnemonicParsing="false" onAction="#deleteAppointment" prefHeight="25.0" prefWidth="127.0" text="Delete Appointment" />
-      <Button layoutX="230.0" layoutY="569.0" mnemonicParsing="false" onAction="#handleSubmit" text="Submit" />
-      <Button layoutX="317.0" layoutY="569.0" mnemonicParsing="false" onAction="#handleClose" prefHeight="25.0" prefWidth="54.0" text="Close" />
+      <Button layoutX="16.0" layoutY="431.0" mnemonicParsing="false" onAction="#editAppointment" prefHeight="25.0" prefWidth="127.0" text="Edit Appointment">
+         <tooltip>
+            <Tooltip text="Edit Selected Appointment">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Tooltip>
+         </tooltip></Button>
+      <Button layoutX="15.0" layoutY="473.0" mnemonicParsing="false" onAction="#addAppointment" prefHeight="25.0" prefWidth="127.0" text="Add Appointment">
+         <tooltip>
+            <Tooltip text="Add New Appointment">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Tooltip>
+         </tooltip></Button>
+      <Button layoutX="16.0" layoutY="516.0" mnemonicParsing="false" onAction="#deleteAppointment" prefHeight="25.0" prefWidth="127.0" text="Delete Appointment">
+         <tooltip>
+            <Tooltip text="Delete Selected Appointment">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Tooltip>
+         </tooltip></Button>
+      <Button layoutX="230.0" layoutY="550.0" mnemonicParsing="false" onAction="#handleSubmit" text="Submit">
+         <font>
+            <Font size="13.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Confirm Changes and Close">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Tooltip>
+         </tooltip></Button>
+      <Button layoutX="317.0" layoutY="550.0" mnemonicParsing="false" onAction="#handleClose" prefHeight="25.0" prefWidth="54.0" text="Close">
+         <font>
+            <Font size="13.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Close Window">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Tooltip>
+         </tooltip></Button>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#e0e0e04f" height="56.0" stroke="#00000046" strokeType="INSIDE" width="600.0" />
-      <Text layoutX="254.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Case" wrappingWidth="94.609375">
+      <Text layoutX="270.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Case" wrappingWidth="94.609375">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Text>
-      <Button layoutX="7.0" layoutY="165.0" mnemonicParsing="false" onAction="#clearSelectedClient" prefHeight="25.0" prefWidth="134.0" text="Clear Client Selection" />
+      <Button layoutX="9.0" layoutY="143.0" mnemonicParsing="false" onAction="#clearSelectedClient" prefHeight="25.0" prefWidth="133.0" text="Clear Client Selection">
+         <tooltip>
+            <Tooltip text="Detach Client From Case">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Tooltip>
+         </tooltip></Button>
    </children>
 </AnchorPane>
