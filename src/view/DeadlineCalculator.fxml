@@ -41,7 +41,7 @@
          <tooltip>
             <Tooltip text="Enter Number of Days">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></TextField>
@@ -49,7 +49,7 @@
          <tooltip>
             <Tooltip text="Select Date to Compare">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></DatePicker>
@@ -60,7 +60,7 @@
          <tooltip>
             <Tooltip text="Confirm Calculation and Close">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></Button>
@@ -71,7 +71,7 @@
          <tooltip>
             <Tooltip text="Close Window">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></Button>
@@ -82,7 +82,7 @@
          <tooltip>
             <Tooltip text="Perform Calculation">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></Button>
@@ -99,7 +99,7 @@
          <tooltip>
             <Tooltip text="The Calculated Deadline">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></DatePicker>

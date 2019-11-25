@@ -56,7 +56,7 @@
                            <tooltip>
                               <Tooltip text="Archive Selected Case">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font size="12.0" />
                                  </font>
                               </Tooltip>
                            </tooltip></Button>
@@ -67,7 +67,7 @@
                            <tooltip>
                               <Tooltip text="Mark Selected Case for Removal">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font size="12.0" />
                                  </font>
                               </Tooltip>
                            </tooltip></Button>
@@ -76,7 +76,7 @@
                <tooltip>
                   <Tooltip text="Display Ongoing Cases">
                      <font>
-                        <Font size="14.0" />
+                        <Font size="12.0" />
                      </font>
                   </Tooltip>
                </tooltip>
@@ -101,7 +101,7 @@
                            <tooltip>
                               <Tooltip text="Mark Selected Case for Removal">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font size="12.0" />
                                  </font>
                               </Tooltip>
                            </tooltip></Button>
@@ -112,7 +112,7 @@
                            <tooltip>
                               <Tooltip text="Resume Selected Case">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font size="12.0" />
                                  </font>
                               </Tooltip>
                            </tooltip></Button>
@@ -121,7 +121,7 @@
                <tooltip>
                   <Tooltip text="Display Archived Cases">
                      <font>
-                        <Font size="14.0" />
+                        <Font size="12.0" />
                      </font>
                   </Tooltip>
                </tooltip>
@@ -146,7 +146,7 @@
                            <tooltip>
                               <Tooltip text="Archive Selected Case">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font size="12.0" />
                                  </font>
                               </Tooltip>
                            </tooltip></Button>
@@ -157,7 +157,7 @@
                            <tooltip>
                               <Tooltip text="Resume Selected Case">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font size="12.0" />
                                  </font>
                               </Tooltip>
                            </tooltip></Button>
@@ -167,7 +167,7 @@
                <tooltip>
                   <Tooltip text="Display Deleted Cases">
                      <font>
-                        <Font size="14.0" />
+                        <Font size="12.0" />
                      </font>
                   </Tooltip>
                </tooltip>
@@ -181,7 +181,7 @@
          <tooltip>
             <Tooltip text="Add a Case">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></Button>
@@ -204,7 +204,7 @@
          <tooltip>
             <Tooltip text="View or Edit Selected Case">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></Button>
@@ -215,7 +215,7 @@
          <tooltip>
             <Tooltip text="Add a Client">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></Button>
@@ -226,7 +226,7 @@
          <tooltip>
             <Tooltip text="View Ongoing Deadlines">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></Button>
@@ -237,7 +237,7 @@
          <tooltip>
             <Tooltip text="View Ongoing Appointments">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></Button>
@@ -248,7 +248,7 @@
          <tooltip>
             <Tooltip text="View and Edit Clients">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></Button>

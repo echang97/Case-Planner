@@ -39,7 +39,7 @@
          <tooltip>
             <Tooltip text="Close Window">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip>

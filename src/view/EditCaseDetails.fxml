@@ -20,7 +20,7 @@
          <tooltip>
             <Tooltip text="Edit Case Title">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></TextField>
@@ -63,14 +63,14 @@
          <tooltip>
             <Tooltip text="Add New Deadline">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font></Tooltip>
          </tooltip></Button>
       <Button layoutX="12.0" layoutY="361.0" mnemonicParsing="false" onAction="#deleteDeadline" prefHeight="25.0" prefWidth="127.0" text="Delete Deadline">
          <tooltip>
             <Tooltip text="Delete Selected Deadline">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></Button>
@@ -78,7 +78,7 @@
          <tooltip>
             <Tooltip text="Edit Selected Deadline">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></Button>
@@ -102,7 +102,7 @@
          <tooltip>
             <Tooltip text="Edit Selected Appointment">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></Button>
@@ -110,7 +110,7 @@
          <tooltip>
             <Tooltip text="Add New Appointment">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></Button>
@@ -118,7 +118,7 @@
          <tooltip>
             <Tooltip text="Delete Selected Appointment">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></Button>
@@ -129,7 +129,7 @@
          <tooltip>
             <Tooltip text="Confirm Changes and Close">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></Button>
@@ -140,7 +140,7 @@
          <tooltip>
             <Tooltip text="Close Window">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></Button>
@@ -154,7 +154,7 @@
          <tooltip>
             <Tooltip text="Detach Client From Case">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></Button>

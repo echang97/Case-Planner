@@ -40,15 +40,15 @@
          <tooltip>
             <Tooltip text="Enter Appointment Title">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></TextField>
       <TextField fx:id="hourField" layoutX="101.0" layoutY="154.0" prefHeight="25.0" prefWidth="30.0" promptText="hh">
          <tooltip>
-            <Tooltip text="Enter Appointment Hour">
+            <Tooltip text="Time (hour)">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></TextField>
@@ -56,7 +56,7 @@
          <tooltip>
             <Tooltip text="Select Appointment Date">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></DatePicker>
@@ -67,7 +67,7 @@
          <tooltip>
             <Tooltip text="Create Appointment and Close">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></Button>
@@ -78,7 +78,7 @@
          <tooltip>
             <Tooltip text="Close Window">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></Button>
@@ -103,7 +103,7 @@
                <tooltip>
                   <Tooltip text="Appointment's Room #">
                      <font>
-                        <Font size="14.0" />
+                        <Font size="12.0" />
                      </font>
                   </Tooltip>
                </tooltip></TextField>
@@ -111,7 +111,7 @@
                <tooltip>
                   <Tooltip text="Appointment's Address">
                      <font>
-                        <Font size="14.0" />
+                        <Font size="12.0" />
                      </font>
                   </Tooltip>
                </tooltip></TextField>
@@ -119,7 +119,7 @@
                <tooltip>
                   <Tooltip text="Appointment's City">
                      <font>
-                        <Font size="14.0" />
+                        <Font size="12.0" />
                      </font>
                   </Tooltip>
                </tooltip></TextField>
@@ -127,7 +127,7 @@
                <tooltip>
                   <Tooltip text="Appointment's State">
                      <font>
-                        <Font size="14.0" />
+                        <Font size="12.0" />
                      </font>
                   </Tooltip>
                </tooltip></TextField>
@@ -135,7 +135,7 @@
                <tooltip>
                   <Tooltip text="Appointment's ZIP Code">
                      <font>
-                        <Font size="14.0" />
+                        <Font size="12.0" />
                      </font>
                   </Tooltip>
                </tooltip></TextField>
@@ -165,7 +165,7 @@
          <tooltip>
             <Tooltip text="Enter Appointment Minute">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></TextField>
@@ -174,7 +174,7 @@
          <tooltip>
             <Tooltip text="Select AM/PM">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></ComboBox>
@@ -183,7 +183,7 @@
          <tooltip>
             <Tooltip text="Enter Notification Start">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip>
@@ -194,7 +194,7 @@
          <tooltip>
             <Tooltip text="Enter Notification Frequency">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip>

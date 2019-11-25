@@ -26,7 +26,7 @@
          <tooltip>
             <Tooltip text="Select Deadline Date">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></DatePicker>
@@ -38,7 +38,7 @@
          <tooltip>
             <Tooltip text="Enter Deadline Title">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></TextField>
@@ -49,7 +49,7 @@
                <tooltip>
                   <Tooltip text="Set Notification Frequency">
                      <font>
-                        <Font size="14.0" />
+                        <Font size="12.0" />
                      </font>
                   </Tooltip>
                </tooltip></TextField>
@@ -59,7 +59,7 @@
                <tooltip>
                   <Tooltip text="Set Notification Start">
                      <font>
-                        <Font size="14.0" />
+                        <Font size="12.0" />
                      </font>
                   </Tooltip>
                </tooltip></TextField>
@@ -78,7 +78,7 @@
          <tooltip>
             <Tooltip text="Create Deadline and Close">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></Button>
@@ -89,7 +89,7 @@
          <tooltip>
             <Tooltip text="Close Window">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></Button>
@@ -105,7 +105,7 @@
          <tooltip>
             <Tooltip text="Open Deadline Calculator">
                <font>
-                  <Font size="14.0" />
+                  <Font size="12.0" />
                </font>
             </Tooltip>
          </tooltip></Button>
