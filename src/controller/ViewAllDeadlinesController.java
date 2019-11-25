@@ -36,11 +36,6 @@ public class ViewAllDeadlinesController implements Initializable {
 		this.dialogStage = dialogStage;
 	}
 
-	@FXML
-	public void handleClose(ActionEvent event) {
-		dialogStage.close();
-	}
-
 	public void initialize(URL location, ResourceBundle bundle){
 	    deadlineColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
 	    dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
@@ -94,4 +89,9 @@ public class ViewAllDeadlinesController implements Initializable {
         }
         return deadlineData;
     }
+
+	@FXML
+	public void handleClose(ActionEvent event) {
+		dialogStage.close();
+	}
 }
