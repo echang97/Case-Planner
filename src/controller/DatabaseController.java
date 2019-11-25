@@ -230,7 +230,7 @@ public class DatabaseController {
 			}
 			// Send the notification, then delete it from the Database
 			NotificationSender.sendNotification(notification);
-			autoDeleteNotificationinDB(resultSet.getInt("deadline_id"));
+			autoDeleteNotificationinDB(resultSet.getInt("notification_id"));
 		}
 	}
 
