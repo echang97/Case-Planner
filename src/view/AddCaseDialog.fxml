@@ -77,5 +77,10 @@
             </Tooltip>
          </tooltip>
       </TableView>
+      <Label layoutX="83.0" layoutY="74.0" text="*" textFill="#e40000">
+         <tooltip>
+            <Tooltip text="This is a Mandatory Field" />
+         </tooltip>
+      </Label>
    </children>
 </AnchorPane>

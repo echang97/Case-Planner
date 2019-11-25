@@ -103,5 +103,15 @@
                </font>
             </Tooltip>
          </tooltip></DatePicker>
+      <Label layoutX="140.0" layoutY="72.0" text="*" textFill="#e40000">
+         <tooltip>
+            <Tooltip text="This is a Mandatory Field" />
+         </tooltip>
+      </Label>
+      <Label layoutX="61.0" layoutY="178.0" text="*" textFill="#e40000">
+         <tooltip>
+            <Tooltip text="This is a Mandatory Field" />
+         </tooltip>
+      </Label>
    </children>
 </AnchorPane>

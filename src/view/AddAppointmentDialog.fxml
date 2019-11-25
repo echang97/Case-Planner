@@ -205,5 +205,25 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
+      <Label layoutX="87.0" layoutY="75.0" text="*" textFill="#e40000">
+         <tooltip>
+            <Tooltip text="This is a Mandatory Field" />
+         </tooltip>
+      </Label>
+      <Label layoutX="87.0" layoutY="120.0" text="*" textFill="#e40000">
+         <tooltip>
+            <Tooltip text="This is a Mandatory Field" />
+         </tooltip>
+      </Label>
+      <Label layoutX="87.0" layoutY="158.0" text="*" textFill="#e40000">
+         <tooltip>
+            <Tooltip text="This is a Mandatory Field" />
+         </tooltip>
+      </Label>
+      <Label layoutX="99.0" layoutY="403.0" text="*" textFill="#e40000">
+         <tooltip>
+            <Tooltip text="This is a Mandatory Field" />
+         </tooltip>
+      </Label>
    </children>
 </AnchorPane>

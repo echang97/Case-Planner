@@ -69,6 +69,11 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
+            <Label layoutX="66.0" layoutY="-12.0" text="*" textFill="#e40000">
+               <tooltip>
+                  <Tooltip text="This is a Mandatory Field" />
+               </tooltip>
+            </Label>
          </children>
       </Group>
       <Button layoutX="88.0" layoutY="277.0" mnemonicParsing="false" onAction="#handleSubmit" text="Submit">
@@ -109,5 +114,15 @@
                </font>
             </Tooltip>
          </tooltip></Button>
+      <Label layoutX="73.0" layoutY="73.0" text="*" textFill="#e40000">
+         <tooltip>
+            <Tooltip text="This is a Mandatory Field" />
+         </tooltip>
+      </Label>
+      <Label layoutX="73.0" layoutY="120.0" text="*" textFill="#e40000">
+         <tooltip>
+            <Tooltip text="This is a Mandatory Field" />
+         </tooltip>
+      </Label>
    </children>
 </AnchorPane>
