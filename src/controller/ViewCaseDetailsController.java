@@ -20,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -82,6 +83,7 @@ public class ViewCaseDetailsController{
 
 	public void setDialogStage(Stage dialogStage){
 		this.dialogStage = dialogStage;
+        dialogStage.getIcons().add(new Image("/view/case.png"));
 	}
 
 	// Event Listener on Button.onAction

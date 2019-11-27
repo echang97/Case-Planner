@@ -17,6 +17,7 @@ import javafx.event.ActionEvent;
 
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Client;
@@ -45,6 +46,7 @@ public class ManageClientsController {
 
 	public void setDialogStage(Stage dialogStage){
 		this.dialogStage = dialogStage;
+        dialogStage.getIcons().add(new Image("/view/case.png"));
 	}
 	
 	// Event Listener on Button.onAction

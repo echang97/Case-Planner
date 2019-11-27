@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import java.sql.*;
 
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.Client;
 import javafx.event.ActionEvent;
@@ -23,6 +24,7 @@ public class AddClientInfoDialogController {
 
 	public void setDialogStage(Stage dialogStage){
 		this.dialogStage = dialogStage;
+        dialogStage.getIcons().add(new Image("/view/case.png"));
 		nameField.requestFocus();
 	}
 

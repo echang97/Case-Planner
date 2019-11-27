@@ -7,6 +7,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.sql.*;
@@ -39,6 +40,7 @@ public class AddCaseDialogController{
 
 	public void setDialogStage(Stage dialogStage){
 		this.dialogStage = dialogStage;
+        dialogStage.getIcons().add(new Image("/view/case.png"));
 	}
 	
 	private ObservableList<Client> getClientAndAddToObservableList(String query){

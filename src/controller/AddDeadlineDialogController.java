@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
@@ -39,6 +40,7 @@ public class AddDeadlineDialogController{
 
 	public void setDialogStage(Stage dialogStage){
 		this.dialogStage = dialogStage;
+        dialogStage.getIcons().add(new Image("/view/case.png"));
 	}
 
 	// Event Listener on Button.onAction

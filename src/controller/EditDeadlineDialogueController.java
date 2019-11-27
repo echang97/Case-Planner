@@ -3,6 +3,7 @@ package controller;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.Deadline;
 
@@ -36,6 +37,7 @@ public class EditDeadlineDialogueController {
 		this.deadline = deadline;
 		fillFields();
 		this.dialogStage = dialogStage;
+        dialogStage.getIcons().add(new Image("/view/case.png"));
 	}
 
 	// Event Listener on Button.onAction

@@ -20,6 +20,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -179,6 +180,7 @@ public class CaseListController implements Initializable{
 		try {
 			Parent root = (Parent) loader.load();
 			Stage dialogStage = new Stage();
+	        dialogStage.getIcons().add(new Image("/view/case.png"));
 			Scene scene = new Scene(root);
 			dialogStage.setScene(scene);
 			dialogStage.setTitle("Add Client Info");

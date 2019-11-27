@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.Appointment;
 import model.Case;
@@ -36,6 +37,7 @@ public class ViewAllAppointmentsController implements Initializable {
 	
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
+        dialogStage.getIcons().add(new Image("/view/case.png"));
 	}
 
 	@FXML

@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import model.Client;
 
@@ -35,6 +36,7 @@ public class EditClientInfoDialogController {
 		this.client = client;
 		fillFields();
 		this.dialogStage = dialogStage;
+        dialogStage.getIcons().add(new Image("/view/case.png"));
 	}
 	
 	// Event Listener on Button.onAction
