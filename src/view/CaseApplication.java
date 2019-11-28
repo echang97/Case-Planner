@@ -7,12 +7,14 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.sql.SQLException;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -21,8 +23,24 @@ public class CaseApplication extends Application{
 
     private static TrayIcon trayIcon;
     private Stage stage;
+    private static ServerSocket ss;
 
     public static void main(String[] args) {
+
+        ss = null;
+
+        try {
+            ss = new ServerSocket(1044);
+            launch(args);
+        }catch (IOException e){
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Case Application");
+            alert.setContentText("An instance of the Case Planner is already running!");
+
+            alert.showAndWait();
+            System.exit(0);
+        }
         launch(args);
     }
 
