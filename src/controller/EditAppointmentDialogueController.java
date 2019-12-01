@@ -46,7 +46,6 @@ public class EditAppointmentDialogueController {
 	private ComboBox<String> statusCombo;
 	private Stage dialogStage;
 	private Appointment appointment;
-	private int id;
 
 	public void setDialogStage(Stage dialogStage, Appointment appointment){
 		this.appointment = appointment;
@@ -98,7 +97,7 @@ public class EditAppointmentDialogueController {
 		return LocalDateTime.of(dateField.getValue(), time);
 	}
 	
-	public void fillFields(){
+	private void fillFields(){
 		titleField.setText(appointment.getTitle());
 		roomField.setText(appointment.getRoom());
 		addressField.setText(appointment.getAddress());
@@ -108,9 +107,9 @@ public class EditAppointmentDialogueController {
 		dateField.setValue(appointment.getDate().toLocalDate());
 		String date = appointment.getDate().toString();
 		Integer hour = Integer.parseInt(date.substring(11, 13));
-		Integer minute = Integer.parseInt(date.substring(14, 16));
+		String minute = date.substring(14, 16);
 		
-		minuteField.setText(minute.toString());
+		minuteField.setText(minute);
 		if(hour < 12){
 			amPMCombo.setValue("AM");
 			
