@@ -71,15 +71,19 @@ public class EditAppointmentDialogueController {
 
 		dialogStage.close();
 	}
-	
+
 	// Event Listener on Button.onAction
 	@FXML
 	public void handleClose(ActionEvent event) {
 		dialogStage.close();
 	}
-	
+
 	private LocalDateTime makeLocalDateTime(){
 		int hour = Integer.parseInt(hourField.getText());
+		int minute = Integer.parseInt(minuteField.getText());
+		String hourString;
+		String minuteString;
+
 		LocalTime time;
 		if(amPMCombo.getValue().equals("AM") && hour == 12){
 			hour = 0;
@@ -90,13 +94,19 @@ public class EditAppointmentDialogueController {
 			}
 		}
 		if(hour < 10){
-			time = LocalTime.parse("0" + Integer.toString(hour) + ":" + minuteField.getText());
+			hourString = "0" + Integer.toString(hour);
 		} else {
-			time = LocalTime.parse(Integer.toString(hour) + ":" + minuteField.getText());
+			hourString = Integer.toString(hour);
 		}
+		if(minute < 10){
+			minuteString = "0" + Integer.toString(minute);
+		}else{
+			minuteString = Integer.toString(minute);
+		}
+		time = LocalTime.parse(hourString + ":" + minuteString);
 		return LocalDateTime.of(dateField.getValue(), time);
 	}
-	
+
 	private void fillFields(){
 		titleField.setText(appointment.getTitle());
 		roomField.setText(appointment.getRoom());
@@ -108,15 +118,18 @@ public class EditAppointmentDialogueController {
 		String date = appointment.getDate().toString();
 		Integer hour = Integer.parseInt(date.substring(11, 13));
 		String minute = date.substring(14, 16);
-		
+
 		minuteField.setText(minute);
 		if(hour < 12){
 			amPMCombo.setValue("AM");
-			
-			hourField.setText(hour.toString());
+			if(hour == 0){
+				hour = 12;
+			}
 		} else {
 			amPMCombo.setValue("PM");
-			hour -= 12;
+			if(hour > 12){
+				hour -= 12;
+			}
 		}
 		hourField.setText(hour.toString());
 	}
