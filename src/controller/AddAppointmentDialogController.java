@@ -112,7 +112,7 @@ public class AddAppointmentDialogController implements Initializable{
 		for(long i = 0; i < daysUntil; i+=frequency){
 			Notification n = new Notification(startDate.plusDays(i));
 			n.setAppointment(appointment);
-			n.setMessage(daysUntil - i + " Days Until " + date);
+			n.setMessage(daysUntil - i + " Days Until " + appointment.getDateString());
 			DatabaseController.addNotificationToDB(n);
 		}
 		Notification today = new Notification();

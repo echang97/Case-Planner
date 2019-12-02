@@ -5,7 +5,6 @@ import model.Deadline;
 
 import java.io.IOException;
 import java.sql.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
@@ -20,8 +19,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import model.Notification;
-
-import javax.swing.plaf.nimbus.State;
 
 public class AddDeadlineDialogController{
 	private DatabaseConnection database = new DatabaseConnection();
@@ -95,7 +92,7 @@ public class AddDeadlineDialogController{
 		for(long i = 0; i < daysUntil; i+=frequency){
 			Notification n = new Notification(startDate.plusDays(i));
 			n.setDeadline(deadline);
-			n.setMessage(daysUntil - i + " Days Until " + date);
+			n.setMessage(daysUntil - i + " Days Until " + deadline.getDateString());
 			DatabaseController.addNotificationToDB(n);
 		}
 		Notification today = new Notification();
