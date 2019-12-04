@@ -70,16 +70,16 @@ public class AddDeadlineDialogController{
 			Stage dialogStage = new Stage();
 			Scene scene = new Scene(root);
 			dialogStage.setScene(scene);
-			dialogStage.setTitle("Deadline Calcuator");
+			dialogStage.setTitle("Deadline Calculator");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 
 			DeadlineCalculatorController controller = loader.getController();
 			controller.setDialogStage(dialogStage);
 
 			dialogStage.showAndWait();
-			LocalDateTime newDate = controller.getDate();
+			LocalDate newDate = controller.getDate();
 			if (newDate != null){
-				dateField.setValue(newDate.toLocalDate());
+				dateField.setValue(newDate);
 			}
 
 		} catch (IOException e) {
