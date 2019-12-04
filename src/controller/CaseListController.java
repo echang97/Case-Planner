@@ -119,13 +119,15 @@ public class CaseListController implements Initializable{
 				String deadline_date = resultSet.getString(4);
 				String deadline_status = resultSet.getString(5);
 				Case c = getDataFromCaseToReturn(resultSet.getInt("case_id"));
-				deadlineData.add(new Deadline(
-						deadline_id,
-						c,
-						deadline_title,
-						deadline_date,
-						deadline_status
-				));
+				if(c.getStatus().equals("ongoing")){
+					deadlineData.add(new Deadline(
+							deadline_id,
+							c,
+							deadline_title,
+							deadline_date,
+							deadline_status
+					));
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -153,18 +155,20 @@ public class CaseListController implements Initializable{
 				String appointment_status = resultSet.getString("status");
 
 				Case c = getDataFromCaseToReturn(resultSet.getInt("case_id"));
-				appointmentData.add(new Appointment(
-						appointment_id,
-						c,
-						appointment_title,
-						appointment_room,
-						appointment_address,
-						appointment_city,
-						appointment_state,
-						appointment_zip,
-						appointment_date,
-						appointment_status
-				));
+				if(c.getStatus().equals("ongoing")){
+					appointmentData.add(new Appointment(
+							appointment_id,
+							c,
+							appointment_title,
+							appointment_room,
+							appointment_address,
+							appointment_city,
+							appointment_state,
+							appointment_zip,
+							appointment_date,
+							appointment_status
+					));
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -425,13 +429,15 @@ public class CaseListController implements Initializable{
 
 		deadlineTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
 		deadlineCaseColumn.setCellValueFactory(new PropertyValueFactory<>("case"));
-		ObservableList<Deadline> deadlines = getDataFromADeadlineAndAddToObservableList("SELECT * FROM deadline ORDER BY datetime(date) LIMIT 6");
+		ObservableList<Deadline> deadlines = getDataFromADeadlineAndAddToObservableList
+				("SELECT * FROM deadline WHERE status = 'Incomplete' ORDER BY datetime(date) LIMIT 6");
 		deadlinesTable.getItems().addAll(deadlines);
 
 		appointmentsTable.getItems().clear();
 		appointmentTitleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
 		appointmentCaseColumn.setCellValueFactory(new PropertyValueFactory<>("case"));
-		ObservableList<Appointment> appointments = getDataFromAnAppointmentAndAddToObservableList("SELECT * FROM appointment ORDER BY datetime(date) LIMIT 6");
+		ObservableList<Appointment> appointments = getDataFromAnAppointmentAndAddToObservableList
+				("SELECT * FROM appointment WHERE status = 'Incomplete' ORDER BY datetime(date) LIMIT 6");
 		appointmentsTable.getItems().addAll(appointments);
 	}
 
