@@ -2,13 +2,19 @@ package controller;
 
 import javafx.fxml.FXML;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Deadline;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
@@ -56,6 +62,31 @@ public class EditDeadlineDialogueController {
 	@FXML
 	public void handleClose(ActionEvent event) {
 		dialogStage.close();
+	}
+
+	@FXML
+	public void handleCalcDeadline(ActionEvent event){
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/DeadlineCalculator.fxml"));
+		try {
+			Parent root = (Parent) loader.load();
+			Stage dialogStage = new Stage();
+			Scene scene = new Scene(root);
+			dialogStage.setScene(scene);
+			dialogStage.setTitle("Deadline Calculator");
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+
+			DeadlineCalculatorController controller = loader.getController();
+			controller.setDialogStage(dialogStage);
+
+			dialogStage.showAndWait();
+			LocalDate newDate = controller.getDate();
+			if (newDate != null){
+				dateField.setValue(newDate);
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void fillFields(){

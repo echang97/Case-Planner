@@ -28,7 +28,7 @@ public class DeadlineCalculatorController{
 	@FXML
 	private DatePicker newDateField;
 	private Stage dialogStage;
-	private LocalDateTime outputDate;
+	private LocalDate outputDate;
 
 	public void setDialogStage(Stage dialogStage){
 		this.dialogStage = dialogStage;
@@ -38,7 +38,7 @@ public class DeadlineCalculatorController{
 	// Event Listener on Button.onAction
 	@FXML
 	public void handleSubmit(ActionEvent event) {
-		outputDate = newDateField.getValue().atStartOfDay();
+		outputDate = newDateField.getValue();
 		dialogStage.close();
 	}
 
@@ -61,7 +61,7 @@ public class DeadlineCalculatorController{
 		}
 	}
 
-	public LocalDateTime getDate(){
+	public LocalDate getDate(){
 		return outputDate;
 	}
 }
