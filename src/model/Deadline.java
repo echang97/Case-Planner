@@ -32,7 +32,10 @@ public class Deadline {
 	public String getTitle() { return title; }
 	public void setTitle(String title) { this.title = title; }
 	public LocalDateTime getDate() { return date; }
-	public void setDate(LocalDateTime date) { this.date = date; }
+	public void setDate(LocalDateTime date) {
+		this.date = date;
+		this.dateString = date.toString().substring(0,date.toString().indexOf("T"));
+	}
 	public String getStatus() {return status;}
 	public void setStatus(String status) { this.status = status; }
 	public String getDateString() { return dateString; }

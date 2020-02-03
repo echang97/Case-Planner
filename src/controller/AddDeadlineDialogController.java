@@ -46,7 +46,7 @@ public class AddDeadlineDialogController{
 	public void handleSubmit(ActionEvent event) throws SQLException{
 		String title = titleField.getText();
 		LocalDateTime date = dateField.getValue().atStartOfDay();
-		deadline = new Deadline(title, date);
+		deadline = new Deadline(404, c, title, date.toString(), "Incomplete");
 		deadline.setCase(c);
 		DatabaseController.addDeadlineToDB(database, deadline);
 		addDeadlineNotifications(date);
